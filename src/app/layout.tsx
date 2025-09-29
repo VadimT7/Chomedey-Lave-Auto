@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnimationProvider from "@/components/AnimationProvider";
 import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -45,7 +46,9 @@ export default function RootLayout({
           <CustomCursor />
           <Navigation />
           <main className="min-h-screen">
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </main>
           <Footer />
         </AnimationProvider>

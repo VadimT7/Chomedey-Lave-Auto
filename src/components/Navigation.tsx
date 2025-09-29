@@ -93,7 +93,7 @@ const Navigation = () => {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'relative px-4 py-2 text-base font-semibold transition-all duration-300 group rounded-lg',
+                  'relative px-4 py-2 text-base font-semibold transition-all duration-500 ease-out group rounded-lg',
                   pathname === item.href
                     ? 'text-cyan-600 bg-cyan-50 shadow-md shadow-cyan-500/20'
                     : isScrolled 
