@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { 
   Eye, 
@@ -19,6 +19,27 @@ const GalleryPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Scroll detection for header visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Header disappears when scrolling down past 200px
+      if (currentScrollY > 200 && currentScrollY > lastScrollY) {
+        setIsHeaderVisible(false);
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 200) {
+        setIsHeaderVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const categories = [
     { id: 'all', label: 'All Transformations', count: 12, color: 'from-cyan-500 to-blue-600' },
@@ -260,7 +281,9 @@ const GalleryPage = () => {
       </section>
 
       {/* Filter Section */}
-      <section className="py-12 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky top-20 z-30">
+      <section className={`py-12 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky z-30 transition-all duration-500 ease-out ${
+        isHeaderVisible ? 'top-20' : 'top-0'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="flex items-center space-x-2 text-gray-600">

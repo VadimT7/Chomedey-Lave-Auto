@@ -27,8 +27,8 @@ const pageVariants = {
 };
 
 const pageTransition = {
-  type: 'tween',
-  ease: [0.25, 0.46, 0.45, 0.94], // Custom cubic-bezier for smooth feel
+  type: 'tween' as const,
+  ease: 'easeInOut',
   duration: 0.4,
 };
 
@@ -48,8 +48,8 @@ const overlayVariants = {
 };
 
 const overlayTransition = {
-  type: 'tween',
-  ease: [0.25, 0.46, 0.45, 0.94],
+  type: 'tween' as const,
+  ease: 'easeInOut',
   duration: 0.3,
 };
 

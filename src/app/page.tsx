@@ -437,10 +437,47 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-gradient-to-r from-purple-900 via-blue-900 to-purple-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
+      <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Floating Geometric Shapes */}
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={`shape-${i}`}
+              className="absolute opacity-20 animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${6 + Math.random() * 4}s`,
+              }}
+            >
+              <div className={`w-${Math.floor(Math.random() * 4) + 2} h-${Math.floor(Math.random() * 4) + 2} bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full blur-sm`}></div>
+            </div>
+          ))}
+          
+          {/* Animated Gradient Orbs */}
+          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-blue-500/15 to-cyan-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+          
+          {/* Flowing Lines */}
+          <div className="absolute inset-0">
+            <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-shimmer"></div>
+            <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent animate-shimmer" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent animate-shimmer" style={{ animationDelay: '2s' }}></div>
+          </div>
+          
+          {/* Subtle Grid Pattern */}
+          <div className="absolute inset-0 opacity-5" style={{
+            backgroundImage: `
+              linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+            animation: 'grid-move 20s linear infinite'
+          }}></div>
+        </div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
@@ -449,22 +486,52 @@ const HomePage = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Award className="w-16 h-16 text-yellow-400 mx-auto mb-6" />
+            <motion.div
+              animate={{ 
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.05, 1]
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Award className="w-16 h-16 text-cyan-400 mx-auto mb-6 drop-shadow-lg" />
+            </motion.div>
+            
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
               Ready for the Ultimate
               <br />
-              <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">
                 Car Care Experience?
               </span>
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            
+            <motion.p 
+              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              animate={{ opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
               Book your premium detailing service today and transform your vehicle into a masterpiece
-            </p>
+            </motion.p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-premium cursor-interactive px-8 py-4 border-2 border-white rounded-full font-bold text-lg text-white hover:bg-white hover:text-black">
+              <motion.button 
+                className="btn-premium cursor-interactive px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-full font-bold text-lg text-white shadow-2xl shadow-cyan-500/25"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                animate={{ 
+                  boxShadow: [
+                    '0 0 20px rgba(6, 182, 212, 0.3)',
+                    '0 0 40px rgba(6, 182, 212, 0.5)',
+                    '0 0 20px rgba(6, 182, 212, 0.3)'
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
                 Call (514) 555-0123
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         </div>

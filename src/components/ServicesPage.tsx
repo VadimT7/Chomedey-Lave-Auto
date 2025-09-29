@@ -495,7 +495,7 @@ const ServicesPage = () => {
                   href="/contact"
                   className="btn-premium cursor-interactive bg-white hover:bg-gray-100 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg"
                 >
-                  Get Free Consultation
+                  Get Free Quote
                 </Link>
                 <a
                   href="tel:+14506860016"
