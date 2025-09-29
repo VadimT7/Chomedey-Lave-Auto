@@ -209,7 +209,7 @@ const HomePage = () => {
               className="text-7xl md:text-9xl font-black mb-8 leading-tight"
             >
               <span className="block bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent drop-shadow-2xl">
-                Lave-Auto
+                Chomedey
               </span>
               <motion.span 
                 initial={{ opacity: 0, x: -50 }}
@@ -217,7 +217,7 @@ const HomePage = () => {
                 transition={{ duration: 1, delay: 0.8 }}
                 className="block text-5xl md:text-7xl bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent"
               >
-                Chomedey
+                Lave-Auto
               </motion.span>
             </motion.h1>
             

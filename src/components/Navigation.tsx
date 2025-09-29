@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Car, Phone, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -18,8 +19,8 @@ const Navigation = () => {
       const currentScrollY = window.scrollY;
       
       // Show/hide based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past 100px - hide navbar
+      if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        // Scrolling down and past 200px - hide navbar
         setIsVisible(false);
         setIsOpen(false); // Close mobile menu when hiding navbar
       } else {
@@ -49,38 +50,55 @@ const Navigation = () => {
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out',
-        'bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/10',
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/10' 
+          : 'bg-transparent backdrop-blur-none border-b border-transparent shadow-none',
         isVisible ? 'translate-y-0' : '-translate-y-full'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-              <Car className="relative h-8 w-8 text-cyan-600 group-hover:text-blue-600 transition-all duration-300 group-hover:scale-110" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-pulse shadow-lg shadow-cyan-500/50"></div>
+          <Link href="/" className="flex items-center space-x-3 group flex-shrink-0">
+            <div className="relative flex-shrink-0">
+              <Image
+                src="/Others/logo.png"
+                alt="Lave-Auto Chomedey"
+                width={90 }
+                height={45}
+                className="transition-all duration-300 group-hover:scale-105"
+                priority
+              />
             </div>
-            <div className="hidden sm:block">
-              <h1 className="text-xl lg:text-2xl font-black bg-gradient-to-r from-gray-900 via-cyan-800 to-blue-800 bg-clip-text text-transparent group-hover:from-cyan-600 group-hover:to-blue-600 transition-all duration-300">
-                Lave-Auto
+            <div className="hidden sm:block flex-shrink-0">
+              <h1 className={cn(
+                "text-lg lg:text-xl font-black bg-clip-text text-transparent group-hover:from-cyan-600 group-hover:to-blue-600 transition-all duration-300 whitespace-nowrap",
+                isScrolled 
+                  ? "bg-gradient-to-r from-gray-900 via-cyan-800 to-blue-800" 
+                  : "bg-gradient-to-r from-white via-cyan-100 to-blue-100"
+              )}>
+                Chomedey
               </h1>
-              <p className="text-xs font-semibold text-gray-600 -mt-1 group-hover:text-cyan-600 transition-colors duration-300">Chomedey</p>
+              <p className={cn(
+                "text-xs font-semibold -mt-1 group-hover:text-cyan-600 transition-colors duration-300 whitespace-nowrap",
+                isScrolled ? "text-gray-600" : "text-white/90"
+              )}>Lave-Auto</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 ml-12">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'relative px-4 py-2 text-sm font-semibold transition-all duration-300 group rounded-lg',
+                  'relative px-4 py-2 text-base font-semibold transition-all duration-300 group rounded-lg',
                   pathname === item.href
                     ? 'text-cyan-600 bg-cyan-50 shadow-md shadow-cyan-500/20'
-                    : 'text-gray-800 hover:text-cyan-600 hover:bg-cyan-50/50'
+                    : isScrolled 
+                      ? 'text-gray-800 hover:text-cyan-600 hover:bg-cyan-50/50'
+                      : 'text-white/90 hover:text-cyan-300 hover:bg-white/10'
                 )}
               >
                 {item.label}
@@ -98,14 +116,20 @@ const Navigation = () => {
           </div>
 
           {/* Contact Info & CTA */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <div className="flex items-center space-x-2 text-sm font-semibold text-gray-700 group">
-              <Phone className="h-4 w-4 text-cyan-600 group-hover:text-blue-600 transition-colors duration-300" />
+          <div className="hidden lg:flex items-center space-x-8">
+            <div className={cn(
+              "flex items-center space-x-2 text-sm font-semibold group transition-colors duration-300 whitespace-nowrap",
+              isScrolled ? "text-gray-700" : "text-white/90"
+            )}>
+              <Phone className={cn(
+                "h-4 w-4 group-hover:text-blue-600 transition-colors duration-300",
+                isScrolled ? "text-cyan-600" : "text-cyan-300"
+              )} />
               <span className="group-hover:text-cyan-600 transition-colors duration-300">+1 450-686-0016</span>
             </div>
             <Link
               href="/contact"
-              className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25 overflow-hidden"
+              className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-4 py-2 rounded-full font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25 overflow-hidden whitespace-nowrap"
             >
               <span className="relative z-10">Visit Us</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -115,7 +139,12 @@ const Navigation = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-3 rounded-xl text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 transition-all duration-300 group"
+            className={cn(
+              "lg:hidden p-3 rounded-xl hover:text-cyan-600 transition-all duration-300 group",
+              isScrolled 
+                ? "text-gray-700 hover:bg-cyan-50" 
+                : "text-white/90 hover:bg-white/10"
+            )}
           >
             <div className="relative">
               {isOpen ? <X className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" /> : <Menu className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />}
