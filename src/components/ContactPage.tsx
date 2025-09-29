@@ -99,39 +99,42 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
-        {/* Background Elements */}
+      <section className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+        {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-4 h-4 bg-white/20 rounded-full animate-bubble"
+              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full animate-bubble"
               style={{
                 left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 8}s`,
                 animationDuration: `${8 + Math.random() * 4}s`,
               }}
             />
           ))}
+          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <MessageCircle className="h-4 w-4" />
+            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
+              <MessageCircle className="h-5 w-5 text-cyan-400" />
               <span>Get In Touch</span>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-display text-white mb-6 leading-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black font-display text-white mb-8 leading-tight">
               Contact{' '}
-              <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Us Today
               </span>
             </h1>
             
-            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed">
               Ready to transform your vehicle? Get in touch with us today. We're here to answer 
               your questions and help you choose the perfect service for your car.
             </p>
@@ -140,7 +143,7 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactInfo.map((info, index) => {
@@ -148,12 +151,12 @@ const ContactPage = () => {
               return (
                 <div
                   key={info.title}
-                  className="card-premium cursor-interactive bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center"
+                  className="card-premium cursor-interactive bg-white rounded-3xl p-8 shadow-xl border border-gray-100 text-center"
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-2xl mb-4">
-                    <IconComponent className="h-8 w-8 text-primary-600" />
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-3xl mb-6">
+                    <IconComponent className="h-10 w-10 text-cyan-600" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">
+                  <h3 className="text-xl font-black text-gray-900 mb-4">
                     {info.title}
                   </h3>
                   <div className="space-y-1 mb-4">
@@ -165,7 +168,7 @@ const ContactPage = () => {
                   </div>
                   <a
                     href={info.href}
-                    className="link-premium cursor-interactive inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm"
+                    className="link-premium cursor-interactive inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-semibold text-sm"
                   >
                     <span>{info.action}</span>
                     <Navigation className="h-4 w-4" />
@@ -178,16 +181,16 @@ const ContactPage = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="card-premium bg-white rounded-2xl p-8 shadow-xl">
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="card-premium bg-white rounded-3xl p-10 shadow-xl border border-gray-100">
+              <div className="mb-10">
+                <h2 className="text-3xl font-black text-gray-900 mb-4">
                   Send Us a Message
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-lg">
                   Fill out the form below and we'll get back to you as soon as possible.
                 </p>
               </div>
@@ -311,7 +314,7 @@ const ContactPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-premium cursor-interactive w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white px-6 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2"
+                    className="btn-premium cursor-interactive w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:bg-gray-400 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center space-x-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -332,15 +335,15 @@ const ContactPage = () => {
             {/* Map and Additional Info */}
             <div className="space-y-8">
               {/* Map */}
-              <div className="card-premium bg-white rounded-2xl p-6 shadow-xl">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <div className="card-premium bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                <h3 className="text-2xl font-black text-gray-900 mb-6">
                   Find Us Here
                 </h3>
                 <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden">
                   {/* Placeholder for actual map integration */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center">
                     <div className="text-center">
-                      <MapPin className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+                      <MapPin className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
                       <p className="text-gray-600 font-medium">Interactive Map</p>
                       <p className="text-gray-500 text-sm">3987 Av. de la Renaissance, Laval</p>
                     </div>
@@ -351,7 +354,7 @@ const ContactPage = () => {
                     href="https://maps.google.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-premium cursor-interactive inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium"
+                    className="link-premium cursor-interactive inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-semibold"
                   >
                     <Navigation className="h-4 w-4" />
                     <span>Get Directions</span>
@@ -360,16 +363,16 @@ const ContactPage = () => {
               </div>
 
               {/* Quick Actions */}
-              <div className="card-premium bg-white rounded-2xl p-6 shadow-xl">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <div className="card-premium bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                <h3 className="text-2xl font-black text-gray-900 mb-6">
                   Quick Actions
                 </h3>
                 <div className="space-y-4">
                   <a
                     href="tel:+14506860016"
-                    className="card-premium cursor-interactive flex items-center space-x-3 p-4 bg-primary-50 rounded-lg hover:bg-primary-100"
+                    className="card-premium cursor-interactive flex items-center space-x-3 p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100"
                   >
-                    <Phone className="h-6 w-6 text-primary-600" />
+                    <Phone className="h-6 w-6 text-cyan-600" />
                     <div>
                       <div className="font-semibold text-gray-900">Call Now</div>
                       <div className="text-sm text-gray-600">+1 450-686-0016</div>
@@ -378,9 +381,9 @@ const ContactPage = () => {
                   
                   <a
                     href="mailto:info@laveautochomedey.com"
-                    className="card-premium cursor-interactive flex items-center space-x-3 p-4 bg-accent-50 rounded-lg hover:bg-accent-100"
+                    className="card-premium cursor-interactive flex items-center space-x-3 p-4 bg-blue-50 rounded-lg hover:bg-blue-100"
                   >
-                    <Mail className="h-6 w-6 text-accent-600" />
+                    <Mail className="h-6 w-6 text-blue-600" />
                     <div>
                       <div className="font-semibold text-gray-900">Send Email</div>
                       <div className="text-sm text-gray-600">info@laveautochomedey.com</div>
@@ -398,18 +401,18 @@ const ContactPage = () => {
               </div>
 
               {/* Special Offer */}
-              <div className="card-premium bg-gradient-to-br from-primary-600 to-accent-600 rounded-2xl p-6 text-white">
+              <div className="card-premium bg-gradient-to-br from-cyan-600 to-blue-600 rounded-3xl p-8 text-white">
                 <div className="flex items-center space-x-2 mb-4">
                   <Car className="h-6 w-6" />
                   <span className="font-semibold">Special Offer</span>
                 </div>
-                <h4 className="text-lg font-bold mb-2">
+                <h4 className="text-xl font-black mb-3">
                   First-Time Customer Discount
                 </h4>
-                <p className="text-white/90 mb-4">
+                <p className="text-white/90 mb-6 text-lg">
                   Get 20% off your first service when you mention this website!
                 </p>
-                <div className="text-2xl font-bold">
+                <div className="text-3xl font-black">
                   Save up to $50
                 </div>
               </div>
