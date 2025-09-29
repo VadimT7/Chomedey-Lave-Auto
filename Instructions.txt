@@ -1,0 +1,130 @@
+Instruction for Claude:
+Build a full, multi-page professional website for a car wash + car detailing business. The site should be modern, attractive, fluid, and memorable, with an emphasis on before & after transformations, smooth animations, and brand consistency.
+
+🌐 General Requirements:
+
+Framework/Stack: Next.js + TailwindCSS (or any modern stack Claude prefers in Cursor).
+
+Styling: Modern, clean, and smooth. Use glassmorphism, gradients, subtle reflections, and water/bubble elements.
+
+Animations: GSAP or Framer Motion for buttery-smooth scroll and hover animations.
+
+Theme: Fresh, clean, premium feel → water, soap bubbles, reflections, shine.
+
+Mobile-first: Fully responsive, fast, and optimized.
+
+Navigation: Sticky top navbar with subtle hover animations + smooth page transitions.
+
+🏠 Pages & Content:
+1. Home Page
+
+Hero Section:
+
+Full-width video/animation background of water splashes or soap bubbles rising.
+
+Headline: “Your Car, Reimagined.”
+
+Sub-headline: “Professional Car Wash & Detailing That Shines Beyond Clean.”
+
+Prominent Call-to-Action button: “Visit Us Today” (anchors to Contact/Map).
+
+Before/After Highlight: Interactive slider of a dirty → clean car transformation.
+
+Quick Services Overview: Icon-based cards for major services (Wash, Interior Detailing, Waxing, Ceramic Coating, etc.) with hover shine animations.
+
+Why Choose Us: 3–4 cards with icons (Eco-friendly, Experienced Detailers, Fast Service, Premium Results).
+
+CTA Banner: Floating bubble animation + “Get Your Shine Back – Drop By Today!”
+
+2. Services Page
+
+Service Categories Grid: Each service as a card with:
+
+Title + short description.
+
+Animated icon (e.g., droplet, buffer machine, spray).
+
+“View Transformations” link → opens Before/After gallery specific to that service.
+
+Services Include:
+
+Exterior Wash
+
+Full Detailing
+
+Interior Cleaning
+
+Wax & Polish
+
+Ceramic Coating
+
+Engine Bay Cleaning
+
+Section Divider Animation: Subtle water ripple transitions between sections.
+
+3. Before & After Gallery
+
+Masonry grid of projects with hover effect → slides between before & after images.
+
+Option to filter by service (Exterior, Interior, etc.).
+
+Smooth zoom + lightbox when clicked.
+
+4. Testimonials Page
+
+Large customer quotes styled in glossy “mirror reflection” cards.
+
+Background with subtle animated water flow.
+
+Option to show before/after car pics with testimonial text overlay.
+
+Slider of reviews with smooth auto-play and swipe support.
+
+5. About Us Page
+
+Short, story-driven section: “From Soap to Shine – Our Journey.”
+
+Team photos styled with “clean frame” animations.
+
+Trust badges: eco-friendly products, years in business, certifications.
+
+6. Contact / Visit Us Page
+
+Integrated Google Maps with animated water ripple hover effect.
+
+Contact Info (phone, email, WhatsApp/Telegram chat button).
+
+Big floating CTA button: “Drive In Today.”
+
+Simple contact form (Name, Phone, Service Interest).
+
+✨ Animation & Interaction Ideas
+
+Site Entry Animation: Water splash or soap bubbles flow across → transition into homepage.
+
+Scroll Storytelling: Dirty → foamed → rinsed → polished (as background transitions while scrolling).
+
+Hover Shine Effects: Buttons, service images, cars → quick streak shine animation.
+
+Micro-Animations: Floating bubbles in section dividers, ripple effects on buttons.
+
+🎨 Style Guide
+
+Colors: Clean gradients (light blues, aqua, white, silver).
+
+Typography: Bold modern sans-serif (e.g., Poppins, Montserrat).
+
+UI Effects: Glassmorphism cards, gradients, subtle drop shadows.
+
+✅ Deliverables
+
+Generate:
+
+Full multi-page Next.js project with TailwindCSS and animations.
+
+All sections + components reusable and easy to extend.
+
+Clean, modular code with best practices.
+
+⚡ Final Note for Claude:
+The website should feel alive, fluid, and trustworthy. Visitors should be impressed instantly, smoothly discover services and transformations, and finally be nudged to visit/contact the car wash in real life.

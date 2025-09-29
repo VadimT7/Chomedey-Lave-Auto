@@ -1,0 +1,10 @@
+This is a placeholder for the Lamborghini GLB 3D model.
+
+To add the actual model:
+1. Download or obtain a Lamborghini SVJ GLB file
+2. Name it "lamborghini.glb"
+3. Place it in this folder (public/3d-models/)
+
+The website will automatically load and display the model.
+If no model is found, a fallback 3D car will be displayed.
+

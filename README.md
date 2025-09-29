@@ -1,36 +1,196 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lave-Auto Chomedey - Professional Car Wash & Detailing Website
 
-## Getting Started
+A modern, responsive website for Lave-Auto Chomedey, a professional car wash and detailing business in Chomedey, Laval, Quebec.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Design & User Experience
+- **Modern, Fluid Design**: Clean, professional layout with glassmorphism effects
+- **Water/Bubble Theme**: Consistent water, soap bubbles, and shine elements throughout
+- **Smooth Animations**: GSAP and CSS animations for buttery-smooth interactions
+- **Mobile-First**: Fully responsive design optimized for all devices
+- **Fast Performance**: Optimized images and code for quick loading
+
+### Pages & Content
+1. **Home Page**
+   - Hero section with video background
+   - Interactive before/after slider
+   - Services overview with hover effects
+   - Why choose us section
+   - Call-to-action banners
+
+2. **Services Page**
+   - Interactive service cards
+   - Detailed service information
+   - Pricing and duration details
+   - Process explanations
+
+3. **Gallery Page**
+   - Masonry grid layout
+   - Before/after transformations
+   - Filter by service type
+   - Lightbox image viewer
+
+4. **Testimonials Page**
+   - Customer reviews with ratings
+   - Interactive testimonial slider
+   - Before/after images with reviews
+   - Statistics and trust indicators
+
+5. **About Page**
+   - Company story and timeline
+   - Team member profiles
+   - Company values and mission
+   - Trust badges and certifications
+
+6. **Contact Page**
+   - Contact form with validation
+   - Interactive map placeholder
+   - Contact information cards
+   - Quick action buttons
+
+### Technical Features
+- **Next.js 14**: Latest React framework with App Router
+- **TypeScript**: Type-safe development
+- **TailwindCSS**: Utility-first CSS framework
+- **Framer Motion**: Smooth animations and transitions
+- **Lucide React**: Beautiful, consistent icons
+- **Responsive Images**: Optimized with Next.js Image component
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd lave-auto-chomedey
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 📁 Project Structure
+
+```
+lave-auto-chomedey/
+├── public/
+│   ├── photos-before-and-after/    # Gallery images
+│   ├── logo/                       # Company logo
+│   └── 3d-models/                  # 3D assets
+├── src/
+│   ├── app/                        # Next.js App Router pages
+│   │   ├── about/
+│   │   ├── contact/
+│   │   ├── gallery/
+│   │   ├── services/
+│   │   ├── testimonials/
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/                 # React components
+│   │   ├── AboutPage.tsx
+│   │   ├── BeforeAfterHighlight.tsx
+│   │   ├── ContactPage.tsx
+│   │   ├── CTABanner.tsx
+│   │   ├── Footer.tsx
+│   │   ├── GalleryPage.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── Navigation.tsx
+│   │   ├── ServicesOverview.tsx
+│   │   ├── ServicesPage.tsx
+│   │   ├── TestimonialsPage.tsx
+│   │   └── WhyChooseUs.tsx
+│   └── lib/
+│       └── utils.ts               # Utility functions
+├── tailwind.config.ts             # Tailwind configuration
+├── next.config.ts                 # Next.js configuration
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Colors
+The website uses a custom color palette defined in `tailwind.config.ts`:
+- **Primary**: Blue tones for main elements
+- **Secondary**: Gray tones for text and backgrounds
+- **Accent**: Green tones for highlights and CTAs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Fonts
+- **Primary**: Poppins (body text)
+- **Display**: Montserrat (headings)
 
-## Learn More
+### Animations
+Custom animations are defined in both `tailwind.config.ts` and `globals.css`:
+- Bubble animations
+- Shimmer effects
+- Float animations
+- Ripple effects
 
-To learn more about Next.js, take a look at the following resources:
+## 📱 Responsive Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The website is built mobile-first and includes:
+- Responsive navigation with mobile menu
+- Flexible grid layouts
+- Optimized images for different screen sizes
+- Touch-friendly interactive elements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Deployment
 
-## Deploy on Vercel
+### Vercel (Recommended)
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Other Platforms
+The website can be deployed to any platform that supports Next.js:
+- Netlify
+- AWS Amplify
+- Railway
+- DigitalOcean App Platform
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📞 Contact Information
+
+**Lave-Auto Chomedey**
+- Address: 123 Chomedey Blvd, Chomedey, Laval, QC H7P 1A1
+- Phone: (450) 123-4567
+- Email: info@laveautochomedey.com
+- Hours: Mon-Fri 8:00 AM - 6:00 PM, Sat-Sun 9:00 AM - 5:00 PM
+
+## 🛠️ Future Enhancements
+
+- Online booking system integration
+- Real-time Google Maps integration
+- Customer portal for service history
+- Blog section for car care tips
+- Multi-language support (French/English)
+- Payment processing integration
+
+## 📄 License
+
+This project is proprietary software developed for Lave-Auto Chomedey.
+
+---
+
+Built with ❤️ for Lave-Auto Chomedey
