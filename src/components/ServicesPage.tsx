@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Car, 
   Sparkles, 
@@ -261,7 +262,12 @@ const ServicesPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+      >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(25)].map((_, i) => (
@@ -320,7 +326,7 @@ const ServicesPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Categories */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
@@ -361,8 +367,17 @@ const ServicesPage = () => {
                     {category.services.map((service, serviceIndex) => {
                       const ServiceIcon = service.icon;
                       return (
-                        <div
+                        <motion.div
                           key={service.id}
+                          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{ 
+                            duration: 0.5, 
+                            delay: serviceIndex * 0.1,
+                            ease: [0.25, 0.46, 0.45, 0.94]
+                          }}
+                          viewport={{ once: true }}
+                          whileHover={{ y: -10, scale: 1.02 }}
                           className={`card-premium cursor-interactive group relative bg-white rounded-3xl overflow-hidden border-2 transition-all duration-300 ${
                             service.popular 
                               ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20 scale-105' 
@@ -471,7 +486,7 @@ const ServicesPage = () => {
                               </Link>
                             </div>
                           </div>
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -484,7 +499,7 @@ const ServicesPage = () => {
           <div className="mt-24">
             <div className="card-premium bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl p-12 text-center text-white">
               <h3 className="text-3xl font-black mb-6">
-                Not Sure Which Service is Right for You?
+                Want To Know Which Service Is Best For You?
               </h3>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
                 Our experts are here to help you choose the perfect service package 

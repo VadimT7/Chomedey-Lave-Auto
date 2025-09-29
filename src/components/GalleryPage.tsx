@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Eye, 
   X, 
@@ -223,7 +224,12 @@ const GalleryPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+      >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(20)].map((_, i) => (
@@ -278,21 +284,31 @@ const GalleryPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Filter Section */}
-      <section className={`py-12 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky z-30 transition-all duration-500 ease-out ${
-        isHeaderVisible ? 'top-20' : 'top-0'
-      }`}>
+      <motion.section 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className={`py-12 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky z-30 transition-all duration-500 ease-out ${
+          isHeaderVisible ? 'top-20' : 'top-0'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="flex items-center space-x-2 text-gray-600">
               <Filter className="h-5 w-5" />
               <span className="font-semibold text-lg">Filter by service:</span>
             </div>
-            {categories.map((category) => (
-              <button
+            {categories.map((category, index) => (
+              <motion.button
                 key={category.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category.id)}
                 className={`btn-premium cursor-interactive px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                   selectedCategory === category.id
@@ -301,20 +317,30 @@ const GalleryPage = () => {
                 }`}
               >
                 {category.label} ({category.count})
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Gallery Grid */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredItems.map((item, index) => (
-              <div
-                key={item.id}
-                className="card-premium cursor-interactive group bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100"
+            <AnimatePresence mode="wait">
+              {filteredItems.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -50, scale: 0.9 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="card-premium cursor-interactive group bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100"
               >
                 {/* Image Container */}
                 <div className="image-premium relative h-80 overflow-hidden">
@@ -375,8 +401,9 @@ const GalleryPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
+            </AnimatePresence>
           </div>
 
           {filteredItems.length === 0 && (

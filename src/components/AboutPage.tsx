@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Award, 
   Users, 
@@ -17,7 +18,9 @@ import {
   Wrench,
   Droplets,
   Crown,
-  Gem
+  Gem,
+  ArrowRight,
+  Phone
 } from 'lucide-react';
 
 const AboutPage = () => {
@@ -101,7 +104,12 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="py-32 bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 relative overflow-hidden"
+      >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(30)].map((_, i) => (
@@ -138,7 +146,7 @@ const AboutPage = () => {
             
             <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-12">
               For over 14 years, we've been transforming vehicles and exceeding expectations 
-              in the Chomedey community. Learn about our story, values, and the team behind your car's transformation.
+              in the Laval community. Learn about our story, values, and the team behind your car's transformation.
             </p>
 
             {/* Stats */}
@@ -158,166 +166,395 @@ const AboutPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Story Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl sm:text-5xl font-black font-display text-gray-900 mb-8">
-                Our Story
-              </h2>
-              <div className="space-y-8 text-gray-600 leading-relaxed text-lg">
-                <p>
-                  Lave-Auto Chomedey was born from a simple passion: the love of seeing a dirty, 
-                  neglected vehicle transform into a gleaming masterpiece. Founded in 2010 by 
-                  Jean-Pierre Dubois, we started as a small operation with big dreams.
-                </p>
-                <p>
-                  What began as a one-man show has grown into a trusted team of professionals 
-                  who share the same commitment to excellence. Over the years, we've invested 
-                  in the latest equipment, premium products, and continuous training to ensure 
-                  we deliver the best possible results.
-                </p>
-                <p>
-                  Today, we're proud to have served over 5,000 satisfied customers in the 
-                  Chomedey and greater Laval area. Our reputation is built on quality, 
-                  reliability, and an unwavering commitment to customer satisfaction.
-                </p>
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-32 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
+      >
+        {/* Subtle Background Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Hero Tagline */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-gray-900 mb-8 leading-tight">
+              From Soap to{' '}
+              <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                Shine
+              </span>
+            </h2>
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Chomedey's Premier Car Detailing Experience
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            {/* Story Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Lave-Auto Chomedey was born from a simple passion: the love of seeing a dirty, 
+                    neglected vehicle transform into a gleaming masterpiece. Founded in 2010 by 
+                    Jean-Pierre Dubois, we started as a small operation with big dreams.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    What began as a one-man show has grown into a trusted team of professionals 
+                    who share the same commitment to excellence. Over the years, we've invested 
+                    in the latest equipment, premium products, and continuous training.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Today, we're proud to have served over 5,000 satisfied customers in the 
+                    Chomedey and greater Laval area. Our reputation is built on quality, 
+                    reliability, and an unwavering commitment to customer satisfaction.
+                  </p>
+                </div>
+                
+                {/* Key Stats */}
+                <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                  >
+                    <div className="text-4xl font-black text-cyan-600 mb-2">5000+</div>
+                    <div className="text-sm text-gray-600 font-medium">Cars Transformed</div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.7 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                  >
+                    <div className="text-4xl font-black text-blue-600 mb-2">14+</div>
+                    <div className="text-sm text-gray-600 font-medium">Years Experience</div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                  >
+                    <div className="text-4xl font-black text-indigo-600 mb-2">5★</div>
+                    <div className="text-sm text-gray-600 font-medium">Rating</div>
+                  </motion.div>
+                </div>
               </div>
-            </div>
-            <div className="relative">
-              <div className="image-premium relative h-96 rounded-3xl overflow-hidden shadow-2xl">
+            </motion.div>
+
+            {/* Visual Element */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src="/photos-before-and-after/cleaning-process.jpg"
                   alt="Our team at work"
-                  fill
-                  className="object-cover"
+                  width={800}
+                  height={600}
+                  className="object-cover w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-8 left-8">
-                  <span className="bg-white/20 backdrop-blur-md text-white px-6 py-3 rounded-full text-sm font-bold">
-                    Our Team in Action
-                  </span>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
-            </div>
+              
+              {/* Floating Achievement Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100 cursor-interactive"
+              >
+                <div className="flex items-center space-x-2 mb-3">
+                  <Crown className="h-5 w-5 text-amber-500" />
+                  <span className="text-sm font-bold text-gray-900">Excellence Award</span>
+                </div>
+                <div className="text-2xl font-black text-gray-900">Chomedey's #1</div>
+                <div className="text-sm text-gray-600">Car Detailing Service</div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Values Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black font-display text-gray-900 mb-8">
-              Our Values
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-32 bg-white relative overflow-hidden"
+      >
+        {/* Subtle Background Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/3 to-blue-500/3 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl sm:text-6xl font-black font-display text-gray-900 mb-8">
+              What Drives{' '}
+              <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                Us
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               These core values guide everything we do and shape the experience we provide to every customer.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <div
+                <motion.div
                   key={value.title}
-                  className="card-premium cursor-interactive bg-white rounded-3xl p-10 shadow-xl border border-gray-100"
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.15,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.02,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="card-premium cursor-interactive bg-white rounded-3xl p-8 shadow-lg border border-gray-100 text-center group"
                 >
-                  <div className="flex items-start space-x-8">
-                    <div className={`flex-shrink-0 w-20 h-20 rounded-3xl bg-gradient-to-br ${value.color} flex items-center justify-center`}>
-                      <IconComponent className="h-10 w-10 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-black text-gray-900 mb-4">
-                        {value.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed text-lg">
-                        {value.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  <motion.div 
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.15 + 0.2,
+                      ease: "backOut"
+                    }}
+                    viewport={{ once: true }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 360,
+                      transition: { duration: 0.5 }
+                    }}
+                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${value.color} mb-6 group-hover:shadow-lg`}
+                  >
+                    <IconComponent className="h-8 w-8 text-white" />
+                  </motion.div>
+                  
+                  <motion.h3 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.15 + 0.4 }}
+                    viewport={{ once: true }}
+                    className="text-xl font-black text-gray-900 mb-4"
+                  >
+                    {value.title}
+                  </motion.h3>
+                  
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.15 + 0.5 }}
+                    viewport={{ once: true }}
+                    className="text-gray-600 leading-relaxed text-sm"
+                  >
+                    {value.description}
+                  </motion.p>
+                </motion.div>
               );
             })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Team Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black font-display text-gray-900 mb-8">
-              Meet Our Team
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-32 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
+      >
+        {/* Subtle Background Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl sm:text-6xl font-black font-display text-gray-900 mb-8">
+              Meet the{' '}
+              <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                Masters
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Our experienced professionals are passionate about delivering exceptional results 
               and ensuring your complete satisfaction.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {teamMembers.map((member, index) => (
-              <div
+              <motion.div
                 key={member.name}
-                className="card-premium cursor-interactive bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100"
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.7, 
+                  delay: index * 0.2,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  y: -12, 
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
+                className="card-premium cursor-interactive bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 group"
               >
-                <div className="image-premium relative h-80">
+                {/* Profile Image */}
+                <div className="relative h-80 overflow-hidden">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-6 left-6">
-                    <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-bold">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                  
+                  {/* Experience Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
+                    viewport={{ once: true }}
+                    className="absolute top-6 right-6"
+                  >
+                    <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       {member.experience}
                     </span>
-                  </div>
+                  </motion.div>
+                  
+                  {/* Specialty Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
+                    viewport={{ once: true }}
+                    className="absolute bottom-6 left-6"
+                  >
+                    <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      {member.specialty}
+                    </span>
+                  </motion.div>
                 </div>
                 
+                {/* Profile Content */}
                 <div className="p-8">
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">
+                  <motion.h3 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.5 }}
+                    viewport={{ once: true }}
+                    className="text-2xl font-black text-gray-900 mb-2"
+                  >
                     {member.name}
-                  </h3>
-                  <p className="text-emerald-600 font-bold text-lg mb-4">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                    {member.description}
-                  </p>
+                  </motion.h3>
                   
-                  <div className="space-y-2">
+                  <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-cyan-600 font-bold text-lg mb-4"
+                  >
+                    {member.role}
+                  </motion.p>
+                  
+                  <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.7 }}
+                    viewport={{ once: true }}
+                    className="text-gray-600 leading-relaxed mb-6"
+                  >
+                    {member.description}
+                  </motion.p>
+                  
+                  {/* Signature Line */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.8 }}
+                    viewport={{ once: true }}
+                    className="pt-6 border-t border-gray-100"
+                  >
                     <div className="flex items-center space-x-2">
-                      <Star className="h-4 w-4 text-yellow-500" />
-                      <span className="text-sm font-semibold text-gray-700">
-                        Specializes in: {member.specialty}
+                      <Heart className="h-4 w-4 text-red-500" />
+                      <span className="text-sm text-gray-500 italic">
+                        "Passion drives perfection"
                       </span>
                     </div>
-                    
-                    <div className="mt-4 space-y-1">
-                      {member.achievements.map((achievement, idx) => (
-                        <div key={idx} className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-emerald-500" />
-                          <span className="text-sm text-gray-600">{achievement}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Timeline Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
@@ -329,19 +566,59 @@ const AboutPage = () => {
           </div>
 
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 to-cyan-500 rounded-full"></div>
+            {/* Animated Timeline Line */}
+            <motion.div 
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+              viewport={{ once: true }}
+              className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 to-cyan-500 rounded-full origin-top"
+            />
             
             <div className="space-y-16">
               {milestones.map((milestone, index) => {
                 const IconComponent = milestone.icon;
+                const isEven = index % 2 === 0;
                 return (
-                  <div
+                  <motion.div
                     key={milestone.year}
-                    className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                    initial={{ 
+                      opacity: 0, 
+                      x: isEven ? -100 : 100, 
+                      scale: 0.8,
+                      rotateY: isEven ? -15 : 15
+                    }}
+                    whileInView={{ 
+                      opacity: 1, 
+                      x: 0, 
+                      scale: 1,
+                      rotateY: 0
+                    }}
+                    transition={{ 
+                      duration: 0.8, 
+                      delay: index * 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    viewport={{ once: true }}
+                    whileHover={{ 
+                      scale: 1.05,
+                      rotateY: isEven ? 5 : -5,
+                      transition: { duration: 0.3 }
+                    }}
+                    className={`flex items-center ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
                   >
-                    <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12 text-right' : 'pl-12 text-left'}`}>
-                      <div className="card-premium bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
+                    <div className={`w-1/2 ${isEven ? 'pr-12 text-right' : 'pl-12 text-left'}`}>
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: index * 0.3 + 0.2 }}
+                        viewport={{ once: true }}
+                        whileHover={{ 
+                          scale: 1.02,
+                          boxShadow: "0 20px 40px rgba(16, 185, 129, 0.3)"
+                        }}
+                        className="card-premium bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20"
+                      >
                         <div className="flex items-center space-x-4 mb-4">
                           <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl">
                             <IconComponent className="h-6 w-6 text-white" />
@@ -356,103 +633,278 @@ const AboutPage = () => {
                         <p className="text-white/80 text-lg">
                           {milestone.description}
                         </p>
-                      </div>
+                      </motion.div>
                     </div>
                     
-                    <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full border-4 border-white flex items-center justify-center z-10">
-                      <div className="w-4 h-4 bg-white rounded-full"></div>
-                    </div>
+                    <motion.div 
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: index * 0.3 + 0.4,
+                        ease: "backOut"
+                      }}
+                      viewport={{ once: true }}
+                      whileHover={{ 
+                        scale: 1.2,
+                        rotate: 360,
+                        transition: { duration: 0.5 }
+                      }}
+                      className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full border-4 border-white flex items-center justify-center z-10 shadow-lg shadow-emerald-500/50"
+                    >
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.3 + 0.6 }}
+                        viewport={{ once: true }}
+                        className="w-4 h-4 bg-white rounded-full"
+                      />
+                    </motion.div>
                     
                     <div className="w-1/2"></div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Trust Badges Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black font-display text-gray-900 mb-8">
-              Why Trust Us?
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden"
+      >
+        {/* Subtle Background Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl sm:text-6xl font-black font-display text-white mb-8">
+              Why Trust{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Us?
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
               Our certifications, insurance, and commitment to excellence give you peace of mind.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-100 to-emerald-100 rounded-3xl mb-6">
-                <Shield className="h-10 w-10 text-green-600" />
-              </div>
-              <h3 className="text-xl font-black text-gray-900 mb-3">Fully Insured</h3>
-              <p className="text-gray-600">Complete liability coverage for your peace of mind</p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-3xl mb-6">
-                <Award className="h-10 w-10 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-black text-gray-900 mb-3">Certified Professionals</h3>
-              <p className="text-gray-600">Trained and certified in the latest techniques</p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-3xl mb-6">
-                <Leaf className="h-10 w-10 text-emerald-600" />
-              </div>
-              <h3 className="text-xl font-black text-gray-900 mb-3">Eco-Friendly</h3>
-              <p className="text-gray-600">100% biodegradable and environmentally safe products</p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-3xl mb-6">
-                <Star className="h-10 w-10 text-yellow-600" />
-              </div>
-              <h3 className="text-xl font-black text-gray-900 mb-3">5-Star Rated</h3>
-              <p className="text-gray-600">Consistently rated 5 stars by our customers</p>
-            </div>
+            {[
+              { icon: Shield, title: "Fully Insured", description: "Complete liability coverage for your peace of mind", color: "from-green-500 to-emerald-500", iconColor: "text-white" },
+              { icon: Award, title: "Certified Professionals", description: "Trained and certified in the latest techniques", color: "from-blue-500 to-cyan-500", iconColor: "text-white" },
+              { icon: Leaf, title: "Eco-Friendly", description: "100% biodegradable and environmentally safe products", color: "from-emerald-500 to-teal-500", iconColor: "text-white" },
+              { icon: Star, title: "5-Star Rated", description: "Consistently rated 5 stars by our customers", color: "from-yellow-500 to-orange-500", iconColor: "text-white" }
+            ].map((badge, index) => {
+              const IconComponent = badge.icon;
+              return (
+                <motion.div
+                  key={badge.title}
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.2,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    y: -10, 
+                    scale: 1.05,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="text-center cursor-interactive"
+                >
+                  <motion.div 
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.2 + 0.2,
+                      ease: "backOut"
+                    }}
+                    viewport={{ once: true }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 360,
+                      transition: { duration: 0.5 }
+                    }}
+                    className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r ${badge.color} rounded-3xl mb-6 shadow-lg`}
+                  >
+                    <IconComponent className={`h-10 w-10 ${badge.iconColor}`} />
+                  </motion.div>
+                  <motion.h3 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.2 + 0.4 }}
+                    viewport={{ once: true }}
+                    className="text-xl font-black text-white mb-3"
+                  >
+                    {badge.title}
+                  </motion.h3>
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.2 + 0.5 }}
+                    viewport={{ once: true }}
+                    className="text-white/80"
+                  >
+                    {badge.description}
+                  </motion.p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
-            <Sparkles className="h-5 w-5 text-emerald-400" />
-            <span>Ready to Experience Excellence?</span>
-          </div>
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+      >
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 8,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
           
-          <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
-            Join Our Family of Satisfied Customers
-          </h2>
-          
-          <p className="text-xl text-white/80 mb-12 leading-relaxed">
-            Experience the Lave-Auto Chomedey difference. Let us transform your vehicle 
-            with the same care and attention to detail we've been providing for over 14 years.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8">
-            <a
-              href="/contact"
-              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-emerald-700 px-10 py-5 rounded-full font-bold text-lg"
-            >
-              Book Your Service
-            </a>
-            <a
-              href="tel:+14506860016"
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-10 py-5 rounded-full font-bold text-lg border border-white/20"
-            >
-              Call +1 450-686-0016
-            </a>
-          </div>
+          <motion.div 
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
+            animate={{
+              x: [0, 50, 0],
+              y: [0, -30, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl"
+            animate={{
+              x: [0, -50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 3,
+            }}
+          />
         </div>
-      </section>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full text-sm font-medium mb-12 border border-white/20"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles className="h-6 w-6 text-cyan-400" />
+            </motion.div>
+            <span className="text-lg">Ready to Experience Excellence?</span>
+          </motion.div>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-white mb-8 leading-tight"
+          >
+            Ready for the{' '}
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Ultimate
+            </span>
+            <br />
+            Car Care Experience?
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-xl lg:text-2xl text-white/80 mb-16 leading-relaxed max-w-4xl mx-auto"
+          >
+            Book your premium detailing service today and transform your vehicle into a masterpiece. 
+            Join thousands of satisfied customers who trust us with their most prized possessions.
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8"
+          >
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-slate-900 px-12 py-6 rounded-full font-bold text-xl inline-flex items-center justify-center space-x-3 shadow-2xl"
+            >
+              <span>Book Your Service</span>
+              <ArrowRight className="h-6 w-6" />
+            </motion.a>
+            <motion.a
+              href="tel:+14506860016"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-6 rounded-full font-bold text-xl border border-white/20 inline-flex items-center justify-center space-x-3"
+            >
+              <Phone className="h-6 w-6" />
+              <span>Call +1 450-686-0016</span>
+            </motion.a>
+          </motion.div>
+        </div>
+      </motion.section>
     </div>
   );
 };

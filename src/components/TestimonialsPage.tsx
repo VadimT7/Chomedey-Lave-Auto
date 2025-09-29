@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Star, 
   Quote, 
@@ -134,7 +135,12 @@ const TestimonialsPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="py-32 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden"
+      >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(25)].map((_, i) => (
@@ -205,10 +211,16 @@ const TestimonialsPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Main Testimonials Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+      >
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-pink-100 to-purple-100 rounded-full opacity-30 animate-float"></div>
@@ -218,7 +230,12 @@ const TestimonialsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Testimonial Slider */}
           <div className="relative">
-            <div className="card-premium bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="card-premium bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image Section */}
                 <div className="image-premium relative h-96 lg:h-auto">
@@ -300,7 +317,7 @@ const TestimonialsPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Navigation */}
             <div className="flex items-center justify-between mt-12">
@@ -337,7 +354,7 @@ const TestimonialsPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Additional Testimonials Grid */}
       <section className="py-24 bg-white">
@@ -353,8 +370,17 @@ const TestimonialsPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.slice(0, 6).map((testimonial, index) => (
-              <div
+              <motion.div
                 key={testimonial.id}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.02 }}
                 className="card-premium cursor-interactive bg-white rounded-3xl p-8 shadow-xl border border-gray-100"
               >
                 <div className="flex items-center space-x-2 mb-6">
@@ -390,7 +416,7 @@ const TestimonialsPage = () => {
                     {testimonial.service}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
