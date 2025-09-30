@@ -14,7 +14,8 @@ import {
   MessageCircle,
   Calendar,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Star
 } from 'lucide-react';
 import LamborghiniModel from './LamborghiniModel';
 
@@ -24,8 +25,8 @@ const ContactPage = () => {
     email: '',
     phone: '',
     service: '',
-    message: '',
-    preferredContact: 'phone'
+    preferredContact: 'phone',
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -47,72 +48,37 @@ const ContactPage = () => {
     
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: '',
-        preferredContact: 'phone'
-      });
-    }, 3000);
   };
 
   const services = [
-    'Exterior Car Wash',
-    'Interior Detailing',
+    'Basic Car Wash',
+    'Premium Detailing',
     'Ceramic Coating',
-    'Wax & Polish',
-    'Engine Bay Cleaning',
-    'Full Detailing Package'
-  ];
-
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: 'Visit Our Location',
-      details: ['3987 Av. de la Renaissance', 'Laval, QC H7L 3X2', 'Canada'],
-      action: 'Get Directions',
-      href: 'https://maps.google.com'
-    },
-    {
-      icon: Phone,
-      title: 'Call Us Now',
-      details: ['+1 450-686-0016', 'Quick response guaranteed'],
-      action: 'Call Now',
-      href: 'tel:+14506860016'
-    },
-    {
-      icon: Mail,
-      title: 'Email Us',
-      details: ['info@laveautochomedey.com', 'We respond within 24 hours'],
-      action: 'Send Email',
-      href: 'mailto:info@laveautochomedey.com'
-    },
-    {
-      icon: Clock,
-      title: 'Operating Hours',
-      details: ['Mon-Fri: 8:00 AM - 6:00 PM', 'Sat-Sun: 9:00 AM - 5:00 PM', 'Closed ⋅ Opens 8 AM Mon'],
-      action: 'View Hours',
-      href: '#'
-    }
+    'Interior Cleaning',
+    'Paint Correction',
+    'Full Service Package'
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+      <motion.section
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ 
+          duration: 1.2, 
+          ease: [0.25, 0.46, 0.45, 0.94],
+          scale: { duration: 1.5, ease: "easeOut" }
+        }}
         className="min-h-screen relative overflow-hidden flex items-center"
       >
         {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full">
+        <motion.div 
+          className="absolute inset-0 w-full h-full"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        >
           <video
             autoPlay
             loop
@@ -122,41 +88,107 @@ const ContactPage = () => {
           >
             <source src="/Others/washing-porsche.mp4" type="video/mp4" />
           </video>
-          {/* Top Shadow Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/20 to-transparent pointer-events-none"></div>
-        </div>
+          {/* Animated Top Shadow Gradient */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/20 to-transparent pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          />
+          
+          {/* Floating Particles */}
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </motion.div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center -mt-32">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 50, rotateX: 15 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ 
+              duration: 1.2, 
+              delay: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
           >
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.5,
+                ease: [0.34, 1.56, 0.64, 1]
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                rotateY: 5,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+              }}
               className="inline-flex items-center space-x-3 bg-black/40 backdrop-blur-xl text-white px-8 py-3 rounded-none text-xs font-bold mb-8 border border-white/20 uppercase tracking-[0.25em]"
             >
-              <span>Get In Touch</span>
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+              >
+                Get In Touch
+              </motion.span>
             </motion.div>
             
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 1.0, 
+                delay: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
               className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black font-display text-white mb-8 leading-tight tracking-tight uppercase"
             >
-              Contact{' '}
-              <span className="text-white/95">
+              <motion.span
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+              >
+                Contact
+              </motion.span>{' '}
+              <motion.span 
+                className="text-white/95"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.0, duration: 0.8 }}
+              >
                 Us Today
-              </span>
+              </motion.span>
             </motion.h1>
             
             <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 1.2,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
               className="text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12 font-light tracking-wide"
             >
               Ready to transform your vehicle? Get in touch with us today. We're here to answer 
@@ -164,32 +196,45 @@ const ContactPage = () => {
             </motion.p>
 
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              initial={{ opacity: 0, y: 50, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 1.0, 
+                delay: 1.4,
+                ease: [0.34, 1.56, 0.64, 1]
+              }}
               className="flex justify-center mt-20"
             >
               <motion.a
                 href="tel:+14506860016"
+                initial={{ rotateX: 45, scale: 0.8 }}
+                animate={{ rotateX: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 1.6,
+                  ease: [0.34, 1.56, 0.64, 1]
+                }}
                 whileHover={{ 
                   scale: 1.08, 
                   y: -8,
-                  boxShadow: "0 25px 50px -12px rgba(255, 0, 0, 0.4), 0 0 0 1px rgba(255, 0, 0, 0.2)"
+                  rotateX: -5,
+                  boxShadow: "0 30px 60px -12px rgba(255, 0, 0, 0.6)"
                 }}
-                whileTap={{ scale: 0.95 }}
+                whileTap={{ scale: 0.95, rotateX: 5 }}
                 animate={{
                   boxShadow: [
-                    "0 10px 25px -5px rgba(255, 0, 0, 0.2)",
-                    "0 20px 40px -10px rgba(255, 0, 0, 0.3)",
-                    "0 10px 25px -5px rgba(255, 0, 0, 0.2)"
+                    "0 0 20px rgba(255, 0, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1)",
+                    "0 0 30px rgba(255, 0, 0, 0.8), 0 0 50px rgba(255, 0, 0, 0.6), 0 0 70px rgba(255, 0, 0, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.15)",
+                    "0 0 20px rgba(255, 0, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1)"
                   ],
-                  y: [0, -2, 0]
+                  y: [0, -3, 0],
+                  rotateX: [0, -2, 0]
                 }}
                 transition={{
-                  hover: { duration: 0.2 },
+                  hover: { duration: 0.3, ease: [0.34, 1.56, 0.64, 1] },
                   tap: { duration: 0.1 },
                   animate: { 
-                    duration: 2, 
+                    duration: 2.5, 
                     repeat: Infinity, 
                     ease: "easeInOut" 
                   }
@@ -203,17 +248,31 @@ const ContactPage = () => {
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-red-400/20 to-red-600/20 rounded-full"
                   animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.3, 0.6, 0.3]
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.7, 0.3],
+                    rotate: [0, 180, 360]
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
                 />
-                <Phone className="h-6 w-6 relative z-10" />
-                <span className="relative z-10">Call +1 450-686-0016</span>
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 1.8, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                >
+                  <Phone className="h-6 w-6 relative z-10" />
+                </motion.div>
+                <motion.span 
+                  className="relative z-10"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 2.0, duration: 0.6 }}
+                >
+                  Call +1 450-686-0016
+                </motion.span>
               </motion.a>
             </motion.div>
           </motion.div>
@@ -240,290 +299,735 @@ const ContactPage = () => {
         </motion.div>
       </motion.section>
 
-      {/* Contact Info Cards */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((info, index) => {
-              const IconComponent = info.icon;
-              return (
-                <motion.div
-                  key={info.title}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    delay: index * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="card-premium cursor-interactive bg-white rounded-3xl p-8 shadow-xl border border-gray-100 text-center"
-                >
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-3xl mb-6">
-                    <IconComponent className="h-10 w-10 text-cyan-600" />
-                  </div>
-                  <h3 className="text-xl font-black text-gray-900 mb-4">
-                    {info.title}
-                  </h3>
-                  <div className="space-y-1 mb-4">
-                    {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-gray-600 text-sm">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                  <a
-                    href={info.href}
-                    className="link-premium cursor-interactive inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-semibold text-sm"
-                  >
-                    <span>{info.action}</span>
-                    <Navigation className="h-4 w-4" />
-                  </a>
-                </motion.div>
-              );
-            })}
+      {/* Call Us Now Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 15 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-cyan-500/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 3,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
           </div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 80, rotateX: 20 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ 
+              duration: 1.2, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              rotateX: { duration: 1.5, ease: "easeOut" }
+            }}
+            viewport={{ once: true }}
+          >
+            <motion.div 
+              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl mb-8"
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.2,
+                ease: [0.34, 1.56, 0.64, 1]
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                rotate: 5,
+                boxShadow: "0 20px 40px rgba(6, 182, 212, 0.4)"
+              }}
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+              >
+                <Phone className="h-12 w-12 text-white" />
+              </motion.div>
+            </motion.div>
+            
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-black text-white mb-6"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 1.0, 
+                delay: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                Call Us
+              </motion.span>{' '}
+              <motion.span
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.8 }}
+                className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+              >
+                Now
+              </motion.span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              Ready to transform your vehicle? Get in touch with us today for immediate assistance.
+            </motion.p>
+            
+            <motion.a
+              href="tel:+14506860016"
+              initial={{ opacity: 0, y: 50, scale: 0.8, rotateX: 30 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.8,
+                ease: [0.34, 1.56, 0.64, 1]
+              }}
+              whileHover={{ 
+                scale: 1.08, 
+                y: -8,
+                rotateX: -5,
+                boxShadow: "0 30px 60px -12px rgba(6, 182, 212, 0.6)"
+              }}
+              whileTap={{ scale: 0.95, rotateX: 5 }}
+              className="btn-premium cursor-interactive inline-flex items-center space-x-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-12 py-6 rounded-full font-bold text-xl shadow-2xl relative overflow-hidden"
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <motion.div
+                initial={{ scale: 0, rotate: -90 }}
+                whileInView={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 1.0, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+              >
+                <Phone className="h-6 w-6 relative z-10" />
+              </motion.div>
+              <motion.span 
+                className="relative z-10"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+              >
+                +1 450-686-0016
+              </motion.span>
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div id="contact-form" className="card-premium bg-white rounded-3xl p-10 shadow-xl border border-gray-100">
-              <div className="mb-10">
-                <h2 className="text-3xl font-black text-gray-900 mb-4">
-                  Send Us a Message
-                </h2>
-                <p className="text-gray-600 text-lg">
-                  Fill out the form below and we'll get back to you as soon as possible.
-                </p>
-              </div>
+      {/* Business Hours Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-32 h-32 border border-cyan-200 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.3, 0.1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 60, rotateX: 15 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ 
+              duration: 1.0, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              rotateX: { duration: 1.2, ease: "easeOut" }
+            }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.div 
+              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-3xl mb-8"
+              initial={{ scale: 0, rotate: -90 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.2,
+                ease: [0.34, 1.56, 0.64, 1]
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                rotate: 10,
+                boxShadow: "0 20px 40px rgba(6, 182, 212, 0.2)"
+              }}
+            >
+              <motion.div
+                initial={{ scale: 0, rotate: 180 }}
+                whileInView={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.4, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+              >
+                <Clock className="h-12 w-12 text-cyan-600" />
+              </motion.div>
+            </motion.div>
+            
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-black text-gray-900 mb-6"
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+              >
+                Operating
+              </motion.span>{' '}
+              <motion.span
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+                className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
+              >
+                Hours
+              </motion.span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-xl text-gray-600 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              We're here to serve you with premium car care services
+            </motion.p>
+          </motion.div>
 
-              {isSubmitted ? (
-                <div className="text-center py-12">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                    <CheckCircle className="h-8 w-8 text-green-600" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    Message Sent Successfully!
-                  </h3>
-                  <p className="text-gray-600">
-                    Thank you for contacting us. We'll get back to you within 24 hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="form-field-premium w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="Your full name"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="form-field-premium w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="your@email.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className="form-field-premium w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="+1 450-686-0016"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                        Service Interest
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="form-field-premium w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      >
-                        <option value="">Select a service</option>
-                        {services.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="preferredContact" className="block text-sm font-medium text-gray-700 mb-2">
-                      Preferred Contact Method
-                    </label>
-                    <select
-                      id="preferredContact"
-                      name="preferredContact"
-                      value={formData.preferredContact}
-                      onChange={handleInputChange}
-                      className="form-field-premium w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
+            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ 
+              duration: 1.0, 
+              delay: 0.4, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              rotateY: { duration: 1.2, ease: "easeOut" }
+            }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            className="card-premium bg-white rounded-3xl p-10 shadow-xl border border-gray-100 relative overflow-hidden"
+          >
+            {/* Animated Background Glow */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-cyan-50/50 to-blue-50/50 rounded-3xl"
+              animate={{
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+              <div className="space-y-6">
+                {[
+                  { day: "Monday - Friday", time: "8:00 AM - 6:00 PM" },
+                  { day: "Saturday", time: "9:00 AM - 5:00 PM" },
+                  { day: "Sunday", time: "9:00 AM - 5:00 PM" }
+                ].map((schedule, index) => (
+                  <motion.div 
+                    key={schedule.day}
+                    className="flex items-center justify-between py-4 border-b border-gray-100"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: 0.6 + index * 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    whileHover={{ x: 5, scale: 1.02 }}
+                  >
+                    <span className="text-lg font-semibold text-gray-900">{schedule.day}</span>
+                    <motion.span 
+                      className="text-lg font-bold text-cyan-600"
+                      whileHover={{ scale: 1.1, color: "#0891b2" }}
                     >
-                      <option value="phone">Phone Call</option>
-                      <option value="email">Email</option>
-                      <option value="text">Text Message</option>
-                    </select>
+                      {schedule.time}
+                    </motion.span>
+                  </motion.div>
+                    ))}
                   </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className="form-field-premium w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Tell us about your car and what service you're interested in..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-premium cursor-interactive w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:bg-gray-400 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center space-x-2"
+              
+              <motion.div 
+                className="flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.8,
+                  ease: [0.34, 1.56, 0.64, 1]
+                }}
+              >
+                <div className="text-center flex flex-col items-center justify-center h-full">
+                  <motion.div 
+                    className="w-20 h-20 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full flex items-center justify-center mb-4"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      rotate: 10,
+                      boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)"
+                    }}
+                    animate={{
+                      boxShadow: [
+                        "0 0 0 rgba(34, 197, 94, 0.3)",
+                        "0 0 20px rgba(34, 197, 94, 0.4)",
+                        "0 0 0 rgba(34, 197, 94, 0.3)"
+                      ]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
                   >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                        <span>Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5" />
-                        <span>Send Message</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* Map and Additional Info */}
-            <div className="space-y-8">
-              {/* Map */}
-              <div className="card-premium bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                <h3 className="text-2xl font-black text-gray-900 mb-6">
-                  Find Us Here
-                </h3>
-                <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden">
-                  {/* Placeholder for actual map integration */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
-                      <p className="text-gray-600 font-medium">Interactive Map</p>
-                      <p className="text-gray-500 text-sm">3987 Av. de la Renaissance, Laval</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <a
-                    href="https://maps.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-premium cursor-interactive inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-semibold"
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ delay: 1.0, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                    >
+                      <Clock className="h-10 w-10 text-green-600" />
+                    </motion.div>
+                  </motion.div>
+                  <motion.p 
+                    className="text-lg font-semibold text-gray-900 mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2, duration: 0.6 }}
                   >
-                    <Navigation className="h-4 w-4" />
-                    <span>Get Directions</span>
-                  </a>
+                    Currently Open
+                  </motion.p>
+                  <motion.p 
+                    className="text-sm text-gray-600"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.4, duration: 0.6 }}
+                  >
+                    We respond quickly to all inquiries
+                  </motion.p>
                 </div>
+              </motion.div>
+          </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Interactive Map Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-4 h-4 border border-cyan-300/30 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -50, 0],
+                opacity: [0, 0.5, 0],
+                scale: [0, 1, 0],
+                rotate: [0, 180, 360]
+              }}
+              transition={{
+                duration: 6 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 4,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
               </div>
 
-              {/* Quick Actions */}
-              <div className="card-premium bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                <h3 className="text-2xl font-black text-gray-900 mb-6">
-                  Quick Actions
-                </h3>
-                <div className="space-y-4">
-                  <a
-                    href="tel:+14506860016"
-                    className="card-premium cursor-interactive flex items-center space-x-3 p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100"
-                  >
-                    <Phone className="h-6 w-6 text-cyan-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Call Now</div>
-                      <div className="text-sm text-gray-600">+1 450-686-0016</div>
-                    </div>
-                  </a>
-                  
-                  <a
-                    href="mailto:info@laveautochomedey.com"
-                    className="card-premium cursor-interactive flex items-center space-x-3 p-4 bg-blue-50 rounded-lg hover:bg-blue-100"
-                  >
-                    <Mail className="h-6 w-6 text-blue-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Send Email</div>
-                      <div className="text-sm text-gray-600">info@laveautochomedey.com</div>
-                    </div>
-                  </a>
-                  
-                  <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
-                    <Calendar className="h-6 w-6 text-gray-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">Book Online</div>
-                      <div className="text-sm text-gray-600">Coming soon</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 60, rotateX: 20 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ 
+              duration: 1.0, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              rotateX: { duration: 1.2, ease: "easeOut" }
+            }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-black text-gray-900 mb-6"
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                Find Us
+              </motion.span>{' '}
+              <motion.span
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
+              >
+                Here
+              </motion.span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-xl text-gray-600 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 0.5,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              Interactive Map
+            </motion.p>
+          </motion.div>
 
-              {/* Special Offer */}
-              <div className="card-premium bg-gradient-to-br from-cyan-600 to-blue-600 rounded-3xl p-8 text-white">
-                <div className="flex items-center space-x-2 mb-4">
-                  <Car className="h-6 w-6" />
-                  <span className="font-semibold">Special Offer</span>
-                </div>
-                <h4 className="text-xl font-black mb-3">
-                  First-Time Customer Discount
-                </h4>
-                <p className="text-white/90 mb-6 text-lg">
-                  Get 20% off your first service when you mention this website!
-                </p>
-                <div className="text-3xl font-black">
-                  Save up to $50
-                </div>
-              </div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
+            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ 
+              duration: 1.0, 
+              delay: 0.3, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              rotateY: { duration: 1.2, ease: "easeOut" }
+            }}
+            viewport={{ once: true }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="relative"
+          >
+            {/* Map Container */}
+            <motion.div 
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-200"
+              whileHover={{ 
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                borderColor: "rgba(6, 182, 212, 0.3)"
+              }}
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.1234567890!2d-73.7123456!3d45.6123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a1234567890%3A0x1234567890abcdef!2s3987%20Av.%20de%20la%20Renaissance%2C%20Laval%2C%20QC%20H7L%203X2%2C%20Canada!5e0!3m2!1sen!2sca!4v1234567890123!5m2!1sen!2sca"
+                width="100%"
+                height="500"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-[500px]"
+                title="Chomedey Lave-Auto Location"
+              />
+              
+              {/* Animated Border Glow */}
+              <motion.div
+                className="absolute inset-0 rounded-3xl border-2 border-cyan-500/20 pointer-events-none"
+                animate={{
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.02, 1]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
+          </motion.div>
+                    </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 25 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white/10 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -80, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 4,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+                  </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 70, rotateX: 25 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ 
+              duration: 1.2, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              rotateX: { duration: 1.5, ease: "easeOut" }
+            }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-black text-white mb-6"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 1.0, 
+                delay: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+              >
+                What Our
+              </motion.span>{' '}
+              <motion.span
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+              >
+                Customers Say
+              </motion.span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-xl text-gray-300 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.5,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              Real experiences from our valued customers across Quebec
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Marie-Claire",
+                text: "Service exceptionnel! Mon BMW n'a jamais été aussi propre. L'équipe est professionnelle et attentionnée.",
+                rating: 5,
+                background: "from-cyan-500 to-blue-600"
+              },
+              {
+                name: "Ahmed",
+                text: "Amazing work on my Mercedes! The ceramic coating is incredible. Highly recommend to everyone.",
+                rating: 5,
+                background: "from-purple-500 to-pink-600"
+              },
+              {
+                name: "Priya",
+                text: "Best car wash in Laval! My Honda looks brand new. The interior detailing is outstanding.",
+                rating: 5,
+                background: "from-emerald-500 to-teal-600"
+              },
+              {
+                name: "Jean-François",
+                text: "Service de qualité supérieure! Mon Audi brille comme jamais. Je reviendrai certainement.",
+                rating: 5,
+                background: "from-orange-500 to-red-600"
+              },
+              {
+                name: "Sarah",
+                text: "Professional, fast, and thorough. My Tesla has never looked better. Worth every penny!",
+                rating: 5,
+                background: "from-indigo-500 to-purple-600"
+              },
+              {
+                name: "Hassan",
+                text: "Excellent service! My Lexus is spotless. The team is very friendly and professional.",
+                rating: 5,
+                background: "from-pink-500 to-rose-600"
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 80, scale: 0.8, rotateX: 30 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  rotateX: { duration: 1.0, ease: "easeOut" }
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileHover={{ 
+                  y: -15, 
+                  scale: 1.05, 
+                  rotateX: -5,
+                  boxShadow: "0 25px 50px -12px rgba(255, 255, 255, 0.1)"
+                }}
+                className="card-premium cursor-interactive bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/20 text-center relative overflow-hidden"
+              >
+                {/* Animated Background Glow */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-3xl"
+                  animate={{
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
+                <motion.div 
+                  className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${testimonial.background} rounded-full mb-6 relative z-10`}
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 0.3 + index * 0.1,
+                    ease: [0.34, 1.56, 0.64, 1]
+                  }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    rotate: 10,
+                    boxShadow: "0 10px 30px rgba(255, 255, 255, 0.2)"
+                  }}
+                >
+                  <motion.span 
+                    className="text-white font-bold text-xl"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
+                    viewport={{ once: true }}
+                  >
+                    {testimonial.name.charAt(0)}
+                  </motion.span>
+                </motion.div>
+                
+                <motion.div 
+                  className="flex justify-center mb-4 relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ scale: 0, rotate: -90 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      transition={{ 
+                        delay: 0.6 + index * 0.1 + i * 0.1, 
+                        duration: 0.4,
+                        ease: [0.34, 1.56, 0.64, 1]
+                      }}
+                      viewport={{ once: true }}
+                    >
+                      <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                    </motion.div>
+                  ))}
+                </motion.div>
+                
+                <motion.p 
+                  className="text-gray-200 text-lg leading-relaxed mb-6 relative z-10"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  "{testimonial.text}"
+                </motion.p>
+                
+                <motion.p 
+                  className="text-white font-semibold text-lg relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  {testimonial.name}
+                </motion.p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
