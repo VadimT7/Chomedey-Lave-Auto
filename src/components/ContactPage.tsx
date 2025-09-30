@@ -109,194 +109,114 @@ const ContactPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden flex items-center"
+        className="min-h-screen relative overflow-hidden flex items-center"
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(30)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-              }}
-              transition={{
-                duration: 8 + Math.random() * 4,
-                repeat: Infinity,
-                delay: Math.random() * 8,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-          
-          {/* Floating Orbs */}
-          <motion.div 
-            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
-            animate={{
-              x: [0, 50, 0],
-              y: [0, -30, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl"
-            animate={{
-              x: [0, -50, 0],
-              y: [0, 30, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 3,
-            }}
-          />
-          
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full" style={{
-              backgroundImage: `
-                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px',
-              animation: 'grid-move 20s linear infinite',
-            }} />
-          </div>
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          >
+            <source src="/Others/washing-porsche.mp4" type="video/mp4" />
+          </video>
+          {/* Top Shadow Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/20 to-transparent pointer-events-none"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Side - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-center lg:text-left"
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center -mt-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center space-x-3 bg-black/40 backdrop-blur-xl text-white px-8 py-3 rounded-none text-xs font-bold mb-8 border border-white/20 uppercase tracking-[0.25em]"
             >
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+              <span>Get In Touch</span>
+            </motion.div>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black font-display text-white mb-8 leading-tight tracking-tight uppercase"
+            >
+              Contact{' '}
+              <span className="text-white/95">
+                Us Today
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12 font-light tracking-wide"
+            >
+              Ready to transform your vehicle? Get in touch with us today. We're here to answer 
+              your questions and help you choose the perfect service for your car.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex justify-center mt-20"
+            >
+              <motion.a
+                href="tel:+14506860016"
+                whileHover={{ 
+                  scale: 1.08, 
+                  y: -8,
+                  boxShadow: "0 25px 50px -12px rgba(255, 0, 0, 0.4), 0 0 0 1px rgba(255, 0, 0, 0.2)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                animate={{
+                  boxShadow: [
+                    "0 10px 25px -5px rgba(255, 0, 0, 0.2)",
+                    "0 20px 40px -10px rgba(255, 0, 0, 0.3)",
+                    "0 10px 25px -5px rgba(255, 0, 0, 0.2)"
+                  ],
+                  y: [0, -2, 0]
+                }}
+                transition={{
+                  hover: { duration: 0.2 },
+                  tap: { duration: 0.1 },
+                  animate: { 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }
+                }}
+                className="btn-premium cursor-interactive bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white px-12 py-6 rounded-full font-bold text-lg inline-flex items-center justify-center space-x-3 shadow-2xl border-2 border-red-400/30 relative overflow-hidden"
+                style={{
+                  boxShadow: "0 0 20px rgba(255, 0, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1)"
+                }}
               >
+                {/* Animated Background Glow */}
                 <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                >
-                  <Sparkles className="h-5 w-5 text-cyan-400" />
-                </motion.div>
-                <span>Get In Touch</span>
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-white mb-8 leading-tight"
-              >
-                Contact{' '}
-                <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Us Today
-                </span>
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-xl lg:text-2xl text-white/80 max-w-2xl leading-relaxed mb-12"
-              >
-                Ready to transform your vehicle? Get in touch with us today. We're here to answer 
-                your questions and help you choose the perfect service for your car.
-              </motion.p>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start"
-              >
-                <motion.a
-                  href="#contact-form"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  className="btn-premium bg-white text-slate-900 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center space-x-2"
-                >
-                  <span>Send Message</span>
-                  <ArrowRight className="h-5 w-5" />
-                </motion.a>
-                <motion.a
-                  href="tel:+14506860016"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  className="btn-premium border-2 border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center space-x-2"
-                >
-                  <Phone className="h-5 w-5" />
-                  <span>Call Now</span>
-                </motion.a>
-              </motion.div>
+                  className="absolute inset-0 bg-gradient-to-r from-red-400/20 to-red-600/20 rounded-full"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                <Phone className="h-6 w-6 relative z-10" />
+                <span className="relative z-10">Call +1 450-686-0016</span>
+              </motion.a>
             </motion.div>
-
-            {/* Right Side - 3D Model */}
-            <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.8 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="relative h-96 lg:h-[600px] w-full"
-            >
-              {/* 3D Model Container */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-white/20">
-                <LamborghiniModel />
-              </div>
-              
-              {/* Floating Elements around the model */}
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                  rotate: [0, 5, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full flex items-center justify-center shadow-lg shadow-cyan-400/50"
-              >
-                <Car className="h-8 w-8 text-white" />
-              </motion.div>
-              
-              <motion.div
-                animate={{
-                  y: [0, 20, 0],
-                  rotate: [0, -5, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-                className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg shadow-purple-400/50"
-              >
-                <Sparkles className="h-6 w-6 text-white" />
-              </motion.div>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}

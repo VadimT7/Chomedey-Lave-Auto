@@ -501,10 +501,10 @@ const HomePage = () => {
             </motion.div>
             
             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-              Ready for the Ultimate
+              Come Ready for the Ultimate
               <br />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">
-                Car Care Experience?
+                Car Care Experience
               </span>
             </h2>
             

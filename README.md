@@ -1,6 +1,6 @@
-# Lave-Auto Chomedey - Professional Car Wash & Detailing Website
+# Chomedey Lave-Auto - Professional Car Wash & Detailing Website
 
-A modern, responsive website for Lave-Auto Chomedey, a professional car wash and detailing business in Chomedey, Laval, Quebec.
+A modern, responsive website for Chomedey Lave-Auto, a professional car wash and detailing business in Chomedey, Laval, Quebec.
 
 ## 🌟 Features
 
@@ -172,7 +172,7 @@ The website can be deployed to any platform that supports Next.js:
 
 ## 📞 Contact Information
 
-**Lave-Auto Chomedey**
+**Chomedey Lave-Auto**
 - Address: 123 Chomedey Blvd, Chomedey, Laval, QC H7P 1A1
 - Phone: (450) 123-4567
 - Email: info@laveautochomedey.com
@@ -189,8 +189,8 @@ The website can be deployed to any platform that supports Next.js:
 
 ## 📄 License
 
-This project is proprietary software developed for Lave-Auto Chomedey.
+This project is proprietary software developed for Chomedey Lave-Auto.
 
 ---
 
-Built with ❤️ for Lave-Auto Chomedey
+Built with ❤️ for Chomedey Lave-Auto

@@ -63,7 +63,7 @@ const Navigation = () => {
             <div className="relative flex-shrink-0">
               <Image
                 src="/Others/logo.png"
-                alt="Lave-Auto Chomedey"
+                alt="Chomedey Lave-Auto"
                 width={90 }
                 height={45}
                 className="transition-all duration-300 group-hover:scale-105"
@@ -116,7 +116,7 @@ const Navigation = () => {
           </div>
 
           {/* Contact Info & CTA */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 ml-8">
             <div className={cn(
               "flex items-center space-x-2 text-sm font-semibold group transition-colors duration-300 whitespace-nowrap",
               isScrolled ? "text-gray-700" : "text-white/90"

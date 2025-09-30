@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               <Car className="h-8 w-8 text-primary-400" />
               <div>
-                <h3 className="text-xl font-bold font-display">Lave-Auto Chomedey</h3>
+                <h3 className="text-xl font-bold font-display">Chomedey Lave-Auto</h3>
                 <p className="text-sm text-gray-400">Professional Car Care</p>
               </div>
             </div>
@@ -144,7 +144,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © 2024 Lave-Auto Chomedey. All rights reserved.
+              © 2024 Chomedey Lave-Auto. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
               <Link href="/privacy" className="text-gray-400 hover:text-primary-400 transition-colors">

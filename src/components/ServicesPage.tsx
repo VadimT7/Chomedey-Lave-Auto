@@ -35,25 +35,25 @@ const ServicesPage = () => {
       color: 'from-blue-500 to-cyan-500',
       bgGradient: 'from-blue-50 via-cyan-50 to-blue-50',
       services: [
-        {
-          id: 'exterior-wash',
-          title: 'Exterior Car Wash',
-          description: 'Complete exterior cleaning with premium soap and protective wax',
-          icon: Car,
-          color: 'from-blue-500 to-cyan-500',
-          duration: '30-45 min',
+    {
+      id: 'exterior-wash',
+      title: 'Exterior Car Wash',
+      description: 'Complete exterior cleaning with premium soap and protective wax',
+      icon: Car,
+      color: 'from-blue-500 to-cyan-500',
+      duration: '30-45 min',
           price: '$25',
           originalPrice: '$35',
           rating: 5,
           popular: false,
-          features: [
-            'Hand wash with premium soap',
-            'Wheel and tire cleaning',
-            'Tire shine application',
-            'Quick dry with microfiber',
-            'Windows and mirrors cleaning',
-            'Basic wax protection'
-          ],
+      features: [
+        'Hand wash with premium soap',
+        'Wheel and tire cleaning',
+        'Tire shine application',
+        'Quick dry with microfiber',
+        'Windows and mirrors cleaning',
+        'Basic wax protection'
+      ],
           image: '/photos-before-and-after/before-car-dirty-1.jpg'
         },
         {
@@ -108,67 +108,67 @@ const ServicesPage = () => {
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-50 via-pink-50 to-purple-50',
       services: [
-        {
-          id: 'interior-detailing',
-          title: 'Interior Detailing',
-          description: 'Deep cleaning and protection for your car\'s interior surfaces',
-          icon: Sparkles,
-          color: 'from-purple-500 to-pink-500',
+    {
+      id: 'interior-detailing',
+      title: 'Interior Detailing',
+      description: 'Deep cleaning and protection for your car\'s interior surfaces',
+      icon: Sparkles,
+      color: 'from-purple-500 to-pink-500',
           duration: '90-120 min',
           price: '$85',
           originalPrice: '$120',
           rating: 5,
           popular: true,
-          features: [
-            'Complete vacuum and steam cleaning',
-            'Leather conditioning and protection',
+      features: [
+        'Complete vacuum and steam cleaning',
+        'Leather conditioning and protection',
             'Dashboard and console deep clean',
-            'Carpet and upholstery treatment',
-            'Odor elimination',
-            'UV protection application'
-          ],
+        'Carpet and upholstery treatment',
+        'Odor elimination',
+        'UV protection application'
+      ],
           image: '/photos-before-and-after/after-carpet-treatment.jpg'
-        },
-        {
-          id: 'wax-polish',
-          title: 'Wax & Polish',
-          description: 'Professional waxing and polishing for showroom-quality shine',
-          icon: Droplets,
-          color: 'from-orange-500 to-red-500',
-          duration: '90-120 min',
+    },
+    {
+      id: 'wax-polish',
+      title: 'Wax & Polish',
+      description: 'Professional waxing and polishing for showroom-quality shine',
+      icon: Droplets,
+      color: 'from-orange-500 to-red-500',
+      duration: '90-120 min',
           price: '$95',
           originalPrice: '$130',
           rating: 5,
           popular: false,
-          features: [
-            'Paint correction and polishing',
-            'Premium carnauba wax',
-            'Buffing and shine enhancement',
-            'Paint protection',
-            'Scratch and swirl removal',
-            'Long-lasting results'
-          ],
+      features: [
+        'Paint correction and polishing',
+        'Premium carnauba wax',
+        'Buffing and shine enhancement',
+        'Paint protection',
+        'Scratch and swirl removal',
+        'Long-lasting results'
+      ],
           image: '/photos-before-and-after/after-leather-treatment.jpg'
-        },
-        {
-          id: 'full-detailing',
-          title: 'Full Detailing Package',
-          description: 'Complete inside and out transformation package',
+    },
+    {
+      id: 'full-detailing',
+      title: 'Full Detailing Package',
+      description: 'Complete inside and out transformation package',
           icon: Crown,
-          color: 'from-yellow-500 to-orange-500',
-          duration: '4-6 hours',
+      color: 'from-yellow-500 to-orange-500',
+      duration: '4-6 hours',
           price: '$199',
           originalPrice: '$299',
           rating: 5,
           popular: true,
-          features: [
-            'Everything included',
-            'Premium products used',
-            'Expert craftsmanship',
-            'Guaranteed results',
-            'Before/after photos',
-            'Satisfaction guarantee'
-          ],
+      features: [
+        'Everything included',
+        'Premium products used',
+        'Expert craftsmanship',
+        'Guaranteed results',
+        'Before/after photos',
+        'Satisfaction guarantee'
+      ],
           image: '/photos-before-and-after/before-car-dirty-2.jpg'
         }
       ]
@@ -343,8 +343,8 @@ const ServicesPage = () => {
               From basic maintenance to luxury treatments, we have the perfect service 
               to keep your vehicle looking and feeling its best.
             </p>
-          </div>
-
+                      </div>
+                      
           {/* Service Categories */}
           <div className="space-y-24">
             {serviceCategories.map((category, categoryIndex) => {
@@ -390,19 +390,19 @@ const ServicesPage = () => {
                               <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                                 Most Popular
                               </span>
-                            </div>
+            </div>
                           )}
 
-                          {/* Service Image */}
+                {/* Service Image */}
                           <div className="image-premium relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
-                            <Image
+                  <Image
                               src={service.image}
                               alt={service.title}
-                              fill
-                              className="object-cover"
-                            />
+                    fill
+                    className="object-cover"
+                  />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                            <div className="absolute bottom-4 left-4">
+                  <div className="absolute bottom-4 left-4">
                               <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-lg`}>
                                 <ServiceIcon className="h-6 w-6 text-white" />
                               </div>
@@ -411,8 +411,8 @@ const ServicesPage = () => {
                               <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-md px-2 py-1 rounded-full">
                                 {renderStars(service.rating)}
                               </div>
-                            </div>
-                          </div>
+                  </div>
+                </div>
 
                           {/* Service Content */}
                           <div className="p-8">
@@ -441,32 +441,32 @@ const ServicesPage = () => {
                                 <div className="flex items-center space-x-1">
                                   <Star className="h-4 w-4 text-yellow-400" />
                                   <span className="font-semibold">{service.rating}.0</span>
-                                </div>
-                              </div>
-                            </div>
+                    </div>
+                    </div>
+                  </div>
 
                             {/* Features Preview */}
-                            <div className="mb-6">
+                  <div className="mb-6">
                               <h5 className="font-bold text-gray-900 mb-3 text-sm">What's Included:</h5>
-                              <ul className="space-y-2">
+                    <ul className="space-y-2">
                                 {service.features.slice(0, 3).map((feature, index) => (
-                                  <li key={index} className="flex items-center space-x-2 text-sm text-gray-600">
+                        <li key={index} className="flex items-center space-x-2 text-sm text-gray-600">
                                     <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                                    <span>{feature}</span>
-                                  </li>
-                                ))}
+                          <span>{feature}</span>
+                        </li>
+                      ))}
                                 {service.features.length > 3 && (
                                   <li className="text-sm text-cyan-600 font-semibold">
                                     +{service.features.length - 3} more features
                                   </li>
                                 )}
-                              </ul>
-                            </div>
+                    </ul>
+                  </div>
 
-                            {/* CTA Buttons */}
-                            <div className="space-y-3">
-                              <Link
-                                href="/contact"
+                  {/* CTA Buttons */}
+                  <div className="space-y-3">
+                    <Link
+                      href="/contact"
                                 className={`btn-premium cursor-interactive w-full text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 ${
                                   service.popular
                                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700'
@@ -474,16 +474,16 @@ const ServicesPage = () => {
                                 }`}
                               >
                                 <span>Book Now</span>
-                                <ArrowRight className="h-4 w-4" />
-                              </Link>
-                              
-                              <Link
-                                href="/gallery"
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    
+                    <Link
+                      href="/gallery"
                                 className="btn-premium cursor-interactive w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2"
-                              >
-                                <Eye className="h-4 w-4" />
+                    >
+                      <Eye className="h-4 w-4" />
                                 <span>View Results</span>
-                              </Link>
+                    </Link>
                             </div>
                           </div>
                         </motion.div>
@@ -533,7 +533,7 @@ const ServicesPage = () => {
           </div>
           
           <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
-            Experience the Lave-Auto Chomedey Difference
+            Experience the Chomedey Lave-Auto Difference
           </h2>
           
           <p className="text-xl text-white/80 mb-12 leading-relaxed">

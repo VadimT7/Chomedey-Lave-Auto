@@ -7,7 +7,7 @@ import { Loader } from '@react-three/drei';
 
 function Model() {
   const { scene } = useGLTF('/3d-models/lamborghini.glb');
-  return <primitive object={scene} scale={1} position={[0, -1, 0]} />;
+  return <primitive object={scene} scale={0.7} position={[0, -0.8, 0]} />;
 }
 
 function FallbackModel() {
@@ -23,7 +23,7 @@ const LamborghiniModel = () => {
   return (
     <div className="w-full h-full relative">
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
+        camera={{ position: [0, 0, 7], fov: 45 }}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={<FallbackModel />}>

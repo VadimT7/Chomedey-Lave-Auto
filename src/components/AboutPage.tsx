@@ -31,7 +31,7 @@ const AboutPage = () => {
       experience: '14+ years',
       specialty: 'Paint Correction & Ceramic Coating',
       image: '/photos-before-and-after/after-carpet-treatment.jpg',
-      description: 'Passionate about perfection, Jean-Pierre founded Lave-Auto Chomedey with a vision to provide the highest quality car care services.',
+      description: 'Passionate about perfection, Jean-Pierre founded Chomedey Lave-Auto with a vision to provide the highest quality car care services.',
       achievements: ['5000+ Cars Transformed', 'Certified Detailer', 'Eco-Friendly Pioneer']
     },
     {
@@ -112,20 +112,120 @@ const AboutPage = () => {
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-emerald-400/20 rounded-full animate-bubble"
+          {/* Large Particles */}
+          {[...Array(60)].map((_, i) => (
+            <motion.div
+              key={`large-${i}`}
+              className="absolute w-3 h-3 bg-emerald-400/25 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${8 + Math.random() * 4}s`,
+              }}
+              animate={{
+                y: [0, -120, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1.2, 0],
+                x: [0, Math.random() * 20 - 10, 0],
+              }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 8,
+                ease: "easeInOut",
               }}
             />
           ))}
-          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '5s' }}></div>
+          
+          {/* Medium Particles */}
+          {[...Array(80)].map((_, i) => (
+            <motion.div
+              key={`medium-${i}`}
+              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -80, 0],
+                opacity: [0, 0.8, 0],
+                scale: [0, 1, 0],
+                x: [0, Math.random() * 15 - 7.5, 0],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 6,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          
+          {/* Small Particles */}
+          {[...Array(100)].map((_, i) => (
+            <motion.div
+              key={`small-${i}`}
+              className="absolute w-1 h-1 bg-teal-400/15 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -60, 0],
+                opacity: [0, 0.6, 0],
+                scale: [0, 0.8, 0],
+                x: [0, Math.random() * 10 - 5, 0],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          
+          {/* Floating Orbs */}
+          <motion.div 
+            className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl"
+            animate={{
+              x: [0, 60, 0],
+              y: [0, -40, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
+            animate={{
+              x: [0, -60, 0],
+              y: [0, 40, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 5,
+            }}
+          />
+          <motion.div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-teal-500/8 to-emerald-500/8 rounded-full blur-3xl"
+            animate={{
+              x: [0, 40, 0],
+              y: [0, -30, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+          />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -196,7 +296,7 @@ const AboutPage = () => {
               <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
                 Shine
               </span>
-            </h2>
+              </h2>
             <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               Chomedey's Premier Car Detailing Experience
             </p>
@@ -211,23 +311,40 @@ const AboutPage = () => {
               viewport={{ once: true }}
             >
               <div className="space-y-8">
+                {/* Excellence Award Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 cursor-interactive mb-8 text-center"
+                >
+                  <div className="flex items-center justify-center space-x-2 mb-3">
+                    <Crown className="h-5 w-5 text-amber-500" />
+                    <span className="text-sm font-bold text-gray-900">Excellence Award</span>
+                  </div>
+                  <div className="text-2xl font-black text-gray-900">Chomedey's #1</div>
+                  <div className="text-sm text-gray-600">Car Detailing Service</div>
+                </motion.div>
+
                 <div className="space-y-6">
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    Lave-Auto Chomedey was born from a simple passion: the love of seeing a dirty, 
-                    neglected vehicle transform into a gleaming masterpiece. Founded in 2010 by 
-                    Jean-Pierre Dubois, we started as a small operation with big dreams.
-                  </p>
+                  Chomedey Lave-Auto was born from a simple passion: the love of seeing a dirty, 
+                  neglected vehicle transform into a gleaming masterpiece. Founded in 2010 by 
+                  Jean-Pierre Dubois, we started as a small operation with big dreams.
+                </p>
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    What began as a one-man show has grown into a trusted team of professionals 
-                    who share the same commitment to excellence. Over the years, we've invested 
+                  What began as a one-man show has grown into a trusted team of professionals 
+                  who share the same commitment to excellence. Over the years, we've invested 
                     in the latest equipment, premium products, and continuous training.
-                  </p>
+                </p>
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    Today, we're proud to have served over 5,000 satisfied customers in the 
-                    Chomedey and greater Laval area. Our reputation is built on quality, 
-                    reliability, and an unwavering commitment to customer satisfaction.
-                  </p>
-                </div>
+                  Today, we're proud to have served over 5,000 satisfied customers in the 
+                  Chomedey and greater Laval area. Our reputation is built on quality, 
+                  reliability, and an unwavering commitment to customer satisfaction.
+                </p>
+              </div>
                 
                 {/* Key Stats */}
                 <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
@@ -261,8 +378,8 @@ const AboutPage = () => {
                     <div className="text-4xl font-black text-indigo-600 mb-2">5★</div>
                     <div className="text-sm text-gray-600 font-medium">Rating</div>
                   </motion.div>
-                </div>
               </div>
+            </div>
             </motion.div>
 
             {/* Visual Element */}
@@ -284,22 +401,6 @@ const AboutPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
-              {/* Floating Achievement Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100 cursor-interactive"
-              >
-                <div className="flex items-center space-x-2 mb-3">
-                  <Crown className="h-5 w-5 text-amber-500" />
-                  <span className="text-sm font-bold text-gray-900">Excellence Award</span>
-                </div>
-                <div className="text-2xl font-black text-gray-900">Chomedey's #1</div>
-                <div className="text-sm text-gray-600">Car Detailing Service</div>
-              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -374,7 +475,7 @@ const AboutPage = () => {
                     }}
                     className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${value.color} mb-6 group-hover:shadow-lg`}
                   >
-                    <IconComponent className="h-8 w-8 text-white" />
+                      <IconComponent className="h-8 w-8 text-white" />
                   </motion.div>
                   
                   <motion.h3 
@@ -384,7 +485,7 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="text-xl font-black text-gray-900 mb-4"
                   >
-                    {value.title}
+                        {value.title}
                   </motion.h3>
                   
                   <motion.p 
@@ -394,7 +495,7 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="text-gray-600 leading-relaxed text-sm"
                   >
-                    {value.description}
+                        {value.description}
                   </motion.p>
                 </motion.div>
               );
@@ -533,12 +634,12 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="pt-6 border-t border-gray-100"
                   >
-                    <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                       <Heart className="h-4 w-4 text-red-500" />
                       <span className="text-sm text-gray-500 italic">
                         "Passion drives perfection"
-                      </span>
-                    </div>
+                    </span>
+                  </div>
                   </motion.div>
                 </div>
               </motion.div>
@@ -581,7 +682,7 @@ const AboutPage = () => {
                 const isEven = index % 2 === 0;
                 return (
                   <motion.div
-                    key={milestone.year}
+                  key={milestone.year}
                     initial={{ 
                       opacity: 0, 
                       x: isEven ? -100 : 100, 
@@ -624,18 +725,18 @@ const AboutPage = () => {
                             <IconComponent className="h-6 w-6 text-white" />
                           </div>
                           <div className="text-3xl font-black text-emerald-400">
-                            {milestone.year}
-                          </div>
+                        {milestone.year}
+                      </div>
                         </div>
                         <h3 className="text-2xl font-black text-white mb-3">
-                          {milestone.title}
-                        </h3>
+                        {milestone.title}
+                      </h3>
                         <p className="text-white/80 text-lg">
-                          {milestone.description}
-                        </p>
+                        {milestone.description}
+                      </p>
                       </motion.div>
-                    </div>
-                    
+                  </div>
+                  
                     <motion.div 
                       initial={{ scale: 0, rotate: -180 }}
                       whileInView={{ scale: 1, rotate: 0 }}
@@ -660,8 +761,8 @@ const AboutPage = () => {
                         className="w-4 h-4 bg-white rounded-full"
                       />
                     </motion.div>
-                    
-                    <div className="w-1/2"></div>
+                  
+                  <div className="w-1/2"></div>
                   </motion.div>
                 );
               })}
@@ -777,14 +878,14 @@ const AboutPage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+        className="py-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden"
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
+              className="absolute w-2 h-2 bg-cyan-500/30 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -804,7 +905,7 @@ const AboutPage = () => {
           ))}
           
           <motion.div 
-            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
             animate={{
               x: [0, 50, 0],
               y: [0, -30, 0],
@@ -817,7 +918,7 @@ const AboutPage = () => {
             }}
           />
           <motion.div 
-            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl"
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl"
             animate={{
               x: [0, -50, 0],
               y: [0, 30, 0],
@@ -830,7 +931,7 @@ const AboutPage = () => {
               delay: 3,
             }}
           />
-        </div>
+          </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div 
@@ -838,13 +939,13 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full text-sm font-medium mb-12 border border-white/20"
+            className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-xl text-slate-800 px-8 py-4 rounded-full text-sm font-medium mb-12 border border-slate-200 shadow-lg"
           >
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             >
-              <Sparkles className="h-6 w-6 text-cyan-400" />
+              <Sparkles className="h-6 w-6 text-cyan-600" />
             </motion.div>
             <span className="text-lg">Ready to Experience Excellence?</span>
           </motion.div>
@@ -854,10 +955,10 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-white mb-8 leading-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-slate-900 mb-8 leading-tight"
           >
             Ready for the{' '}
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Ultimate
             </span>
             <br />
@@ -869,7 +970,7 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-xl lg:text-2xl text-white/80 mb-16 leading-relaxed max-w-4xl mx-auto"
+            className="text-xl lg:text-2xl text-slate-700 mb-16 leading-relaxed max-w-4xl mx-auto"
           >
             Book your premium detailing service today and transform your vehicle into a masterpiece. 
             Join thousands of satisfied customers who trust us with their most prized possessions.
@@ -887,7 +988,7 @@ const AboutPage = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-slate-900 px-12 py-6 rounded-full font-bold text-xl inline-flex items-center justify-center space-x-3 shadow-2xl"
+              className="btn-premium cursor-interactive bg-slate-900 hover:bg-slate-800 text-white px-12 py-6 rounded-full font-bold text-xl inline-flex items-center justify-center space-x-3 shadow-2xl"
             >
               <span>Book Your Service</span>
               <ArrowRight className="h-6 w-6" />
@@ -897,7 +998,7 @@ const AboutPage = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-6 rounded-full font-bold text-xl border border-white/20 inline-flex items-center justify-center space-x-3"
+              className="btn-premium cursor-interactive bg-white/80 hover:bg-white backdrop-blur-md text-slate-900 px-12 py-6 rounded-full font-bold text-xl border border-slate-200 shadow-lg inline-flex items-center justify-center space-x-3"
             >
               <Phone className="h-6 w-6" />
               <span>Call +1 450-686-0016</span>

@@ -175,7 +175,7 @@ const TestimonialsPage = () => {
             
             <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-12">
               Don't just take our word for it. Read what our satisfied customers have to say 
-              about their experience with Lave-Auto Chomedey.
+              about their experience with Chomedey Lave-Auto.
             </p>
 
             {/* Trust Indicators */}
@@ -431,11 +431,11 @@ const TestimonialsPage = () => {
           </div>
           
           <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
-            Ready to Experience the Difference?
+            Get Ready to Experience the Difference
           </h2>
           
           <p className="text-xl text-white/80 mb-12 leading-relaxed">
-            Join hundreds of satisfied customers who trust Lave-Auto Chomedey 
+            Join hundreds of satisfied customers who trust Chomedey Lave-Auto 
             with their vehicle care needs.
           </p>
           

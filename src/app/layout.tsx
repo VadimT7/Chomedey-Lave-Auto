@@ -26,12 +26,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lave-Auto Chomedey - Professional Car Wash & Detailing",
+  title: "Chomedey Lave-Auto - Professional Car Wash & Detailing",
   description: "Transform your car with our premium car wash and detailing services. Professional cleaning, ceramic coating, and interior detailing in Chomedey. Visit us today!",
   keywords: "car wash, car detailing, ceramic coating, interior cleaning, Chomedey, Laval, Quebec",
-  authors: [{ name: "Lave-Auto Chomedey" }],
+  authors: [{ name: "Chomedey Lave-Auto" }],
   openGraph: {
-    title: "Lave-Auto Chomedey - Professional Car Wash & Detailing",
+    title: "Chomedey Lave-Auto - Professional Car Wash & Detailing",
     description: "Transform your car with our premium car wash and detailing services.",
     type: "website",
     locale: "en_CA",

@@ -348,7 +348,7 @@ const GalleryPage = () => {
                     src={item.after}
                     alt={item.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                   
@@ -368,9 +368,6 @@ const GalleryPage = () => {
                     <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
                     <p className="text-white/80 text-sm">{item.service}</p>
                   </div>
-
-                  {/* Hover Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 group-hover:from-cyan-500/20 transition-all duration-500"></div>
                 </div>
 
                 {/* Content */}
