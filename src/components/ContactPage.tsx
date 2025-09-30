@@ -120,7 +120,7 @@ const ContactPage = () => {
           ))}
         </motion.div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center -mt-32">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center -mt-16">
           <motion.div
             initial={{ opacity: 0, y: 50, rotateX: 15 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -130,29 +130,6 @@ const ContactPage = () => {
               ease: [0.25, 0.46, 0.45, 0.94]
             }}
           >
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: 0.5,
-                ease: [0.34, 1.56, 0.64, 1]
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                rotateY: 5,
-                boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
-              }}
-              className="inline-flex items-center space-x-3 bg-black/40 backdrop-blur-xl text-white px-8 py-3 rounded-none text-xs font-bold mb-8 border border-white/20 uppercase tracking-[0.25em]"
-            >
-              <motion.span
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7, duration: 0.6 }}
-              >
-                Get In Touch
-              </motion.span>
-            </motion.div>
             
             <motion.h1 
               initial={{ opacity: 0, y: 50, scale: 0.9 }}

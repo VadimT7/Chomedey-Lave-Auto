@@ -25,7 +25,8 @@ const TestimonialsPage = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Johnson',
+      name: 'Sarah',
+      car: 'BMW X5 2021',
       location: 'Chomedey, Laval',
       rating: 5,
       date: '2 weeks ago',
@@ -37,7 +38,8 @@ const TestimonialsPage = () => {
     },
     {
       id: 2,
-      name: 'Michael Chen',
+      name: 'Michael',
+      car: 'Mercedes C-Class 2020',
       location: 'Laval',
       rating: 5,
       date: '1 month ago',
@@ -49,7 +51,8 @@ const TestimonialsPage = () => {
     },
     {
       id: 3,
-      name: 'Emily Rodriguez',
+      name: 'Emily',
+      car: 'Audi A4 2019',
       location: 'Chomedey',
       rating: 5,
       date: '3 weeks ago',
@@ -61,7 +64,8 @@ const TestimonialsPage = () => {
     },
     {
       id: 4,
-      name: 'David Thompson',
+      name: 'David',
+      car: 'Toyota Camry 2022',
       location: 'Laval',
       rating: 5,
       date: '1 week ago',
@@ -73,7 +77,8 @@ const TestimonialsPage = () => {
     },
     {
       id: 5,
-      name: 'Lisa Park',
+      name: 'Lisa',
+      car: 'Honda Civic 2020',
       location: 'Chomedey, Laval',
       rating: 5,
       date: '2 months ago',
@@ -85,7 +90,8 @@ const TestimonialsPage = () => {
     },
     {
       id: 6,
-      name: 'Robert Wilson',
+      name: 'Robert',
+      car: 'Lexus RX 2021',
       location: 'Laval',
       rating: 5,
       date: '3 weeks ago',
@@ -139,7 +145,7 @@ const TestimonialsPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="py-32 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden"
+        className="h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden"
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
@@ -159,7 +165,7 @@ const TestimonialsPage = () => {
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="text-center">
             <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
               <Heart className="h-5 w-5 text-pink-400" />
@@ -211,6 +217,22 @@ const TestimonialsPage = () => {
             </div>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-1 h-3 bg-white rounded-full mt-2"
+            />
+          </div>
+        </motion.div>
       </motion.section>
 
       {/* Main Testimonials Section */}
@@ -234,11 +256,11 @@ const TestimonialsPage = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="card-premium bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100"
+              className="card-premium bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-[600px]"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
                 {/* Image Section */}
-                <div className="image-premium relative h-96 lg:h-auto">
+                <div className="image-premium relative h-96 lg:h-full group">
                   <Image
                     src={testimonials[currentTestimonial].image}
                     alt={testimonials[currentTestimonial].name}
@@ -270,19 +292,33 @@ const TestimonialsPage = () => {
                       </div>
                     </div>
                   )}
+
+                  {/* Image Navigation Arrows */}
+                  <button
+                    onClick={prevTestimonial}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={nextTestimonial}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
                 </div>
 
                 {/* Content Section */}
-                <div className="p-12 lg:p-16 flex flex-col justify-center">
+                <div className="p-12 lg:p-16 flex flex-col justify-center h-full relative">
                   {/* Quote Icon */}
-                  <div className="mb-8">
+                  <div className="absolute top-6 left-15">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-100 to-purple-100 rounded-2xl">
                       <Quote className="h-8 w-8 text-pink-600" />
                     </div>
                   </div>
 
                   {/* Testimonial Text */}
-                  <blockquote className="text-2xl text-gray-700 leading-relaxed mb-10 font-medium">
+                  <blockquote className="text-xl text-gray-700 leading-relaxed mb-10 font-medium h-32 flex items-center mt-8">
                     "{testimonials[currentTestimonial].text}"
                   </blockquote>
 
@@ -296,7 +332,10 @@ const TestimonialsPage = () => {
                         <div className="font-bold text-gray-900 text-xl">
                           {testimonials[currentTestimonial].name}
                         </div>
-                        <div className="text-gray-600">
+                        <div className="text-gray-600 font-medium">
+                          {testimonials[currentTestimonial].car}
+                        </div>
+                        <div className="text-gray-500 text-sm">
                           {testimonials[currentTestimonial].location}
                         </div>
                       </div>
@@ -314,52 +353,53 @@ const TestimonialsPage = () => {
                         <span>{testimonials[currentTestimonial].date}</span>
                       </div>
                     </div>
+
+                    {/* Navigation Controls */}
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+                      <button
+                        onClick={prevTestimonial}
+                        className="btn-premium cursor-interactive flex items-center space-x-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-700 px-6 py-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+                      >
+                        <ChevronLeft className="h-4 w-4" />
+                        <span className="font-semibold text-sm">Previous</span>
+                      </button>
+
+                      {/* Dots */}
+                      <div className="flex space-x-2">
+                        {testimonials.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => goToTestimonial(index)}
+                            className={`btn-premium cursor-interactive w-3 h-3 rounded-full transition-all duration-300 ${
+                              index === currentTestimonial
+                                ? 'bg-gradient-to-r from-pink-500 to-purple-500 scale-125'
+                                : 'bg-gray-300 hover:bg-gray-400'
+                            }`}
+                          />
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={nextTestimonial}
+                        className="btn-premium cursor-interactive flex items-center space-x-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-700 px-6 py-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+                      >
+                        <span className="font-semibold text-sm">Next</span>
+                        <ChevronRight className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-12">
-              <button
-                onClick={prevTestimonial}
-                className="btn-premium cursor-interactive flex items-center space-x-3 bg-white hover:bg-gray-50 text-gray-700 px-8 py-4 rounded-full shadow-xl border border-gray-200"
-              >
-                <ChevronLeft className="h-5 w-5" />
-                <span className="font-semibold">Previous</span>
-              </button>
-
-              {/* Dots */}
-              <div className="flex space-x-3">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    className={`btn-premium cursor-interactive w-4 h-4 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial
-                        ? 'bg-gradient-to-r from-pink-500 to-purple-500 scale-125'
-                        : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={nextTestimonial}
-                className="btn-premium cursor-interactive flex items-center space-x-3 bg-white hover:bg-gray-50 text-gray-700 px-8 py-4 rounded-full shadow-xl border border-gray-200"
-              >
-                <span className="font-semibold">Next</span>
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
           </div>
         </div>
       </motion.section>
 
       {/* Additional Testimonials Grid */}
-      <section className="py-24 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16">
             <h2 className="text-4xl font-black font-display text-gray-900 mb-6">
               More Customer Reviews
             </h2>
@@ -402,7 +442,10 @@ const TestimonialsPage = () => {
                     <div className="font-bold text-gray-900 text-lg">
                       {testimonial.name}
                     </div>
-                    <div className="text-gray-600">
+                    <div className="text-gray-600 font-medium">
+                      {testimonial.car}
+                    </div>
+                    <div className="text-gray-500 text-sm">
                       {testimonial.location}
                     </div>
                   </div>

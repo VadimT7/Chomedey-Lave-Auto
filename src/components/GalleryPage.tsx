@@ -13,7 +13,11 @@ import {
   Sparkles,
   Zap,
   Award,
-  Heart
+  Heart,
+  Car,
+  Clock,
+  MapPin,
+  Trophy
 } from 'lucide-react';
 
 const GalleryPage = () => {
@@ -250,38 +254,127 @@ const GalleryPage = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
-              <Sparkles className="h-5 w-5 text-cyan-400" />
-              <span>Transformation Gallery</span>
-            </div>
+            {/* Local Montreal Badge */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+            >
+              <MapPin className="h-5 w-5 text-cyan-400" />
+              <span>Montreal's Premier Car Transformation Gallery</span>
+            </motion.div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black font-display text-white mb-8 leading-tight">
-              Before & After{' '}
+            {/* Main Headline */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-white mb-6 leading-tight"
+            >
+              Transformations That{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Gallery
+                Speak Volumes
               </span>
-            </h1>
+            </motion.h1>
             
-            <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-12">
-              Witness the incredible transformations we achieve with our professional car detailing services. 
-              Every vehicle tells a story of renewal and excellence.
-            </p>
+            {/* Enhanced Subheadline */}
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-xl sm:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-8"
+            >
+              See the dramatic before and after results that have made us{' '}
+              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
+                Montreal's most trusted luxury car care specialists
+              </span>
+            </motion.p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-4xl font-black text-cyan-400 mb-2">500+</div>
-                <div className="text-white/70">Cars Transformed</div>
+            {/* Supporting Text */}
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed mb-12"
+            >
+              Every detail tells a story of perfection. From neglected to spectacular.
+            </motion.p>
+
+            {/* Enhanced Stats with Icons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12"
+            >
+              <div className="text-center group">
+                <motion.div 
+                  whileHover={{ scale: 1.1 }}
+                  className="w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-400/30"
+                >
+                  <Car className="h-8 w-8 text-cyan-400" />
+                </motion.div>
+                <div className="text-3xl sm:text-4xl font-black text-cyan-400 mb-1">2,500+</div>
+                <div className="text-white/70 text-sm sm:text-base">Vehicles Transformed</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-blue-400 mb-2">100%</div>
-                <div className="text-white/70">Satisfaction Rate</div>
+              
+              <div className="text-center group">
+                <motion.div 
+                  whileHover={{ scale: 1.1 }}
+                  className="w-16 h-16 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-emerald-400/30"
+                >
+                  <Heart className="h-8 w-8 text-emerald-400" />
+                </motion.div>
+                <div className="text-3xl sm:text-4xl font-black text-emerald-400 mb-1">100%</div>
+                <div className="text-white/70 text-sm sm:text-base">Client Satisfaction</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-purple-400 mb-2">14+</div>
-                <div className="text-white/70">Years Experience</div>
+              
+              <div className="text-center group">
+                <motion.div 
+                  whileHover={{ scale: 1.1 }}
+                  className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-purple-400/30"
+                >
+                  <Clock className="h-8 w-8 text-purple-400" />
+                </motion.div>
+                <div className="text-3xl sm:text-4xl font-black text-purple-400 mb-1">14+</div>
+                <div className="text-white/70 text-sm sm:text-base">Years of Excellence</div>
               </div>
-            </div>
+              
+              <div className="text-center group">
+                <motion.div 
+                  whileHover={{ scale: 1.1 }}
+                  className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-orange-400/30"
+                >
+                  <Trophy className="h-8 w-8 text-orange-400" />
+                </motion.div>
+                <div className="text-3xl sm:text-4xl font-black text-orange-400 mb-1">50+</div>
+                <div className="text-white/70 text-sm sm:text-base">Award-Winning Services</div>
+              </div>
+            </motion.div>
+
+            {/* Social Proof */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+              className="flex flex-wrap items-center justify-center gap-6 text-white/60 text-sm"
+            >
+              <div className="flex items-center gap-2">
+                <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                <span>5-Star Rated on Google Reviews</span>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-white/30"></div>
+              <div className="flex items-center gap-2">
+                <Award className="h-4 w-4 text-cyan-400" />
+                <span>Featured in Auto Excellence Magazine</span>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-white/30"></div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-emerald-400" />
+                <span>Trusted across Laval & Greater Montreal</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </motion.section>

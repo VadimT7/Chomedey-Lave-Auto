@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -12,7 +12,9 @@ import {
   Award, 
   CheckCircle,
   ChevronRight,
-  Quote
+  Quote,
+  X,
+  Eye
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -26,6 +28,24 @@ const HomePage = () => {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  // Modal state
+  const [selectedTransformation, setSelectedTransformation] = useState<number | null>(null);
+  const [sliderPosition, setSliderPosition] = useState(50);
+
+  // Modal functions
+  const openTransformationModal = (index: number) => {
+    setSelectedTransformation(index);
+    setSliderPosition(50);
+  };
+
+  const closeTransformationModal = () => {
+    setSelectedTransformation(null);
+  };
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderPosition(parseInt(e.target.value));
+  };
 
   // Testimonials data with Montreal-style names
   const testimonials = [
@@ -355,28 +375,85 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="image-premium cursor-interactive group relative overflow-hidden rounded-2xl bg-gray-800"
+                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 to-black shadow-2xl hover:shadow-cyan-500/30 transition-all duration-700 border border-gray-700 hover:border-cyan-400/50 hover:scale-105"
               >
-                <div className="relative h-80">
-                  <Image
-                    src={item.before}
-                    alt={`Before: ${item.title}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      Before
+                {/* Image Container with Hover Reveal */}
+                <div className="relative h-80 overflow-hidden">
+                  {/* Before Image */}
+                  <div className="absolute inset-0">
+                    <Image
+                      src={item.before}
+                      alt={`Before: ${item.title}`}
+                      fill
+                      className="object-cover transition-all duration-1000 group-hover:scale-110 group-hover:blur-sm"
+                    />
+                  </div>
+                  
+                  {/* After Image - Reveals on Hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-1000 transform group-hover:scale-100">
+                    <Image
+                      src={item.after}
+                      alt={`After: ${item.title}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  {/* Animated Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                  
+                  {/* Before Badge */}
+                  <div className="absolute bottom-4 left-4 transform group-hover:translate-y-2 group-hover:opacity-0 transition-all duration-500">
+                    <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      BEFORE
                     </span>
+                  </div>
+                  
+                  {/* After Badge - Appears on Hover */}
+                  <div className="absolute bottom-4 left-4 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                    <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      AFTER
+                    </span>
+                  </div>
+                  
+                  {/* Magic Sparkle Effect */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-700">
+                    <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white p-3 rounded-full shadow-lg animate-pulse">
+                      <Sparkles className="h-6 w-6" />
+                    </div>
+                  </div>
+                  
+                  {/* Hover Instruction - Corner */}
+                  <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-500">
+                    <div className="bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium border border-white/20">
+                      Hover to Reveal
+                    </div>
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
-                  <p className="text-gray-400 text-sm">
-                    Complete transformation with our premium detailing process
-                  </p>
+                {/* Enhanced Content Area */}
+                <div className="p-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black relative">
+                  {/* Glowing Border Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-b-3xl"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-500">
+                        {item.title}
+                      </h3>
+                    </div>
+                    
+                    <p className="text-gray-300 text-sm leading-relaxed mb-4 group-hover:text-gray-200 transition-colors duration-500">
+                      Complete transformation with our premium detailing process
+                    </p>
+                    
+                    <div className="flex items-center justify-end">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -536,6 +613,100 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Before/After Modal */}
+      <AnimatePresence>
+        {selectedTransformation !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={closeTransformationModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-4xl w-full max-h-[90vh] bg-white rounded-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeTransformationModal}
+                className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+              >
+                <X className="h-6 w-6" />
+              </button>
+
+              {/* Modal Content */}
+              <div className="p-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                  {beforeAfterImages[selectedTransformation].title}
+                </h3>
+                
+                {/* Before/After Slider */}
+                <div className="relative w-full h-96 rounded-xl overflow-hidden">
+                  {/* Before Image */}
+                  <div className="absolute inset-0">
+                    <Image
+                      src={beforeAfterImages[selectedTransformation].before}
+                      alt="Before"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  {/* After Image with Slider */}
+                  <div 
+                    className="absolute inset-0 overflow-hidden"
+                    style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                  >
+                    <Image
+                      src={beforeAfterImages[selectedTransformation].after}
+                      alt="After"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  {/* Slider Line */}
+                  <div 
+                    className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-10"
+                    style={{ left: `${sliderPosition}%` }}
+                  >
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Slider Input */}
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={sliderPosition}
+                    onChange={handleSliderChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
+                  />
+                  
+                  {/* Labels */}
+                  <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    Before
+                  </div>
+                  <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    After
+                  </div>
+                </div>
+                
+                <p className="text-gray-600 text-center mt-4">
+                  Drag the slider to compare before and after results
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -263,103 +263,314 @@ const ServicesPage = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="min-h-screen relative overflow-hidden flex items-center"
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(25)].map((_, i) => (
-            <div
+        {/* Video Background */}
+        <motion.div 
+          className="absolute inset-0 w-full h-full"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          >
+            <source src="/Others/washing-bentley.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Dynamic Overlay Gradient */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/60"
+            animate={{
+              background: [
+                "linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%)",
+                "linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%)",
+                "linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%)"
+              ]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          {/* Floating Luxury Particles */}
+          {Array.from({ length: 30 }).map((_, i) => (
+            <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full animate-bubble"
+              className="absolute w-1 h-1 bg-white/30 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${8 + Math.random() * 4}s`,
+              }}
+              animate={{
+                y: [0, -40, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+                x: [0, Math.random() * 20 - 10, 0]
+              }}
+              transition={{
+                duration: 4 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 3,
+                ease: "easeInOut"
               }}
             />
           ))}
-          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
-        </div>
+          
+          {/* Luxury Light Beams */}
+          {Array.from({ length: 5 }).map((_, i) => (
+            <motion.div
+              key={`beam-${i}`}
+              className="absolute w-px h-32 bg-gradient-to-b from-white/20 via-white/40 to-transparent"
+              style={{
+                left: `${20 + i * 15}%`,
+                top: '20%',
+                transform: `rotate(${15 + i * 10}deg)`
+              }}
+              animate={{
+                opacity: [0, 1, 0],
+                scaleY: [0, 1, 0],
+                y: [0, 100, 0]
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </motion.div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
-              <Award className="h-5 w-5 text-cyan-400" />
-              <span>Professional Services</span>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 60, rotateX: 20 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ 
+              duration: 1.2, 
+              delay: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+            className="text-center"
+          >
             
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black font-display text-white mb-8 leading-tight">
-              Our Premium{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <motion.h1 
+              className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="block text-white"
+              >
+                Premium Car
+              </motion.span>
+              <motion.span 
+                className="block text-5xl md:text-6xl lg:text-7xl text-cyan-300 font-normal"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0, duration: 0.6 }}
+              >
                 Services
-              </span>
-            </h1>
+              </motion.span>
+            </motion.h1>
             
-            <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-12">
-              From basic washes to complete transformations, we offer comprehensive car care services 
-              that bring your vehicle back to showroom condition.
-            </p>
+            <motion.p 
+              className="text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-16 font-semibold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 1.2,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              From basic washes to premium detailing - we have the perfect service for your vehicle's needs.
+            </motion.p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-4xl font-black text-cyan-400 mb-2">6+</div>
-                <div className="text-white/70">Service Types</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-blue-400 mb-2">5000+</div>
-                <div className="text-white/70">Cars Serviced</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-purple-400 mb-2">100%</div>
-                <div className="text-white/70">Satisfaction Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-black text-indigo-400 mb-2">14+</div>
-                <div className="text-white/70">Years Experience</div>
-              </div>
-            </div>
-          </div>
+            {/* Minimalist Stats */}
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-16 max-w-5xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 1.4,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
+              {[
+                { number: "6", label: "Service Types", color: "text-cyan-300" },
+                { number: "5K+", label: "Vehicles Served", color: "text-blue-300" },
+                { number: "100%", label: "Satisfaction", color: "text-cyan-200" },
+                { number: "14+", label: "Years Experience", color: "text-blue-200" }
+              ].map((stat, index) => (
+                <motion.div 
+                  key={index}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: 1.6 + index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                >
+                  <div className={`text-4xl lg:text-5xl xl:text-6xl font-bold ${stat.color} mb-3`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-white/80 text-base font-semibold tracking-wide uppercase">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </motion.section>
 
       {/* Services Categories */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+        {/* Luxury Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-6">
-              Choose Your Perfect{' '}
-              <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-                Service Package
+          <motion.div 
+            className="text-center mb-24"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl sm:text-6xl font-black text-white mb-8">
+              Choose Your{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Service Tier
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              From basic maintenance to luxury treatments, we have the perfect service 
-              to keep your vehicle looking and feeling its best.
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              From essential maintenance to luxury treatments, select the perfect service tier 
+              that matches your vehicle's needs and your expectations.
             </p>
-                      </div>
+          </motion.div>
                       
           {/* Service Categories */}
-          <div className="space-y-24">
+          <div className="space-y-32">
             {serviceCategories.map((category, categoryIndex) => {
               const CategoryIcon = category.icon;
-              return (
-                <div key={category.id} className="relative">
-                  {/* Category Header */}
-                  <div className="text-center mb-16">
-                    <div className={`inline-flex items-center space-x-4 bg-gradient-to-r ${category.color} text-white px-8 py-4 rounded-full mb-6 shadow-lg`}>
-                      <CategoryIcon className="h-8 w-8" />
-                      <div className="text-left">
-                        <h3 className="text-2xl font-black">{category.title}</h3>
-                        <p className="text-sm opacity-90">{category.subtitle}</p>
+                return (
+                <motion.div 
+                  key={category.id} 
+                  className="relative"
+                  initial={{ opacity: 0, y: 80 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.0, delay: categoryIndex * 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {/* Luxury Category Header */}
+                  <div className="relative mb-20">
+                    {/* Background Glow */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-10 blur-3xl rounded-3xl`}></div>
+                    
+                    {/* Main Category Card */}
+                    <motion.div 
+                      className={`relative bg-gradient-to-r ${category.color} rounded-3xl p-12 shadow-2xl border border-white/10 backdrop-blur-xl`}
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Floating Elements */}
+                      <div className="absolute top-6 right-6">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        >
+                          <CategoryIcon className="h-12 w-12 text-white/30" />
+                        </motion.div>
                       </div>
-                    </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-6">
+                          <motion.div 
+                            className="w-20 h-20 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/30"
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <CategoryIcon className="h-10 w-10 text-white" />
+                          </motion.div>
+                          
+                          <div>
+                            <motion.h3 
+                              className="text-4xl font-black text-white mb-2"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.3, duration: 0.6 }}
+                            >
+                              {category.title}
+                            </motion.h3>
+                            <motion.p 
+                              className="text-white/80 text-lg font-light"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.5, duration: 0.6 }}
+                            >
+                              {category.subtitle}
+                            </motion.p>
+                          </div>
+                        </div>
+                        
+                        {/* Luxury Badge */}
+                        <motion.div 
+                          className="hidden lg:flex items-center space-x-3 bg-white/10 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.7, duration: 0.6 }}
+                        >
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                          <span className="text-white font-medium text-sm uppercase tracking-wider">
+                            {categoryIndex === 0 ? 'Essential' : categoryIndex === 1 ? 'Premium' : 'Luxury'}
+                          </span>
+                        </motion.div>
+                      </div>
+                    </motion.div>
                   </div>
 
                   {/* Services Grid */}
@@ -369,19 +580,19 @@ const ServicesPage = () => {
                       return (
                         <motion.div
                           key={service.id}
-                          initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                          initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 15 }}
+                          whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
                           transition={{ 
-                            duration: 0.5, 
-                            delay: serviceIndex * 0.1,
+                            duration: 0.8, 
+                            delay: serviceIndex * 0.15,
                             ease: [0.25, 0.46, 0.45, 0.94]
                           }}
                           viewport={{ once: true }}
-                          whileHover={{ y: -10, scale: 1.02 }}
-                          className={`card-premium cursor-interactive group relative bg-white rounded-3xl overflow-hidden border-2 transition-all duration-300 ${
+                          whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
+                          className={`card-premium cursor-interactive group relative bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 ${
                             service.popular 
-                              ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20 scale-105' 
-                              : 'border-gray-200 hover:border-cyan-300 hover:shadow-xl'
+                              ? 'border-cyan-400/50 shadow-2xl shadow-cyan-500/30 scale-105' 
+                              : 'hover:border-cyan-300/50 hover:shadow-xl hover:shadow-cyan-500/20'
                           }`}
                         >
                           {/* Popular Badge */}
@@ -416,11 +627,11 @@ const ServicesPage = () => {
 
                           {/* Service Content */}
                           <div className="p-8">
-                            <div className="mb-4">
-                              <h4 className="text-xl font-black text-gray-900 mb-2 group-hover:text-cyan-600 transition-colors">
+                            <div className="mb-6">
+                              <h4 className="text-xl font-black text-white mb-3 group-hover:text-cyan-300 transition-colors">
                                 {service.title}
                               </h4>
-                              <p className="text-gray-600 text-sm leading-relaxed">
+                              <p className="text-gray-300 text-sm leading-relaxed">
                                 {service.description}
                               </p>
                             </div>
@@ -428,12 +639,12 @@ const ServicesPage = () => {
                             {/* Pricing */}
                             <div className="mb-6">
                               <div className="flex items-center space-x-3 mb-2">
-                                <span className="text-3xl font-black text-gray-900">{service.price}</span>
+                                <span className="text-3xl font-black text-white">{service.price}</span>
                                 {service.originalPrice && (
                                   <span className="text-lg text-gray-400 line-through">{service.originalPrice}</span>
                                 )}
                               </div>
-                              <div className="flex items-center space-x-4 text-sm text-gray-500">
+                              <div className="flex items-center space-x-4 text-sm text-gray-400">
                                 <div className="flex items-center space-x-1">
                                   <Clock className="h-4 w-4" />
                                   <span className="font-semibold">{service.duration}</span>
@@ -441,56 +652,56 @@ const ServicesPage = () => {
                                 <div className="flex items-center space-x-1">
                                   <Star className="h-4 w-4 text-yellow-400" />
                                   <span className="font-semibold">{service.rating}.0</span>
-                    </div>
-                    </div>
-                  </div>
+                                </div>
+                              </div>
+                            </div>
 
                             {/* Features Preview */}
-                  <div className="mb-6">
-                              <h5 className="font-bold text-gray-900 mb-3 text-sm">What's Included:</h5>
-                    <ul className="space-y-2">
+                            <div className="mb-6">
+                              <h5 className="font-bold text-white mb-3 text-sm">What's Included:</h5>
+                              <ul className="space-y-2">
                                 {service.features.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-2 text-sm text-gray-600">
-                                    <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
+                                  <li key={index} className="flex items-center space-x-2 text-sm text-gray-300">
+                                    <CheckCircle className="h-4 w-4 text-cyan-400 flex-shrink-0" />
+                                    <span>{feature}</span>
+                                  </li>
+                                ))}
                                 {service.features.length > 3 && (
-                                  <li className="text-sm text-cyan-600 font-semibold">
+                                  <li className="text-sm text-cyan-400 font-semibold">
                                     +{service.features.length - 3} more features
                                   </li>
                                 )}
-                    </ul>
-                  </div>
+                              </ul>
+                            </div>
 
-                  {/* CTA Buttons */}
-                  <div className="space-y-3">
-                    <Link
-                      href="/contact"
-                                className={`btn-premium cursor-interactive w-full text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 ${
+                            {/* CTA Buttons */}
+                            <div className="space-y-3">
+                              <Link
+                                href="/contact"
+                                className={`btn-premium cursor-interactive w-full text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 transition-all duration-300 ${
                                   service.popular
-                                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700'
-                                    : 'bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800'
+                                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25'
+                                    : 'bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20'
                                 }`}
                               >
                                 <span>Book Now</span>
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                     
-                    <Link
-                      href="/gallery"
-                                className="btn-premium cursor-interactive w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2"
-                    >
-                      <Eye className="h-4 w-4" />
+                              <Link
+                                href="/gallery"
+                                className="btn-premium cursor-interactive w-full bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 border border-white/20 transition-all duration-300"
+                              >
+                                <Eye className="h-4 w-4" />
                                 <span>View Results</span>
-                    </Link>
+                              </Link>
                             </div>
                           </div>
                         </motion.div>
                       );
                     })}
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
