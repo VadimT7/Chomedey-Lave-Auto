@@ -416,12 +416,6 @@ const HomePage = () => {
                     </span>
                   </div>
                   
-                  {/* Magic Sparkle Effect */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-700">
-                    <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white p-3 rounded-full shadow-lg animate-pulse">
-                      <Sparkles className="h-6 w-6" />
-                    </div>
-                  </div>
                   
                   {/* Hover Instruction - Corner */}
                   <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-500">
@@ -446,6 +440,16 @@ const HomePage = () => {
                     <p className="text-gray-300 text-sm leading-relaxed mb-4 group-hover:text-gray-200 transition-colors duration-500">
                       Complete transformation with our premium detailing process
                     </p>
+                    
+                    {/* 5-Star Rating */}
+                    <div className="flex items-center space-x-2 mb-4">
+                      <div className="flex items-center space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                      <span className="text-yellow-400 text-sm font-semibold">5-star rated</span>
+                    </div>
                     
                     <div className="flex items-center justify-end">
                       <div className="flex items-center space-x-2">
