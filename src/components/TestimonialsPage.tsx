@@ -2,25 +2,31 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   Star, 
   Quote, 
   ChevronLeft, 
   ChevronRight,
   User,
+  Users,
   Calendar,
   Sparkles,
   ThumbsUp,
   Award,
   Heart,
   Zap,
-  Shield
+  Shield,
+  Phone
 } from 'lucide-react';
 
 const TestimonialsPage = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  
+  // Parallax effect for hero section
+  const { scrollYProgress } = useScroll();
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0px', '4px']);
 
   const testimonials = [
     {
@@ -140,103 +146,209 @@ const TestimonialsPage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+
+      {/* Hero Section with Video Background */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden"
+        transition={{ duration: 1 }}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(25)].map((_, i) => (
-            <div
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0 top-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/Others/brushing-car-interior.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-900/30 via-transparent to-purple-900/30"></div>
+        </div>
+
+        {/* Floating Bubbles Animation */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
               key={i}
-              className="absolute w-3 h-3 bg-pink-400/20 rounded-full animate-bubble"
+              className="absolute rounded-full border-2 border-white/20"
               style={{
+                width: `${20 + Math.random() * 60}px`,
+                height: `${20 + Math.random() * 60}px`,
                 left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${8 + Math.random() * 4}s`,
+                bottom: '-10%',
+              }}
+              animate={{
+                y: [0, -window.innerHeight - 100],
+                x: [0, Math.random() * 100 - 50],
+                opacity: [0, 0.6, 0],
+                scale: [0.8, 1.2, 0.8],
+              }}
+              transition={{
+                duration: 10 + Math.random() * 10,
+                repeat: Infinity,
+                delay: Math.random() * 10,
+                ease: "easeInOut",
               }}
             />
           ))}
-          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
-              <Heart className="h-5 w-5 text-pink-400" />
-              <span>Customer Reviews</span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black font-display text-white mb-8 leading-tight">
-              What Our{' '}
-              <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-                Customers Say
-              </span>
-            </h1>
-            
-            <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-12">
-              Don't just take our word for it. Read what our satisfied customers have to say 
-              about their experience with Chomedey Lave-Auto.
-            </p>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 sm:pt-12 pb-8 sm:pb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-white/20"
+          >
+            <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-pink-400" />
+            <span>Verified Customer Reviews</span>
+          </motion.div>
 
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl mb-4">
-                  <Star className="h-8 w-8 text-white" />
-                </div>
-                <div className="text-4xl font-black text-yellow-400 mb-2">4.9</div>
-                <div className="text-white/70">Average Rating</div>
-              </div>
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl mb-4">
-                  <ThumbsUp className="h-8 w-8 text-white" />
-                </div>
-                <div className="text-4xl font-black text-green-400 mb-2">500+</div>
-                <div className="text-white/70">Happy Customers</div>
-              </div>
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl mb-4">
-                  <Shield className="h-8 w-8 text-white" />
-                </div>
-                <div className="text-4xl font-black text-blue-400 mb-2">100%</div>
-                <div className="text-white/70">Satisfaction Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl mb-4">
-                  <Award className="h-8 w-8 text-white" />
-                </div>
-                <div className="text-4xl font-black text-purple-400 mb-2">14+</div>
-                <div className="text-white/70">Years Experience</div>
-              </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display text-white mb-6 leading-tight px-4"
+          >
+            Real Stories,{' '}
+            <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+              Real
+            </span>
+            <br />
+            Transformations
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-base sm:text-lg lg:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed px-4"
+          >
+            Don't just take our word for it. Hear directly from hundreds of satisfied customers 
+            who have experienced the Chomedey Lave-Auto difference.
+          </motion.p>
+
+          {/* Star Rating Display */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="flex items-center justify-center space-x-2 sm:space-x-3 mb-10 px-4"
+          >
+            <div className="flex space-x-1 sm:space-x-2">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, rotate: -180, scale: 0 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.1 + i * 0.1 }}
+                >
+                  <Star className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 text-yellow-400 fill-current" />
+                </motion.div>
+              ))}
             </div>
-          </div>
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">5.0</span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <a
+                href="#testimonials"
+                className="btn-premium cursor-interactive bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-base sm:text-lg shadow-2xl shadow-pink-500/50 flex items-center space-x-3"
+              >
+                <span>Read Reviews</span>
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Quote className="h-5 w-5 sm:h-6 sm:w-6" />
+                </motion.div>
+              </a>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <a
+                href="/contact"
+                className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-base sm:text-lg border-2 border-white/30 flex items-center space-x-3"
+              >
+                <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
+                <span>Book Your Service</span>
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Trust Indicators */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3 }}
+            className="mt-8 sm:mt-12 mb-16 sm:mb-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-4"
+          >
+            {[
+              { icon: ThumbsUp, number: '100+', label: '5-Star Reviews' },
+              { icon: Award, number: '100%', label: 'Verified' },
+              { icon: Users, number: '5000+', label: 'Happy Customers' },
+              { icon: Heart, number: '14+', label: 'Years Trusted' }
+            ].map((stat, index) => {
+              const IconComponent = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.5 + index * 0.1 }}
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-6"
+                >
+                  <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-pink-400 mx-auto mb-2 sm:mb-3" />
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-1">{stat.number}</div>
+                  <div className="text-xs sm:text-sm text-white/70">{stat.label}</div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          transition={{ duration: 1, delay: 1.7 }}
+          className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-white rounded-full mt-2"
-            />
-          </div>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/60 text-xs sm:text-sm flex flex-col items-center space-y-1 sm:space-y-2"
+          >
+            <span className="hidden sm:inline">See what they say</span>
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </motion.div>
         </motion.div>
       </motion.section>
 
       {/* Main Testimonials Section */}
       <motion.section 
+        id="testimonials"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}

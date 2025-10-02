@@ -55,6 +55,8 @@ const Navigation = () => {
           : 'bg-transparent backdrop-blur-none border-b border-transparent shadow-none',
         isVisible ? 'translate-y-0' : '-translate-y-full'
       )}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -145,6 +147,9 @@ const Navigation = () => {
                 ? "text-gray-700 hover:bg-cyan-50" 
                 : "text-white/90 hover:bg-white/10"
             )}
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <div className="relative">
               {isOpen ? <X className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" /> : <Menu className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />}
@@ -154,13 +159,14 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden">
+          <div className="lg:hidden" id="mobile-menu" role="menu" aria-label="Mobile navigation menu">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white/98 backdrop-blur-xl rounded-xl mt-2 shadow-xl shadow-black/10 border border-white/20">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
+                  role="menuitem"
                   className={cn(
                     'block px-4 py-3 text-base font-semibold rounded-lg transition-all duration-300',
                     pathname === item.href

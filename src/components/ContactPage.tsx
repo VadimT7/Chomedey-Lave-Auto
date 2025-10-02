@@ -830,11 +830,13 @@ const ContactPage = () => {
                 delay: 0.2,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               <motion.span
                 initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
+                viewport={{ once: true }}
               >
                 What Our
               </motion.span>{' '}
@@ -843,6 +845,7 @@ const ContactPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
                 className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+                viewport={{ once: true }}
               >
                 Customers Say
               </motion.span>
@@ -857,6 +860,7 @@ const ContactPage = () => {
                 delay: 0.5,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               Real experiences from our valued customers across Quebec
             </motion.p>

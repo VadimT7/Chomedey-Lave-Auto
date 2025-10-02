@@ -14,9 +14,11 @@ import {
   ChevronRight,
   Quote,
   X,
-  Eye
+  Eye,
+  Car
 } from 'lucide-react';
 import Image from 'next/image';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -24,6 +26,8 @@ if (typeof window !== 'undefined') {
 }
 
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
@@ -32,6 +36,19 @@ const HomePage = () => {
   // Modal state
   const [selectedTransformation, setSelectedTransformation] = useState<number | null>(null);
   const [sliderPosition, setSliderPosition] = useState(50);
+
+  // Handle loading state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Show loading for 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleVideoLoad = () => {
+    setVideoLoaded(true);
+  };
 
   // Modal functions
   const openTransformationModal = (index: number) => {
@@ -160,33 +177,88 @@ const HomePage = () => {
     });
   }, []);
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Hero Section */}
+      {/* Skip Link for Accessibility */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-cyan-600 text-white px-4 py-2 rounded-lg z-50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+      >
+        Skip to main content
+      </a>
+      {/* Enhanced Hero Section */}
       <section 
         ref={heroRef}
-        className="relative h-screen flex items-center justify-center overflow-hidden"
+        id="main-content"
+        className="relative h-[110vh] flex items-center justify-center overflow-hidden"
+        aria-label="Hero section"
       >
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-black">
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        {/* Enhanced Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+          {/* Dynamic Grid Pattern */}
+          <div className="absolute inset-0 opacity-10" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            animation: 'grid-move 20s linear infinite'
           }}></div>
           
-          {/* Floating Particles */}
-          {[...Array(20)].map((_, i) => (
-            <div
+          {/* Enhanced Floating Particles */}
+          {[...Array(30)].map((_, i) => (
+            <motion.div
               key={i}
-              className="particle absolute w-1 h-1 bg-white rounded-full opacity-30"
+              className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
+              }}
             />
           ))}
+          
+          {/* Animated Gradient Orbs */}
+          <motion.div 
+            className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, 50, 0],
+              y: [0, -30, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, -50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 3,
+            }}
+          />
         </div>
 
-        {/* Video Background */}
+        {/* Enhanced Video Background */}
         <motion.div 
           style={{ y, opacity }}
           className="absolute inset-0 z-10"
@@ -196,86 +268,159 @@ const HomePage = () => {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover opacity-30"
+            onLoadedData={handleVideoLoad}
+            className="w-full h-full object-cover opacity-25"
           >
             <source src="/Others/bubblesVideo.mp4" type="video/mp4" />
           </video>
+          {/* Enhanced Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-transparent to-blue-900/20"></div>
         </motion.div>
 
-        {/* Hero Content */}
-        <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
+        {/* Enhanced Hero Content */}
+        <div className="relative z-20 text-center px-4 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="mb-8"
+            className="mb-12"
           >
+            {/* Enhanced Badge */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 backdrop-blur-xl rounded-full px-8 py-4 mb-8 border border-cyan-400/30 shadow-lg shadow-cyan-500/20"
+              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-2xl rounded-full px-8 py-4 mb-6 border border-white/20 shadow-2xl shadow-cyan-500/20"
             >
-              <Star className="w-6 h-6 text-cyan-300 fill-current animate-pulse" />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Star className="w-6 h-6 text-cyan-400 fill-current" />
+              </motion.div>
               <span className="text-lg font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
-                Luxury Car Care Excellence
+                Chomedey's Premier Detailing Service
               </span>
             </motion.div>
             
+            {/* Enhanced Main Headline */}
             <motion.h1 
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-              className="text-7xl md:text-9xl font-black mb-8 leading-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-8 leading-tight"
             >
-              <span className="block bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent drop-shadow-2xl">
-                Chomedey
-              </span>
               <motion.span 
+                className="block bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                style={{ textShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}
+              >
+                Chomedey
+              </motion.span>
+              <motion.span 
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.8 }}
-                className="block text-5xl md:text-7xl bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent"
+                className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent"
+                style={{ textShadow: '0 0 60px rgba(59, 130, 246, 0.8)' }}
               >
                 Lave-Auto
               </motion.span>
             </motion.h1>
             
+            {/* Enhanced Subtitle */}
             <motion.p 
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
-              className="text-2xl md:text-3xl text-cyan-100 mb-10 max-w-4xl mx-auto leading-relaxed font-light drop-shadow-lg"
+              className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 max-w-5xl mx-auto leading-relaxed font-medium px-4"
             >
               Transform your vehicle with our{' '}
-              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
+              <span className="font-bold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
                 premium detailing services
               </span>
               <br />
               Where{' '}
-              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
+              <span className="font-bold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
                 luxury meets perfection
               </span>{' '}
               in every detail.
             </motion.p>
           </motion.div>
 
+          {/* Enhanced CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex justify-center items-center"
+            transition={{ duration: 1, delay: 1.4 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
-            <a 
+            <motion.a
               href="/contact"
-              className="btn-premium cursor-interactive group relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-bold text-xl overflow-hidden"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-premium cursor-interactive group relative px-12 py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-full font-bold text-xl shadow-2xl shadow-cyan-500/50 flex items-center gap-3 overflow-hidden"
+              aria-label="Book your car detailing service - Contact us now"
             >
-              <span className="relative z-10 flex items-center gap-3">
-                Book Service
-                <ChevronRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
-              </span>
+              <span className="relative z-10">Book Your Service</span>
+              <motion.div
+                className="relative z-10"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ChevronRight className="w-6 h-6" />
+              </motion.div>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
+            </motion.a>
+            
+            <motion.a 
+              href="/gallery"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-12 py-6 rounded-full font-bold text-xl border-2 border-white/30 flex items-center gap-3"
+              aria-label="View our before and after gallery - See our work"
+            >
+              <Eye className="w-6 h-6" />
+              <span>View Our Work</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Enhanced Stats Bar */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0.8 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1, delay: 1.6 }}
+            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-8 mx-auto max-w-5xl"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: '5000+', label: 'Cars Transformed', icon: <Car className="h-6 w-6 text-cyan-400" /> },
+                { number: '100%', label: 'Satisfaction', icon: <Star className="h-6 w-6 text-cyan-400" /> },
+                { number: '14+', label: 'Years Experience', icon: <Award className="h-6 w-6 text-cyan-400" /> },
+                { number: '5.0★', label: 'Rating', icon: <Star className="h-6 w-6 text-cyan-400" /> },
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+                  className="text-center group"
+                >
+                  <div className="flex items-center justify-center mb-3">
+                    {stat.icon}
+                  </div>
+                  <div className="text-3xl lg:text-4xl font-black text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    {stat.number}
+                  </div>
+                  <div className="text-sm text-white/70 font-medium uppercase tracking-wide">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -296,20 +441,62 @@ const HomePage = () => {
         </motion.div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 px-4 relative">
-        <div className="max-w-7xl mx-auto">
+      {/* Enhanced Services Section */}
+      <section 
+        className="py-32 px-4 relative bg-gradient-to-br from-slate-900 via-gray-900 to-black"
+        aria-label="Our premium car detailing services"
+      >
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-24"
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Premium Services
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+            >
+              <Sparkles className="h-5 w-5 text-cyan-400" />
+              <span>Premium Services</span>
+            </motion.div>
+            
+            <h2 className="text-5xl sm:text-6xl font-black text-white mb-8">
+              Choose Your{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Service Tier
+              </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Experience the ultimate in automotive care with our comprehensive range of luxury services
             </p>
           </motion.div>
@@ -318,30 +505,83 @@ const HomePage = () => {
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
                 viewport={{ once: true }}
-                className="card-premium cursor-interactive group relative p-8 bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-2xl border border-white/10 backdrop-blur-sm hover:border-cyan-500/50"
+                whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
+                className="card-premium cursor-interactive group relative bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 hover:border-cyan-300/50 hover:shadow-xl hover:shadow-cyan-500/20"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform duration-300">
-                    {service.icon}
-                  </div>
+                {/* Service Icon */}
+                <div className="p-8">
+                  <motion.div 
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.15 + 0.2,
+                      ease: "backOut"
+                    }}
+                    viewport={{ once: true }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 360,
+                      transition: { duration: 0.5 }
+                    }}
+                    className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg shadow-cyan-500/25"
+                  >
+                    <div className="text-white">
+                      {service.icon}
+                    </div>
+                  </motion.div>
                   
-                  <h3 className="text-2xl font-bold mb-4 text-white">{service.title}</h3>
-                  <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
+                  <motion.h3 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
+                    viewport={{ once: true }}
+                    className="text-2xl font-black text-white mb-4 group-hover:text-cyan-300 transition-colors"
+                  >
+                    {service.title}
+                  </motion.h3>
                   
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-gray-300">
-                        <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
+                    viewport={{ once: true }}
+                    className="text-gray-300 mb-8 leading-relaxed"
+                  >
+                    {service.description}
+                  </motion.p>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 + 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <h5 className="font-bold text-white mb-4 text-sm">What's Included:</h5>
+                    <ul className="space-y-3">
+                      {service.features.map((feature, idx) => (
+                        <motion.li 
+                          key={idx} 
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.15 + 0.7 + idx * 0.1 }}
+                          viewport={{ once: true }}
+                          className="flex items-center space-x-3 text-gray-300"
+                        >
+                          <CheckCircle className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
@@ -349,20 +589,64 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Before/After Gallery */}
-      <section className="py-24 px-4 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-7xl mx-auto">
+      {/* Enhanced Before/After Gallery */}
+      <section 
+        className="py-32 px-4 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
+        aria-label="Before and after transformation gallery"
+      >
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 15 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -80, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 4,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-24"
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Transformations
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+            >
+              <Eye className="h-5 w-5 text-cyan-400" />
+              <span>Witness the Transformation</span>
+            </motion.div>
+            
+            <h2 className="text-5xl sm:text-6xl font-black text-white mb-8">
+              Our Work{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Speaks
+              </span>
+              <br />
+              for Itself
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               See the dramatic before and after results of our premium detailing services
             </p>
           </motion.div>
@@ -371,13 +655,19 @@ const HomePage = () => {
             {beforeAfterImages.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 to-black shadow-2xl hover:shadow-cyan-500/30 transition-all duration-700 border border-gray-700 hover:border-cyan-400/50 hover:scale-105"
+                whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
+                className="group relative overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl shadow-2xl hover:shadow-cyan-500/30 transition-all duration-700 border border-white/20 hover:border-cyan-400/50"
+                onClick={() => openTransformationModal(index)}
               >
-                {/* Image Container with Hover Reveal */}
+                {/* Enhanced Image Container */}
                 <div className="relative h-80 overflow-hidden">
                   {/* Before Image */}
                   <div className="absolute inset-0">
@@ -399,64 +689,103 @@ const HomePage = () => {
                     />
                   </div>
                   
-                  {/* Animated Overlay */}
+                  {/* Enhanced Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                   
                   {/* Before Badge */}
-                  <div className="absolute bottom-4 left-4 transform group-hover:translate-y-2 group-hover:opacity-0 transition-all duration-500">
+                  <motion.div 
+                    className="absolute bottom-4 left-4"
+                    initial={{ opacity: 1, y: 0 }}
+                    whileHover={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       BEFORE
                     </span>
-                  </div>
+                  </motion.div>
                   
                   {/* After Badge - Appears on Hover */}
-                  <div className="absolute bottom-4 left-4 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <motion.div 
+                    className="absolute bottom-4 left-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileHover={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       AFTER
                     </span>
-                  </div>
+                  </motion.div>
                   
-                  
-                  {/* Hover Instruction - Corner */}
-                  <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-500">
+                  {/* Enhanced Hover Instruction */}
+                  <motion.div 
+                    className="absolute top-4 left-4"
+                    initial={{ opacity: 1 }}
+                    whileHover={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <div className="bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium border border-white/20">
                       Hover to Reveal
                     </div>
-                  </div>
+                  </motion.div>
+
+                  {/* Click to Expand Button */}
+                  <motion.div 
+                    className="absolute top-4 right-4"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileHover={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <button className="bg-white/20 backdrop-blur-md text-white p-2 rounded-full hover:bg-white/30 transition-colors">
+                      <Eye className="h-4 w-4" />
+                    </button>
+                  </motion.div>
                 </div>
                 
                 {/* Enhanced Content Area */}
-                <div className="p-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black relative">
-                  {/* Glowing Border Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-b-3xl"></div>
-                  
+                <div className="p-8 bg-gradient-to-br from-white/5 to-transparent relative">
                   <div className="relative z-10">
-                    <div className="mb-4">
-                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-500">
-                        {item.title}
-                      </h3>
-                    </div>
+                    <motion.h3 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
+                      viewport={{ once: true }}
+                      className="text-xl font-black text-white mb-4 group-hover:text-cyan-300 transition-colors duration-500"
+                    >
+                      {item.title}
+                    </motion.h3>
                     
-                    <p className="text-gray-300 text-sm leading-relaxed mb-4 group-hover:text-gray-200 transition-colors duration-500">
+                    <motion.p 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
+                      viewport={{ once: true }}
+                      className="text-gray-300 text-sm leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-500"
+                    >
                       Complete transformation with our premium detailing process
-                    </p>
+                    </motion.p>
                     
-                    {/* 5-Star Rating */}
-                    <div className="flex items-center space-x-2 mb-4">
-                      <div className="flex items-center space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                        ))}
+                    {/* Enhanced Rating */}
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.15 + 0.6 }}
+                      viewport={{ once: true }}
+                      className="flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                        </div>
+                        <span className="text-yellow-400 text-sm font-semibold">5-star rated</span>
                       </div>
-                      <span className="text-yellow-400 text-sm font-semibold">5-star rated</span>
-                    </div>
-                    
-                    <div className="flex items-center justify-end">
+                      
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                         <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </motion.div>
@@ -466,7 +795,10 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 px-4 relative">
+      <section 
+        className="py-24 px-4 relative"
+        aria-label="Customer testimonials and reviews"
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -518,7 +850,10 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      <section 
+        className="py-24 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+        aria-label="Call to action - Book your service today"
+      >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Floating Geometric Shapes */}

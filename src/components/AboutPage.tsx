@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   Award, 
   Users, 
@@ -24,6 +24,10 @@ import {
 } from 'lucide-react';
 
 const AboutPage = () => {
+  // Parallax effect for hero section
+  const { scrollYProgress } = useScroll();
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0px', '4px']);
+  
   const teamMembers = [
     {
       name: 'Jean-Pierre Dubois',
@@ -103,173 +107,222 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+
+      {/* Hero Section with Video Background */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="py-32 bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 relative overflow-hidden"
+        transition={{ duration: 1 }}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       >
-        {/* Animated Background Elements */}
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0 top-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/Others/polishing-car.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-slate-900/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-transparent to-blue-900/20"></div>
+        </div>
+
+        {/* Animated Grid Pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
+          }}></div>
+        </div>
+
+        {/* Sparkle Effects */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Large Particles */}
-          {[...Array(60)].map((_, i) => (
+          {[...Array(40)].map((_, i) => (
             <motion.div
-              key={`large-${i}`}
-              className="absolute w-3 h-3 bg-emerald-400/25 rounded-full"
+              key={i}
+              className="absolute"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, -120, 0],
                 opacity: [0, 1, 0],
-                scale: [0, 1.2, 0],
-                x: [0, Math.random() * 20 - 10, 0],
-              }}
-              transition={{
-                duration: 6 + Math.random() * 4,
-                repeat: Infinity,
-                delay: Math.random() * 8,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-          
-          {/* Medium Particles */}
-          {[...Array(80)].map((_, i) => (
-            <motion.div
-              key={`medium-${i}`}
-              className="absolute w-2 h-2 bg-cyan-400/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -80, 0],
-                opacity: [0, 0.8, 0],
                 scale: [0, 1, 0],
-                x: [0, Math.random() * 15 - 7.5, 0],
               }}
               transition={{
-                duration: 5 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 6,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-          
-          {/* Small Particles */}
-          {[...Array(100)].map((_, i) => (
-            <motion.div
-              key={`small-${i}`}
-              className="absolute w-1 h-1 bg-teal-400/15 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -60, 0],
-                opacity: [0, 0.6, 0],
-                scale: [0, 0.8, 0],
-                x: [0, Math.random() * 10 - 5, 0],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 2,
+                duration: 3 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 5,
                 ease: "easeInOut",
               }}
-            />
+            >
+              <Sparkles className="h-4 w-4 text-cyan-400" />
+            </motion.div>
           ))}
-          
-          {/* Floating Orbs */}
-          <motion.div 
-            className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-3xl"
-            animate={{
-              x: [0, 60, 0],
-              y: [0, -40, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"
-            animate={{
-              x: [0, -60, 0],
-              y: [0, 40, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 5,
-            }}
-          />
-          <motion.div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-teal-500/8 to-emerald-500/8 rounded-full blur-3xl"
-            animate={{
-              x: [0, 40, 0],
-              y: [0, -30, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
-              <Gem className="h-5 w-5 text-emerald-400" />
-              <span>Our Story</span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black font-display text-white mb-8 leading-tight">
-              From Soap to{' '}
-              <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-                Shine
-              </span>
-              <br />
-              Our Journey
-            </h1>
-            
-            <p className="text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-12">
-              For over 14 years, we've been transforming vehicles and exceeding expectations 
-              in the Laval community. Learn about our story, values, and the team behind your car's transformation.
-            </p>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-4 sm:pt-8 pb-10 sm:pb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-white/20"
+          >
+            <Crown className="h-4 w-4 sm:h-5 sm:w-5 text-amber-400" />
+            <span className="whitespace-nowrap">Est. 2010 • Chomedey's #1</span>
+          </motion.div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              {stats.map((stat, index) => {
-                const IconComponent = stat.icon;
-                return (
-                  <div key={index} className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-xl rounded-2xl mb-4 border border-white/20">
-                      <IconComponent className="h-8 w-8 text-emerald-400" />
-                    </div>
-                    <div className="text-4xl font-black text-emerald-400 mb-2">{stat.number}</div>
-                    <div className="text-white/70">{stat.label}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display text-white mb-6 leading-tight px-4"
+          >
+            Passion for{' '}
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              Perfection
+            </span>
+            <br />
+            Since 2010
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-base sm:text-lg lg:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed px-4"
+          >
+            What started as a one-man passion project has evolved into Chomedey's most trusted 
+            car detailing service. Meet the team behind the transformations.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <a
+                href="#story"
+                className="btn-premium cursor-interactive bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-base sm:text-lg shadow-2xl shadow-cyan-500/50 flex items-center space-x-3"
+              >
+                <span>Our Story</span>
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" />
+                </motion.div>
+              </a>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <a
+                href="/contact"
+                className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-base sm:text-lg border-2 border-white/30 flex items-center space-x-3"
+              >
+                <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
+                <span>Get In Touch</span>
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Company Highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="mt-8 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-4"
+          >
+            {[
+              { icon: Car, number: '5000+', label: 'Cars Detailed' },
+              { icon: Users, number: '5', label: 'Expert Team' },
+              { icon: Award, number: '14+', label: 'Years Excellence' },
+              { icon: Leaf, number: '100%', label: 'Eco-Friendly' }
+            ].map((stat, index) => {
+              const IconComponent = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.3 + index * 0.1 }}
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-6"
+                >
+                  <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-cyan-400 mx-auto mb-2 sm:mb-3" />
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-1">{stat.number}</div>
+                  <div className="text-xs sm:text-sm text-white/70">{stat.label}</div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="mt-4 sm:mt-6 mb-16 sm:mb-20 flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-4"
+          >
+            {[
+              { icon: Shield, text: 'Fully Insured' },
+              { icon: Award, text: 'Certified Pros' },
+              { icon: Leaf, text: 'Eco-Conscious' },
+              { icon: Star, text: '5-Star Rated' }
+            ].map((badge, index) => {
+              const IconComponent = badge.icon;
+              return (
+                <motion.div
+                  key={badge.text}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 1.7 + index * 0.1 }}
+                  className="flex items-center space-x-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 sm:px-4 py-2"
+                >
+                  <IconComponent className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
+                  <span className="text-white text-xs sm:text-sm font-semibold">{badge.text}</span>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.9 }}
+          className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/60 text-xs sm:text-sm flex flex-col items-center space-y-1 sm:space-y-2"
+          >
+            <span className="hidden sm:inline">Discover our journey</span>
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </motion.div>
+        </motion.div>
       </motion.section>
 
       {/* Our Story Section */}
       <motion.section 
+        id="story"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}

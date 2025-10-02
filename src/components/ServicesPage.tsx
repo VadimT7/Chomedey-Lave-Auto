@@ -20,7 +20,8 @@ import {
   Award,
   Crown,
   Gem,
-  Heart
+  Heart,
+  Phone
 } from 'lucide-react';
 
 const ServicesPage = () => {
@@ -261,192 +262,224 @@ const ServicesPage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Epic Hero Section with Single Video Background */}
       <motion.section 
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="min-h-screen relative overflow-hidden flex items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative min-h-screen pb-16 flex items-center overflow-hidden pt-20"
       >
-        {/* Video Background */}
+        {/* Single Video Background */}
         <motion.div 
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0"
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
           >
             <source src="/Others/washing-bentley.mp4" type="video/mp4" />
           </video>
           
-          {/* Dynamic Overlay Gradient */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/60"
-            animate={{
-              background: [
-                "linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%)",
-                "linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%)",
-                "linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%)"
-              ]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          {/* Floating Luxury Particles */}
-          {Array.from({ length: 30 }).map((_, i) => (
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-transparent to-blue-900/20"></div>
+        </motion.div>
+
+        {/* Floating Particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(30)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-white/30 rounded-full"
+              className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, -40, 0],
+                y: [0, -120, 0],
                 opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-                x: [0, Math.random() * 20 - 10, 0]
+                scale: [0, 1.5, 0],
               }}
               transition={{
-                duration: 4 + Math.random() * 3,
+                duration: 5 + Math.random() * 5,
                 repeat: Infinity,
-                delay: Math.random() * 3,
-                ease: "easeInOut"
+                delay: Math.random() * 5,
+                ease: "easeInOut",
               }}
             />
           ))}
-          
-          {/* Luxury Light Beams */}
-          {Array.from({ length: 5 }).map((_, i) => (
-            <motion.div
-              key={`beam-${i}`}
-              className="absolute w-px h-32 bg-gradient-to-b from-white/20 via-white/40 to-transparent"
-              style={{
-                left: `${20 + i * 15}%`,
-                top: '20%',
-                transform: `rotate(${15 + i * 10}deg)`
-              }}
-              animate={{
-                opacity: [0, 1, 0],
-                scaleY: [0, 1, 0],
-                y: [0, 100, 0]
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </motion.div>
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        {/* Main Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-12">
+          {/* Top Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 60, rotateX: 20 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ 
-              duration: 1.2, 
-              delay: 0.3,
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
-            className="text-center"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-center mb-4"
           >
-            
-            <motion.h1 
-              className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: 0.6,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
-            >
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="block text-white"
+            <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-2xl border border-white/20 px-6 py-3 rounded-full">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               >
-                Premium Car
+                <Sparkles className="h-5 w-5 text-cyan-400" />
+              </motion.div>
+              <span className="text-white font-bold text-sm uppercase tracking-wider">Chomedey's Premier Detailing</span>
+            </div>
+          </motion.div>
+
+          {/* Main Headline with 3D Effect */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-center mb-6"
+          >
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 leading-none">
+              <motion.span 
+                className="block text-white"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                style={{ textShadow: '0 0 40px rgba(6, 182, 212, 0.5)' }}
+              >
+                Elevate Your
               </motion.span>
               <motion.span 
-                className="block text-5xl md:text-6xl lg:text-7xl text-cyan-300 font-normal"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0, duration: 0.6 }}
+                className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                style={{ textShadow: '0 0 60px rgba(59, 130, 246, 0.8)' }}
               >
-                Services
+                Car Care
               </motion.span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-16 font-semibold"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 1.2,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
+            </h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+              className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed font-medium px-4"
             >
-              From basic washes to premium detailing - we have the perfect service for your vehicle's needs.
+              Experience professional detailing that transforms your vehicle from ordinary to extraordinary
             </motion.p>
+          </motion.div>
 
-            {/* Minimalist Stats */}
-            <motion.div 
-              className="grid grid-cols-2 md:grid-cols-4 gap-16 max-w-5xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 1.4,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
+
+          {/* Enhanced CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.7 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {[
-                { number: "6", label: "Service Types", color: "text-cyan-300" },
-                { number: "5K+", label: "Vehicles Served", color: "text-blue-300" },
-                { number: "100%", label: "Satisfaction", color: "text-cyan-200" },
-                { number: "14+", label: "Years Experience", color: "text-blue-200" }
-              ].map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  className="text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.4, 
-                    delay: 1.6 + index * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
+              <Link
+                href="#services"
+                className="btn-premium cursor-interactive bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-12 py-6 rounded-full font-bold text-xl shadow-2xl shadow-cyan-500/50 flex items-center space-x-3 group"
+              >
+                <span>Explore Services</span>
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <div className={`text-4xl lg:text-5xl xl:text-6xl font-bold ${stat.color} mb-3`}>
-                    {stat.number}
-                  </div>
-                  <div className="text-white/80 text-base font-semibold tracking-wide uppercase">
-                    {stat.label}
-                  </div>
+                  <ArrowRight className="h-6 w-6" />
                 </motion.div>
-              ))}
+              </Link>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                href="/contact"
+                className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-12 py-6 rounded-full font-bold text-xl border-2 border-white/30 flex items-center space-x-3"
+              >
+                <Phone className="h-6 w-6" />
+                <span>Book Now</span>
+              </Link>
             </motion.div>
           </motion.div>
+
+          {/* Animated Stats Bar */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0.8 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1, delay: 1.9 }}
+            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 sm:p-8 mx-auto max-w-5xl"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+              {[
+                { number: '5000+', label: 'Cars Detailed', icon: Car },
+                { number: '100%', label: 'Satisfaction', icon: Heart },
+                { number: '14+', label: 'Years', icon: Award },
+                { number: '5.0★', label: 'Rating', icon: Star },
+              ].map((stat, index) => {
+                const IconComponent = stat.icon;
+                return (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 2.1 + index * 0.1 }}
+                    className="text-center group"
+                  >
+                    <div className="flex items-center justify-center mb-2">
+                      <IconComponent className="h-5 w-5 text-cyan-400 group-hover:scale-125 transition-transform duration-300" />
+                    </div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-1 group-hover:text-cyan-400 transition-colors">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs sm:text-sm text-white/70 font-medium uppercase tracking-wide">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 2.3 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <motion.a
+            href="#services"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center space-y-2 text-white/60 hover:text-white/90 transition-colors cursor-pointer"
+          >
+            <span className="text-xs sm:text-sm font-medium uppercase tracking-wider">Scroll to Explore</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
+          </motion.a>
+        </motion.div>
       </motion.section>
 
       {/* Services Categories */}
-      <section className="py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <section id="services" className="py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         {/* Luxury Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 20 }).map((_, i) => (
@@ -481,7 +514,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl sm:text-6xl font-black text-white mb-8">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-8">
               Choose Your{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Service Tier
@@ -499,8 +532,9 @@ const ServicesPage = () => {
               const CategoryIcon = category.icon;
                 return (
                 <motion.div 
-                  key={category.id} 
-                  className="relative"
+                  key={category.id}
+                  id={category.id}
+                  className="relative scroll-mt-20"
                   initial={{ opacity: 0, y: 80 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.0, delay: categoryIndex * 0.2 }}

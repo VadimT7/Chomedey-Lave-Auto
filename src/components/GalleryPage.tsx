@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   Eye, 
   X, 
@@ -26,6 +26,10 @@ const GalleryPage = () => {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  
+  // Parallax effect for hero section
+  const { scrollYProgress } = useScroll();
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0px', '4px']);
 
   // Scroll detection for header visibility
   useEffect(() => {
@@ -227,170 +231,194 @@ const GalleryPage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+
+      {/* Hero Section with Video Background */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+        transition={{ duration: 1 }}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       >
-        {/* Animated Background Elements */}
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0 top-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/Others/polishing-car2.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/30 via-transparent to-blue-900/30"></div>
+        </div>
+
+        {/* Animated Particles */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
+          {[...Array(30)].map((_, i) => (
+            <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-cyan-400/30 rounded-full animate-bubble"
+              className="absolute w-1 h-1 bg-white/40 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${8 + Math.random() * 4}s`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
               }}
             />
           ))}
-          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            {/* Local Montreal Badge */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
-            >
-              <MapPin className="h-5 w-5 text-cyan-400" />
-              <span>Montreal's Premier Car Transformation Gallery</span>
-            </motion.div>
-            
-            {/* Main Headline */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-white mb-6 leading-tight"
-            >
-              Transformations That{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Speak Volumes
-              </span>
-            </motion.h1>
-            
-            {/* Enhanced Subheadline */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-xl sm:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-8"
-            >
-              See the dramatic before and after results that have made us{' '}
-              <span className="font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
-                Montreal's most trusted luxury car care specialists
-              </span>
-            </motion.p>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-4 sm:py-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium mb-6 sm:mb-8 border border-white/20"
+          >
+            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
+            <span>Witness the Transformation</span>
+          </motion.div>
 
-            {/* Supporting Text */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed mb-12"
-            >
-              Every detail tells a story of perfection. From neglected to spectacular.
-            </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display text-white mb-6 leading-tight px-4"
+          >
+            Our Work{' '}
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Speaks
+            </span>
+            <br />
+            for Itself
+          </motion.h1>
 
-            {/* Enhanced Stats with Icons */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12"
-            >
-              <div className="text-center group">
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  className="w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-cyan-400/30"
-                >
-                  <Car className="h-8 w-8 text-cyan-400" />
-                </motion.div>
-                <div className="text-3xl sm:text-4xl font-black text-cyan-400 mb-1">2,500+</div>
-                <div className="text-white/70 text-sm sm:text-base">Vehicles Transformed</div>
-              </div>
-              
-              <div className="text-center group">
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  className="w-16 h-16 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-emerald-400/30"
-                >
-                  <Heart className="h-8 w-8 text-emerald-400" />
-                </motion.div>
-                <div className="text-3xl sm:text-4xl font-black text-emerald-400 mb-1">100%</div>
-                <div className="text-white/70 text-sm sm:text-base">Client Satisfaction</div>
-              </div>
-              
-              <div className="text-center group">
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-purple-400/30"
-                >
-                  <Clock className="h-8 w-8 text-purple-400" />
-                </motion.div>
-                <div className="text-3xl sm:text-4xl font-black text-purple-400 mb-1">14+</div>
-                <div className="text-white/70 text-sm sm:text-base">Years of Excellence</div>
-              </div>
-              
-              <div className="text-center group">
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-orange-400/30"
-                >
-                  <Trophy className="h-8 w-8 text-orange-400" />
-                </motion.div>
-                <div className="text-3xl sm:text-4xl font-black text-orange-400 mb-1">50+</div>
-                <div className="text-white/70 text-sm sm:text-base">Award-Winning Services</div>
-              </div>
-            </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-base sm:text-lg lg:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed px-4"
+          >
+            Explore our portfolio of stunning transformations. From dirty to dazzling, 
+            see how we turn every vehicle into a masterpiece.
+          </motion.p>
 
-            {/* Social Proof */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
-              className="flex flex-wrap items-center justify-center gap-6 text-white/60 text-sm"
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+          >
+            <a
+              href="#gallery"
+              className="btn-premium cursor-interactive bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full font-bold text-sm sm:text-base lg:text-lg shadow-2xl shadow-cyan-500/50 flex items-center space-x-2 sm:space-x-3"
             >
-              <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                <span>5-Star Rated on Google Reviews</span>
-              </div>
-              <div className="hidden sm:block w-px h-4 bg-white/30"></div>
-              <div className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-cyan-400" />
-                <span>Featured in Auto Excellence Magazine</span>
-              </div>
-              <div className="hidden sm:block w-px h-4 bg-white/30"></div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-emerald-400" />
-                <span>Trusted across Laval & Greater Montreal</span>
-              </div>
-            </motion.div>
-          </div>
+              <span>View Gallery</span>
+              <Eye className="h-5 w-5 sm:h-6 sm:w-6" />
+            </a>
+            <a
+              href="/contact"
+              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full font-bold text-sm sm:text-base lg:text-lg border-2 border-white/30"
+            >
+              Book Your Service
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="mt-8 sm:mt-12 mb-16 sm:mb-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 px-4"
+          >
+            {[
+              { icon: Award, number: '5000+', label: 'Cars Transformed' },
+              { icon: Star, number: '5.0', label: 'Average Rating' },
+              { icon: Trophy, number: '14+', label: 'Years Experience' },
+              { icon: Heart, number: '100%', label: 'Satisfaction' }
+            ].map((stat, index) => {
+              const IconComponent = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.3 + index * 0.1 }}
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8"
+                >
+                  <IconComponent className="h-7 w-7 sm:h-9 sm:w-9 text-cyan-400 mx-auto mb-2 sm:mb-3" />
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-1">{stat.number}</div>
+                  <div className="text-xs sm:text-sm text-white/70">{stat.label}</div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.5 }}
+          className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white/60 text-xs sm:text-sm flex flex-col items-center space-y-1 sm:space-y-2"
+          >
+            <span className="hidden sm:inline">Scroll to explore</span>
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </motion.div>
+        </motion.div>
       </motion.section>
 
-      {/* Filter Section */}
+      {/* Enhanced Filter Section */}
       <motion.section 
+        id="gallery"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className={`py-12 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky z-30 transition-all duration-500 ease-out ${
+        className={`py-16 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky z-30 transition-all duration-500 ease-out ${
           isHeaderVisible ? 'top-20' : 'top-0'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-3xl font-black text-gray-900 mb-4">
+              Filter Our{' '}
+              <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                Transformations
+              </span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Browse through our work by service type to see specific results
+            </p>
+          </motion.div>
+          
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="flex items-center space-x-2 text-gray-600">
+            <div className="flex items-center space-x-2 text-gray-600 mb-4 sm:mb-0">
               <Filter className="h-5 w-5" />
               <span className="font-semibold text-lg">Filter by service:</span>
             </div>
@@ -399,14 +427,14 @@ const GalleryPage = () => {
                 key={category.id}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`btn-premium cursor-interactive px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                className={`btn-premium cursor-interactive px-8 py-4 rounded-full text-sm font-bold transition-all duration-300 ${
                   selectedCategory === category.id
                     ? `bg-gradient-to-r ${category.color} text-white shadow-xl shadow-cyan-500/25`
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:shadow-lg'
                 }`}
               >
                 {category.label} ({category.count})

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import AnimationProvider from "@/components/AnimationProvider";
 import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const poppins = Poppins({
   variable: "--font-poppins",
