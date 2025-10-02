@@ -184,7 +184,7 @@ const TestimonialsPage = () => {
                 bottom: '-10%',
               }}
               animate={{
-                y: [0, -window.innerHeight - 100],
+                y: [0, -1200],
                 x: [0, Math.random() * 100 - 50],
                 opacity: [0, 0.6, 0],
                 scale: [0.8, 1.2, 0.8],

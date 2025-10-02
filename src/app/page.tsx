@@ -693,40 +693,25 @@ const HomePage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                   
                   {/* Before Badge */}
-                  <motion.div 
-                    className="absolute bottom-4 left-4"
-                    initial={{ opacity: 1, y: 0 }}
-                    whileHover={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="absolute bottom-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-150">
                     <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       BEFORE
                     </span>
-                  </motion.div>
+                  </div>
                   
                   {/* After Badge - Appears on Hover */}
-                  <motion.div 
-                    className="absolute bottom-4 left-4"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">
                     <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       AFTER
                     </span>
-                  </motion.div>
+                  </div>
                   
                   {/* Enhanced Hover Instruction */}
-                  <motion.div 
-                    className="absolute top-4 left-4"
-                    initial={{ opacity: 1 }}
-                    whileHover={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-300">
                     <div className="bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium border border-white/20">
                       Hover to Reveal
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Click to Expand Button */}
                   <motion.div 

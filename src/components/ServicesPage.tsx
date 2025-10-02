@@ -55,7 +55,7 @@ const ServicesPage = () => {
         'Windows and mirrors cleaning',
         'Basic wax protection'
       ],
-          image: '/photos-before-and-after/before-car-dirty-1.jpg'
+          image: '/Others/chomedey-washing-rolls-royce.jpeg'
         },
         {
           id: 'interior-basic',
@@ -76,7 +76,7 @@ const ServicesPage = () => {
             'Trunk cleaning',
             'Odor neutralization'
           ],
-          image: '/photos-before-and-after/before-carpet-treatment.jpg'
+          image: '/Others/interior-cleaning.jpeg'
         },
         {
           id: 'engine-bay',
@@ -97,7 +97,7 @@ const ServicesPage = () => {
             'Dressing and shine',
             'Safety inspection'
           ],
-          image: '/photos-before-and-after/after-carpet-treatment.jpg'
+          image: '/Others/Engine-Bay-Cleaning.jpeg'
         }
       ]
     },
@@ -128,7 +128,7 @@ const ServicesPage = () => {
         'Odor elimination',
         'UV protection application'
       ],
-          image: '/photos-before-and-after/after-carpet-treatment.jpg'
+          image: '/Others/interior-detailing.jpg'
     },
     {
       id: 'wax-polish',
@@ -149,7 +149,7 @@ const ServicesPage = () => {
         'Scratch and swirl removal',
         'Long-lasting results'
       ],
-          image: '/photos-before-and-after/after-leather-treatment.jpg'
+          image: '/Others/wax-and-polish.jpeg'
     },
     {
       id: 'full-detailing',
@@ -170,7 +170,7 @@ const ServicesPage = () => {
         'Before/after photos',
         'Satisfaction guarantee'
       ],
-          image: '/photos-before-and-after/before-car-dirty-2.jpg'
+          image: '/Others/full-car-detailing.jpeg'
         }
       ]
     },
@@ -201,7 +201,7 @@ const ServicesPage = () => {
             'Enhanced gloss and shine',
             'Warranty included'
           ],
-          image: '/photos-before-and-after/after-leather-treatment.jpg'
+          image: '/Others/ceramic-coating.jpeg'
         },
         {
           id: 'paint-correction',
@@ -222,7 +222,7 @@ const ServicesPage = () => {
             'Protection application',
             'Showroom finish'
           ],
-          image: '/photos-before-and-after/before-car-dirty-1.jpg'
+          image: '/Others/paint-correction.jpeg'
         },
         {
           id: 'leather-restoration',
@@ -243,7 +243,7 @@ const ServicesPage = () => {
             'Crack prevention',
             'Luxury finish'
           ],
-          image: '/photos-before-and-after/after-carpet-treatment.jpg'
+          image: '/Others/leather-restoration.jpeg'
         }
       ]
     }
@@ -644,7 +644,17 @@ const ServicesPage = () => {
                               src={service.image}
                               alt={service.title}
                     fill
-                    className="object-cover"
+                    className={`object-cover ${
+                      service.id === 'exterior-wash' 
+                        ? 'object-[center_65%]' 
+                        : service.id === 'engine-bay'
+                        ? 'object-[bottom_10%]'
+                        : service.id === 'interior-basic'
+                        ? 'object-top'
+                        : service.id === 'leather-restoration'
+                        ? 'object-[left_20%]'
+                        : ''
+                    }`}
                   />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-4 left-4">

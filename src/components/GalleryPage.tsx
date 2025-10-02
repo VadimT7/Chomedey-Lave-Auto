@@ -400,23 +400,6 @@ const GalleryPage = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-3xl font-black text-gray-900 mb-4">
-              Filter Our{' '}
-              <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                Transformations
-              </span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Browse through our work by service type to see specific results
-            </p>
-          </motion.div>
-          
           <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="flex items-center space-x-2 text-gray-600 mb-4 sm:mb-0">
               <Filter className="h-5 w-5" />
