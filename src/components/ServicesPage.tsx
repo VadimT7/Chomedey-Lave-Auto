@@ -227,26 +227,25 @@ const ServicesPage = () => {
           image: '/Others/wax-and-polish.jpeg'
         },
         {
-          id: 'leather-restoration',
-          title: 'Leather Restoration',
-          description: 'Complete leather cleaning, conditioning, and protection',
+          id: 'leather-cleaning',
+          title: 'Leather Cleaning',
+          description: 'Professional leather cleaning, conditioning, and protection',
           icon: Heart,
           color: 'from-rose-500 to-pink-500',
           duration: '2-3 hours',
-          price: 'Call for Price',
-          priceDetails: 'Custom pricing based on leather condition',
-          phoneNumber: '+14506860016',
+          price: 'From $45',
+          priceDetails: 'Car: $45 | SUV: $45 | 7-Passenger: $65',
           rating: 5,
           popular: false,
           features: [
             'Deep leather cleaning',
             'Conditioning treatment',
-            'Color restoration',
+            'Stain removal',
             'Protection coating',
-            'Crack prevention',
+            'UV protection',
             'Luxury finish'
           ],
-          image: '/Others/leather-restoration.jpeg'
+          image: '/Others/leather-cleaning.jpeg'
         }
       ]
     }
@@ -654,7 +653,7 @@ const ServicesPage = () => {
                         ? 'object-[bottom_10%]'
                         : service.id === 'interior-basic'
                         ? 'object-top'
-                        : service.id === 'leather-restoration'
+                        : service.id === 'leather-cleaning'
                         ? 'object-[left_20%]'
                         : ''
                     }`}
@@ -814,7 +813,7 @@ const ServicesPage = () => {
               href="/contact"
               className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-slate-700 px-10 py-5 rounded-full font-bold text-lg"
             >
-              Book Your Service
+              Book My Service
             </Link>
             <a
               href="tel:+14506860016"

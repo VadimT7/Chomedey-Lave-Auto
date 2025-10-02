@@ -2,245 +2,199 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
-  Eye, 
-  X, 
-  ChevronLeft, 
-  ChevronRight, 
-  Filter,
-  Star,
   Sparkles,
-  Zap,
+  Star,
   Award,
   Heart,
-  Car,
-  Clock,
-  MapPin,
-  Trophy
+  Trophy,
+  MoveHorizontal
 } from 'lucide-react';
 
-const GalleryPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  
-  // Parallax effect for hero section
-  const { scrollYProgress } = useScroll();
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0px', '4px']);
+// Before/After Slider Component
+const BeforeAfterSlider = ({ before, after, title, description }: { before: string; after: string; title: string; description: string }) => {
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll detection for header visibility
+  const handleMove = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
+    setSliderPosition(percent);
+  };
+
+  const handleMouseDown = () => setIsDragging(true);
+  const handleMouseUp = () => setIsDragging(false);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    handleMove(e.clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length > 0) {
+      handleMove(e.touches[0].clientX);
+    }
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+    const handleGlobalMouseUp = () => setIsDragging(false);
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="group relative w-full h-full"
+    >
+      <div
+        ref={containerRef}
+        className="relative w-full h-full overflow-hidden rounded-3xl cursor-ew-resize select-none shadow-2xl border-4 border-white/20"
+        onMouseMove={handleMouseMove}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onTouchMove={handleTouchMove}
+        onTouchStart={() => setIsDragging(true)}
+        onTouchEnd={() => setIsDragging(false)}
+      >
+        {/* After Image (Background) */}
+        <div className="absolute inset-0">
+          <Image
+            src={after}
+            alt={`${title} - After`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+          <div className="absolute top-6 right-6 bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+            AFTER
+          </div>
+        </div>
+
+        {/* Before Image (Overlay) */}
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        >
+          <Image
+            src={before}
+            alt={`${title} - Before`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+          <div className="absolute top-6 left-6 bg-red-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+            BEFORE
+          </div>
+        </div>
+
+        {/* Slider Handle */}
+        <div
+          className="absolute top-0 bottom-0 w-1 bg-white shadow-2xl"
+          style={{ left: `${sliderPosition}%` }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-cyan-500 transition-transform group-hover:scale-110">
+            <MoveHorizontal className="h-5 w-5 text-cyan-600" />
+          </div>
+        </div>
+
+        {/* Info Overlay - Always visible */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-8">
+          <h3 className="text-white font-bold text-2xl mb-2">{title}</h3>
+          <p className="text-white/80 text-sm">{description}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Video Showcase Component
+const VideoShowcase = ({ videoSrc, title, isPrimary = false }: { videoSrc: string; title: string; isPrimary?: boolean }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="group relative w-full h-full overflow-hidden rounded-3xl shadow-2xl border-4 border-white/20"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="relative w-full h-full">
+        <video
+          src={videoSrc}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      </div>
       
-      // Header disappears when scrolling down past 200px
-      if (currentScrollY > 200 && currentScrollY > lastScrollY) {
-        setIsHeaderVisible(false);
-      } else if (currentScrollY < lastScrollY || currentScrollY <= 200) {
-        setIsHeaderVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
+      {/* Gradient Overlay Top */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent pointer-events-none" />
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+      {/* Title - At the top with beautiful styling, hide on hover */}
+      <div className={`absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/80 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
+        <h3 className="text-white font-bold text-lg lg:text-xl tracking-tight leading-tight" style={{
+          textShadow: '0 6px 16px rgba(0, 0, 0, 0.9), 0 3px 8px rgba(0, 0, 0, 0.7), 0 10px 32px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 1)'
+        }}>
+          {title}
+        </h3>
+      </div>
 
-  const categories = [
-    { id: 'all', label: 'All Transformations', count: 12, color: 'from-cyan-500 to-blue-600' },
-    { id: 'exterior', label: 'Exterior', count: 4, color: 'from-emerald-500 to-teal-600' },
-    { id: 'interior', label: 'Interior', count: 4, color: 'from-purple-500 to-pink-600' },
-    { id: 'ceramic', label: 'Ceramic Coating', count: 2, color: 'from-orange-500 to-red-600' },
-    { id: 'engine', label: 'Engine Bay', count: 2, color: 'from-indigo-500 to-purple-600' }
-  ];
+      {/* Premium Badge */}
+      {isPrimary && (
+        <div className="absolute top-6 right-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1">
+          <Sparkles className="h-3 w-3" />
+          <span>PREMIUM</span>
+        </div>
+      )}
+    </motion.div>
+  );
+};
 
-  const galleryItems = [
+const GalleryPage = () => {
+  // Transformation showcase data - ONLY using actual matching photos
+  const transformations = [
     {
       id: 1,
-      before: '/photos-before-and-after/before-car-dirty-1.jpg',
+      before: '/photos-before-and-after/before-carpet-treatment.jpg',
       after: '/photos-before-and-after/after-carpet-treatment.jpg',
-      title: 'Complete Interior Transformation',
-      category: 'interior',
-      service: 'Interior Detailing',
-      description: 'From dirty and stained to pristine and fresh',
-      rating: 5,
-      time: '2 hours'
+      title: 'Complete Carpet Restoration',
+      description: 'Deep cleaning and restoration bringing carpets back to showroom condition'
     },
     {
       id: 2,
-      before: '/photos-before-and-after/before-car-dirty-2.jpg',
-      after: '/photos-before-and-after/after-leather-treatment.jpg',
-      title: 'Leather Restoration',
-      category: 'interior',
-      service: 'Leather Treatment',
-      description: 'Professional leather cleaning and conditioning',
-      rating: 5,
-      time: '1.5 hours'
-    },
-    {
-      id: 3,
-      before: '/photos-before-and-after/before-carpet-treatment.jpg',
-      after: '/photos-before-and-after/after-carpet-treatment.jpg',
-      title: 'Carpet Deep Clean',
-      category: 'interior',
-      service: 'Carpet Cleaning',
-      description: 'Removing years of dirt and stains',
-      rating: 5,
-      time: '1 hour'
-    },
-    {
-      id: 4,
       before: '/photos-before-and-after/before-leather-treatment.jpg',
       after: '/photos-before-and-after/after-leather-treatment.jpg',
-      title: 'Leather Seat Restoration',
-      category: 'interior',
-      service: 'Leather Treatment',
-      description: 'Bringing leather seats back to life',
-      rating: 5,
-      time: '1.5 hours'
-    },
-    {
-      id: 5,
-      before: '/photos-before-and-after/before-car-dirty-1.jpg',
-      after: '/photos-before-and-after/after-carpet-treatment.jpg',
-      title: 'Exterior Wash & Wax',
-      category: 'exterior',
-      service: 'Exterior Wash',
-      description: 'Complete exterior transformation',
-      rating: 5,
-      time: '45 min'
-    },
-    {
-      id: 6,
-      before: '/photos-before-and-after/before-car-dirty-2.jpg',
-      after: '/photos-before-and-after/after-leather-treatment.jpg',
-      title: 'Paint Correction',
-      category: 'exterior',
-      service: 'Wax & Polish',
-      description: 'Removing scratches and restoring shine',
-      rating: 5,
-      time: '2 hours'
-    },
-    {
-      id: 7,
-      before: '/photos-before-and-after/before-carpet-treatment.jpg',
-      after: '/photos-before-and-after/after-carpet-treatment.jpg',
-      title: 'Ceramic Coating Application',
-      category: 'ceramic',
-      service: 'Ceramic Coating',
-      description: 'Long-lasting protection and shine',
-      rating: 5,
-      time: '4 hours'
-    },
-    {
-      id: 8,
-      before: '/photos-before-and-after/before-leather-treatment.jpg',
-      after: '/photos-before-and-after/after-leather-treatment.jpg',
-      title: 'Premium Ceramic Coating',
-      category: 'ceramic',
-      service: 'Ceramic Coating',
-      description: 'Showroom-quality protection',
-      rating: 5,
-      time: '5 hours'
-    },
-    {
-      id: 9,
-      before: '/photos-before-and-after/before-car-dirty-1.jpg',
-      after: '/photos-before-and-after/after-carpet-treatment.jpg',
-      title: 'Engine Bay Cleaning',
-      category: 'engine',
-      service: 'Engine Bay',
-      description: 'Complete engine bay restoration',
-      rating: 5,
-      time: '1 hour'
-    },
-    {
-      id: 10,
-      before: '/photos-before-and-after/before-car-dirty-2.jpg',
-      after: '/photos-before-and-after/after-leather-treatment.jpg',
-      title: 'Engine Bay Detailing',
-      category: 'engine',
-      service: 'Engine Bay',
-      description: 'Professional engine bay cleaning',
-      rating: 5,
-      time: '1.5 hours'
-    },
-    {
-      id: 11,
-      before: '/photos-before-and-after/before-carpet-treatment.jpg',
-      after: '/photos-before-and-after/after-carpet-treatment.jpg',
-      title: 'Full Detailing Package',
-      category: 'exterior',
-      service: 'Full Detailing',
-      description: 'Complete inside and out transformation',
-      rating: 5,
-      time: '6 hours'
-    },
-    {
-      id: 12,
-      before: '/photos-before-and-after/before-leather-treatment.jpg',
-      after: '/photos-before-and-after/after-leather-treatment.jpg',
-      title: 'Premium Full Service',
-      category: 'exterior',
-      service: 'Full Detailing',
-      description: 'Showroom-quality results',
-      rating: 5,
-      time: '8 hours'
+      title: 'Leather Seat Rejuvenation',
+      description: 'Professional leather treatment restoring the original luster and feel'
     }
   ];
 
-  const filteredItems = selectedCategory === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === selectedCategory);
-
-  const openLightbox = (image: string, index: number) => {
-    setLightboxImage(image);
-    setLightboxIndex(index);
-  };
-
-  const closeLightbox = () => {
-    setLightboxImage(null);
-  };
-
-  const nextImage = () => {
-    const nextIndex = (lightboxIndex + 1) % filteredItems.length;
-    setLightboxIndex(nextIndex);
-    setLightboxImage(filteredItems[nextIndex].after);
-  };
-
-  const prevImage = () => {
-    const prevIndex = (lightboxIndex - 1 + filteredItems.length) % filteredItems.length;
-    setLightboxIndex(prevIndex);
-    setLightboxImage(filteredItems[prevIndex].after);
-  };
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-4 w-4 ${
-          i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-        }`}
-      />
-    ));
-  };
-
   return (
-    <div className="min-h-screen">
-
-      {/* Hero Section with Video Background */}
+    <div className="min-h-screen bg-black">
+      {/* Hero Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Video Background */}
-        <div className="absolute inset-0 z-0 top-0">
+        <div className="absolute inset-0 z-0">
           <video
             autoPlay
             loop
@@ -250,29 +204,27 @@ const GalleryPage = () => {
           >
             <source src="/Others/polishing-car2.mp4" type="video/mp4" />
           </video>
-          
-          {/* Gradient Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/30 via-transparent to-blue-900/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-transparent to-blue-900/20"></div>
         </div>
 
-        {/* Animated Particles */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(30)].map((_, i) => (
+        {/* Floating Particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(40)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-white/40 rounded-full"
+              className="absolute w-1 h-1 bg-cyan-400/60 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, -100, 0],
+                y: [0, -150, 0],
                 opacity: [0, 1, 0],
-                scale: [0, 1.5, 0],
+                scale: [0, 2, 0],
               }}
               transition={{
-                duration: 6 + Math.random() * 4,
+                duration: 8 + Math.random() * 4,
                 repeat: Infinity,
                 delay: Math.random() * 5,
                 ease: "easeInOut",
@@ -282,74 +234,52 @@ const GalleryPage = () => {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-4 sm:py-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center py-20">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium mb-6 sm:mb-8 border border-white/20"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full text-base font-semibold mb-8 border border-white/20"
           >
-            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
-            <span>Witness the Transformation</span>
+            <Sparkles className="h-5 w-5 text-cyan-400" />
+            <span>Transformation Gallery</span>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display text-white mb-6 leading-tight px-4"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-6xl sm:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
           >
-            Our Work{' '}
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Speaks
-            </span>
+            Where Magic
             <br />
-            for Itself
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Happens
+            </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-base sm:text-lg lg:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed px-4"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-xl lg:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            Explore our portfolio of stunning transformations. From dirty to dazzling, 
-            see how we turn every vehicle into a masterpiece.
+            Witness the extraordinary transformations that have made us the premier 
+            choice for luxury car care. Every detail, perfected.
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
-          >
-            <a
-              href="#gallery"
-              className="btn-premium cursor-interactive bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full font-bold text-sm sm:text-base lg:text-lg shadow-2xl shadow-cyan-500/50 flex items-center space-x-2 sm:space-x-3"
-            >
-              <span>View Gallery</span>
-              <Eye className="h-5 w-5 sm:h-6 sm:w-6" />
-            </a>
-            <a
-              href="/contact"
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full font-bold text-sm sm:text-base lg:text-lg border-2 border-white/30"
-            >
-              Book Your Service
-            </a>
-          </motion.div>
 
           {/* Stats */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="mt-8 sm:mt-12 mb-16 sm:mb-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 px-4"
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16"
           >
             {[
-              { icon: Award, number: '5000+', label: 'Cars Transformed' },
-              { icon: Star, number: '5.0', label: 'Average Rating' },
-              { icon: Trophy, number: '14+', label: 'Years Experience' },
-              { icon: Heart, number: '100%', label: 'Satisfaction' }
+              { icon: Award, number: '5,000+', label: 'Transformations' },
+              { icon: Star, number: '5.0', label: 'Perfect Rating' },
+              { icon: Trophy, number: '14+', label: 'Years Excellence' },
+              { icon: Heart, number: '100%', label: 'Satisfied Clients' }
             ].map((stat, index) => {
               const IconComponent = stat.icon;
               return (
@@ -357,230 +287,536 @@ const GalleryPage = () => {
                   key={stat.label}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1.3 + index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8"
+                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
                 >
-                  <IconComponent className="h-7 w-7 sm:h-9 sm:w-9 text-cyan-400 mx-auto mb-2 sm:mb-3" />
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-1">{stat.number}</div>
-                  <div className="text-xs sm:text-sm text-white/70">{stat.label}</div>
+                  <IconComponent className="h-10 w-10 text-cyan-400 mx-auto mb-3" />
+                  <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
+                  <div className="text-sm text-white/70">{stat.label}</div>
                 </motion.div>
               );
             })}
           </motion.div>
-        </div>
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-        >
+            className="flex flex-col items-center space-y-3"
+          >
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-white/60 text-sm"
+            >
+              <span>Explore Transformations</span>
+            </motion.div>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="text-white/60 text-xs sm:text-sm flex flex-col items-center space-y-1 sm:space-y-2"
           >
-            <span className="hidden sm:inline">Scroll to explore</span>
-            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </motion.div>
         </motion.div>
-      </motion.section>
-
-      {/* Enhanced Filter Section */}
-      <motion.section 
-        id="gallery"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className={`py-16 bg-white/95 backdrop-blur-xl border-b border-gray-200 sticky z-30 transition-all duration-500 ease-out ${
-          isHeaderVisible ? 'top-20' : 'top-0'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="flex items-center space-x-2 text-gray-600 mb-4 sm:mb-0">
-              <Filter className="h-5 w-5" />
-              <span className="font-semibold text-lg">Filter by service:</span>
-            </div>
-            {categories.map((category, index) => (
-              <motion.button
-                key={category.id}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`btn-premium cursor-interactive px-8 py-4 rounded-full text-sm font-bold transition-all duration-300 ${
-                  selectedCategory === category.id
-                    ? `bg-gradient-to-r ${category.color} text-white shadow-xl shadow-cyan-500/25`
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:shadow-lg'
-                }`}
-              >
-                {category.label} ({category.count})
-              </motion.button>
-            ))}
-          </div>
         </div>
       </motion.section>
 
-      {/* Gallery Grid */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="wait">
-              {filteredItems.map((item, index) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -50, scale: 0.9 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    delay: index * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="card-premium cursor-interactive group bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100"
+      {/* Main Gallery Section */}
+      <section className="relative py-32 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} />
+        </div>
+
+        <div className="relative z-10 w-full">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-24 px-4"
+          >
+            <h2 className="text-5xl lg:text-6xl font-black text-white mb-6">
+              Before & After
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"> Showcase</span>
+            </h2>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              Drag the slider to reveal the stunning transformations. Every detail matters.
+            </p>
+          </motion.div>
+
+          {/* Asymmetric Masonry Layout */}
+          <div className="space-y-20 max-w-[1400px] mx-auto px-4 lg:px-6">
+            {/* Row 1: Two Large Transformations */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+              {/* Carpet Transformation */}
+              <motion.div
+                initial={{ opacity: 0, x: -100, rotate: -5 }}
+                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 1.618,
+                  type: "spring",
+                  bounce: 0.2
+                }}
+                className="h-[500px] lg:h-[700px]"
               >
-                {/* Image Container */}
-                <div className="image-premium relative h-80 overflow-hidden">
-                  <Image
-                    src={item.after}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                <BeforeAfterSlider
+                  before={transformations[0].before}
+                  after={transformations[0].after}
+                  title={transformations[0].title}
+                  description={transformations[0].description}
+                />
+              </motion.div>
+
+              {/* Leather Transformation */}
+              <motion.div
+                initial={{ opacity: 0, x: 100, rotate: 5 }}
+                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 1.618,
+                  type: "spring",
+                  bounce: 0.2,
+                  delay: 0.618
+                }}
+                className="h-[500px] lg:h-[700px]"
+              >
+                <BeforeAfterSlider
+                  before={transformations[1].before}
+                  after={transformations[1].after}
+                  title={transformations[1].title}
+                  description={transformations[1].description}
+                />
+              </motion.div>
+            </div>
+
+            {/* Row 2: EPIC Video Transformation Showcase */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 1.618,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className="relative py-16"
+            >
+              {/* Background Glow Effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-emerald-500/10 blur-3xl" />
+              
+              {/* Title */}
+              <div className="text-center mb-12 px-4">
+                <motion.h3
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.618
+                  }}
+                  className="text-4xl lg:text-5xl font-black text-white mb-4"
+                >
+                  The <span className="bg-gradient-to-r from-red-400 via-amber-400 to-emerald-400 bg-clip-text text-transparent">Ultimate</span> Transformation
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.618, delay: 1.236 }}
+                  className="text-lg text-white/70"
+                >
+                  Watch the magic unfold from start to finish
+                </motion.p>
+        </div>
+
+              {/* Video Transformation Row */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                {/* Before Video */}
+                <motion.div
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 1.618
+                  }}
+                  className="lg:col-span-5 h-[600px] lg:h-[700px]"
+                >
+                  <VideoShowcase
+                    videoSrc="/photos-before-and-after/Before-polishing-video.mp4"
+                    title="Before: Scratched & Dull Surface"
+                    isPrimary={true}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                  
-                  {/* Overlay Content */}
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        AFTER
-                      </span>
-                      <button
-                        onClick={() => openLightbox(item.after, index)}
-                        className="btn-premium cursor-interactive bg-white/20 backdrop-blur-md text-white p-2 rounded-full hover:bg-white/30"
+                </motion.div>
+
+                {/* Animated Arrow Section - Minimalistic & Sleek */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 2.236
+                  }}
+                  className="lg:col-span-2 flex items-center justify-center py-8 lg:py-0"
+                >
+                  <div className="relative flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-4">
+                    {/* Single Sleek Animated Arrow */}
+                    <motion.div
+                      animate={{
+                        x: [0, 15, 0],
+                        opacity: [0.5, 1, 0.5],
+                      }}
+                      transition={{ 
+                        duration: 3.236,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="relative"
+                    >
+                      {/* Subtle Glow */}
+                      <div className="absolute inset-0 bg-cyan-400/30 blur-xl" />
+                      
+                      {/* Arrow */}
+                      <svg
+                        className="relative w-16 h-16 lg:w-20 lg:h-20 text-cyan-400 rotate-90 lg:rotate-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        <Eye className="h-4 w-4" />
-                      </button>
-                    </div>
-                    <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
-                    <p className="text-white/80 text-sm">{item.service}</p>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 5l7 7-7 7M5 5l7 7-7 7"
+                        />
+                      </svg>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* After Video */}
+                <motion.div
+                  initial={{ opacity: 0, x: 60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 1.618
+                  }}
+                  className="lg:col-span-5 h-[600px] lg:h-[700px]"
+                >
+                  <VideoShowcase
+                    videoSrc="/photos-before-and-after/After-polishing-video.mp4"
+                    title="After: Mirror-Like Perfection"
+                    isPrimary={true}
+                  />
+                </motion.div>
+                </div>
+            </motion.div>
+
+            {/* Row 3: Interior Video Transformation Showcase */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 1.618,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className="relative py-16"
+            >
+              {/* Background Glow Effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-blue-500/10 blur-3xl" />
+              
+              {/* Title */}
+              <div className="text-center mb-12 px-4">
+                <motion.h3
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.618
+                  }}
+                  className="text-4xl lg:text-5xl font-black text-white mb-4"
+                >
+                  Interior <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Deep Clean</span> Transformation
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.618, delay: 1.236 }}
+                  className="text-lg text-white/70"
+                >
+                  From neglected to immaculate
+                </motion.p>
+                  </div>
+                  
+              {/* Video Transformation Row */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                {/* Before Video */}
+                <motion.div
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 1.618
+                  }}
+                  className="lg:col-span-5 h-[600px] lg:h-[700px]"
+                >
+                  <VideoShowcase
+                    videoSrc="/photos-before-and-after/Before-video-dirty-car-interior.mp4"
+                    title="Before: Heavily Soiled Interior"
+                    isPrimary={true}
+                  />
+                </motion.div>
+
+                {/* Animated Arrow Section - Minimalistic & Sleek */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    delay: 2.236
+                  }}
+                  className="lg:col-span-2 flex items-center justify-center py-8 lg:py-0"
+                >
+                  <div className="relative flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-4">
+                    {/* Single Sleek Animated Arrow */}
+                    <motion.div
+                      animate={{
+                        x: [0, 15, 0],
+                        opacity: [0.5, 1, 0.5],
+                      }}
+                      transition={{
+                        duration: 3.236,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="relative"
+                    >
+                      {/* Subtle Glow */}
+                      <div className="absolute inset-0 bg-purple-400/30 blur-xl" />
+                      
+                      {/* Arrow */}
+                      <svg
+                        className="relative w-16 h-16 lg:w-20 lg:h-20 text-purple-400 rotate-90 lg:rotate-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 5l7 7-7 7M5 5l7 7-7 7"
+                        />
+                      </svg>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {/* After Video */}
+                <motion.div
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 1.618
+                  }}
+                  className="lg:col-span-5 h-[600px] lg:h-[700px]"
+                >
+                  <VideoShowcase
+                    videoSrc="/photos-before-and-after/After-video-clean-car.mp4"
+                    title="After: Pristine & Fresh Interior"
+                    isPrimary={true}
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Row 4: Cleaning Process Video - Vertical Format with Sleek Sides */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 1.618,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className="relative py-16"
+            >
+              {/* Background Glow Effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-teal-500/10 blur-3xl" />
+              
+              {/* Title */}
+              <div className="text-center mb-12 px-4">
+                <motion.h3
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.618
+                  }}
+                  className="text-5xl lg:text-7xl font-black text-white mb-6"
+                >
+                  Behind the <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">Scenes</span>
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.618, delay: 1.236 }}
+                  className="text-xl lg:text-2xl text-white/70"
+                >
+                  Watch our meticulous process in action
+                </motion.p>
+              </div>
+
+              {/* Vertical Video with Sleek Side Elements */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                {/* Left Sleek Panel */}
+                <div className="lg:col-span-3 hidden lg:block">
+                  <div className="space-y-4">
+                    {[
+                      { title: 'Deep Clean', subtitle: 'Thorough treatment', color: 'from-emerald-500/40 to-teal-500/40', borderColor: 'border-emerald-400/70' },
+                      { title: 'Premium Care', subtitle: 'Professional grade', color: 'from-cyan-500/40 to-blue-500/40', borderColor: 'border-cyan-400/70' },
+                      { title: 'Precision', subtitle: 'Attention to detail', color: 'from-teal-500/40 to-emerald-500/40', borderColor: 'border-teal-400/70' }
+                    ].map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          duration: 1.618,
+                          ease: [0.22, 1, 0.36, 1],
+                          delay: 1.618 + (idx * 0.618)
+                        }}
+                        whileHover={{ x: 8 }}
+                        className={`bg-gradient-to-br ${item.color} backdrop-blur-xl border-2 ${item.borderColor} p-6 rounded-xl group cursor-default shadow-lg`}
+                      >
+                        <h4 className="text-white font-bold text-xl mb-1 tracking-tight">{item.title}</h4>
+                        <p className="text-white/80 text-sm font-light tracking-wide">{item.subtitle}</p>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-2">
-                      {renderStars(item.rating)}
-                      <span className="text-sm font-semibold text-gray-600">{item.service}</span>
-                    </div>
-                    <div className="flex items-center space-x-1 text-gray-500 text-sm">
-                      <Zap className="h-4 w-4" />
-                      <span>{item.time}</span>
-                    </div>
+                {/* Vertical Video - Centered */}
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 1.618,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 1.618
+                  }}
+                  className="lg:col-span-6 flex justify-center"
+                >
+                  <div className="w-full max-w-md h-[500px] lg:h-[700px]">
+                    <VideoShowcase
+                      videoSrc="/photos-before-and-after/Cleaning-Process-Video.mp4"
+                      title="Our Meticulous Process"
+                      isPrimary={true}
+                    />
                   </div>
-                  
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                    {item.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500 font-medium">Transformation #{item.id}</span>
-                    <button
-                      onClick={() => openLightbox(item.after, index)}
-                      className="link-premium cursor-interactive text-cyan-600 hover:text-cyan-700 text-sm font-semibold flex items-center space-x-1"
-                    >
-                      <span>View Details</span>
-                      <Eye className="h-3 w-3" />
-                    </button>
-                  </div>
-                </div>
+                </motion.div>
+
+                {/* Right Sleek Panel */}
+                <div className="lg:col-span-3 hidden lg:block">
+                  <div className="space-y-4">
+                    {[
+                      { title: 'Time Efficient', subtitle: 'Swift excellence', color: 'from-purple-500/40 to-pink-500/40', borderColor: 'border-purple-400/70' },
+                      { title: 'Protected', subtitle: 'Safe on surfaces', color: 'from-blue-500/40 to-cyan-500/40', borderColor: 'border-blue-400/70' },
+                      { title: 'Luxury Finish', subtitle: 'Showroom quality', color: 'from-amber-500/40 to-orange-500/40', borderColor: 'border-amber-400/70' }
+                    ].map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          duration: 1.618,
+                          ease: [0.22, 1, 0.36, 1],
+                          delay: 1.618 + (idx * 0.618)
+                        }}
+                        whileHover={{ x: -8 }}
+                        className={`bg-gradient-to-br ${item.color} backdrop-blur-xl border-2 ${item.borderColor} p-6 rounded-xl group cursor-default shadow-lg`}
+                      >
+                        <h4 className="text-white font-bold text-xl mb-1 tracking-tight">{item.title}</h4>
+                        <p className="text-white/80 text-sm font-light tracking-wide">{item.subtitle}</p>
               </motion.div>
             ))}
-            </AnimatePresence>
+                  </div>
           </div>
-
-          {filteredItems.length === 0 && (
-            <div className="text-center py-24">
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-full mb-6">
-                <Sparkles className="h-12 w-12 text-cyan-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-4">No transformations found</h3>
-              <p className="text-gray-500 text-lg">Try selecting a different category to see more results.</p>
+            </motion.div>
             </div>
-          )}
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxImage && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-6xl max-h-full">
-            {/* Close Button */}
-            <button
-              onClick={closeLightbox}
-              className="btn-premium cursor-interactive absolute top-4 right-4 z-10 bg-white/20 backdrop-blur-md text-white p-3 rounded-full hover:bg-white/30"
-            >
-              <X className="h-6 w-6" />
-            </button>
+      {/* Call to Action Section */}
+      <section className="relative py-32 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
+        {/* Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
 
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevImage}
-              className="btn-premium cursor-interactive absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/20 backdrop-blur-md text-white p-4 rounded-full hover:bg-white/30"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button
-              onClick={nextImage}
-              className="btn-premium cursor-interactive absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/20 backdrop-blur-md text-white p-4 rounded-full hover:bg-white/30"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
-
-            {/* Image */}
-            <div className="relative">
-              <Image
-                src={lightboxImage}
-                alt={filteredItems[lightboxIndex]?.title || 'Gallery image'}
-                width={1000}
-                height={750}
-                className="max-w-full max-h-[85vh] object-contain rounded-2xl"
-              />
-              
-              {/* Image Info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8 rounded-b-2xl">
-                <h3 className="text-white font-bold text-2xl mb-2">
-                  {filteredItems[lightboxIndex]?.title}
-                </h3>
-                <p className="text-white/80 text-lg mb-4">
-                  {filteredItems[lightboxIndex]?.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <span className="text-white/60 text-sm">
-                      {filteredItems[lightboxIndex]?.service}
-                    </span>
-                    <div className="flex items-center space-x-1">
-                      {renderStars(filteredItems[lightboxIndex]?.rating || 5)}
-                    </div>
-                  </div>
-                  <span className="text-white/60 text-sm">
-                    {lightboxIndex + 1} of {filteredItems.length}
-                  </span>
-                </div>
-              </div>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-5xl lg:text-6xl font-black text-white mb-6">
+              Ready for Your
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"> Transformation?</span>
+            </h2>
+            <p className="text-xl text-white/70 mb-12 max-w-3xl mx-auto">
+              Experience the same level of care and attention to detail. Your car deserves the best.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a
+                href="/contact"
+                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-12 py-5 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-cyan-500/50 overflow-hidden"
+              >
+                <span className="relative z-10">Book Your Service</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </a>
+              <a
+                href="/services"
+                className="group bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-5 rounded-full font-bold text-lg border-2 border-white/30 hover:border-white/50 transition-all duration-300"
+              >
+                View All Services
+              </a>
             </div>
-          </div>
+          </motion.div>
         </div>
-      )}
+      </section>
     </div>
   );
 };

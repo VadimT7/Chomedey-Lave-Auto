@@ -290,7 +290,7 @@ const TestimonialsPage = () => {
                 className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-base sm:text-lg border-2 border-white/30 flex items-center space-x-3"
               >
                 <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
-                <span>Book Your Service</span>
+                <span>Book My Service</span>
               </a>
             </motion.div>
           </motion.div>
@@ -599,7 +599,7 @@ const TestimonialsPage = () => {
               href="/contact"
               className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-indigo-700 px-10 py-5 rounded-full font-bold text-lg"
             >
-              Book Your Service
+              Book My Service
             </a>
             <a
               href="tel:+14506860016"

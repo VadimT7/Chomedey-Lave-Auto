@@ -1043,7 +1043,7 @@ const AboutPage = () => {
               transition={{ duration: 0.2 }}
               className="btn-premium cursor-interactive bg-slate-900 hover:bg-slate-800 text-white px-12 py-6 rounded-full font-bold text-xl inline-flex items-center justify-center space-x-3 shadow-2xl"
             >
-              <span>Book Your Service</span>
+              <span>Book My Service</span>
               <ArrowRight className="h-6 w-6" />
             </motion.a>
             <motion.a

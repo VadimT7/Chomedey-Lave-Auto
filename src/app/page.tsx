@@ -18,7 +18,6 @@ import {
   Car
 } from 'lucide-react';
 import Image from 'next/image';
-import LoadingSpinner from '@/components/LoadingSpinner';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -26,7 +25,6 @@ if (typeof window !== 'undefined') {
 }
 
 const HomePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
@@ -36,15 +34,6 @@ const HomePage = () => {
   // Modal state
   const [selectedTransformation, setSelectedTransformation] = useState<number | null>(null);
   const [sliderPosition, setSliderPosition] = useState(50);
-
-  // Handle loading state
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // Show loading for 2 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleVideoLoad = () => {
     setVideoLoaded(true);
@@ -176,10 +165,6 @@ const HomePage = () => {
       });
     });
   }, []);
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
@@ -365,7 +350,7 @@ const HomePage = () => {
               className="btn-premium cursor-interactive group relative px-12 py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-full font-bold text-xl shadow-2xl shadow-cyan-500/50 flex items-center gap-3 overflow-hidden"
               aria-label="Book your car detailing service - Contact us now"
             >
-              <span className="relative z-10">Book Your Service</span>
+              <span className="relative z-10">Book My Service</span>
               <motion.div
                 className="relative z-10"
                 animate={{ x: [0, 5, 0] }}
