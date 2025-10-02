@@ -119,16 +119,19 @@ const Navigation = () => {
 
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-8 ml-8">
-            <div className={cn(
-              "flex items-center space-x-2 text-sm font-semibold group transition-colors duration-300 whitespace-nowrap",
-              isScrolled ? "text-gray-700" : "text-white/90"
-            )}>
+            <a
+              href="tel:+14506860016"
+              className={cn(
+                "flex items-center space-x-2 text-sm font-semibold group transition-colors duration-300 whitespace-nowrap cursor-pointer",
+                isScrolled ? "text-gray-700" : "text-white/90"
+              )}
+            >
               <Phone className={cn(
                 "h-4 w-4 group-hover:text-blue-600 transition-colors duration-300",
                 isScrolled ? "text-cyan-600" : "text-cyan-300"
               )} />
               <span className="group-hover:text-cyan-600 transition-colors duration-300">+1 450-686-0016</span>
-            </div>
+            </a>
             <Link
               href="/contact"
               className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-4 py-2 rounded-full font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25 overflow-hidden whitespace-nowrap"
@@ -178,10 +181,13 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="border-t border-gray-200 pt-4 mt-4">
-                <div className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-gray-700">
+                <a
+                  href="tel:+14506860016"
+                  className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-gray-700 hover:text-cyan-600 transition-colors duration-300 cursor-pointer"
+                >
                   <Phone className="h-4 w-4 text-cyan-600" />
                   <span>+1 450-686-0016</span>
-                </div>
+                </a>
                 <div className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-gray-700">
                   <MapPin className="h-4 w-4 text-cyan-600" />
                   <span>Laval, Quebec</span>

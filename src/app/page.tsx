@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -13,7 +13,6 @@ import {
   CheckCircle,
   ChevronRight,
   Quote,
-  X,
   Eye,
   Car
 } from 'lucide-react';
@@ -31,26 +30,8 @@ const HomePage = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   
-  // Modal state
-  const [selectedTransformation, setSelectedTransformation] = useState<number | null>(null);
-  const [sliderPosition, setSliderPosition] = useState(50);
-
   const handleVideoLoad = () => {
     setVideoLoaded(true);
-  };
-
-  // Modal functions
-  const openTransformationModal = (index: number) => {
-    setSelectedTransformation(index);
-    setSliderPosition(50);
-  };
-
-  const closeTransformationModal = () => {
-    setSelectedTransformation(null);
-  };
-
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderPosition(parseInt(e.target.value));
   };
 
   // Testimonials data with Montreal-style names
@@ -116,12 +97,7 @@ const HomePage = () => {
 
   const beforeAfterImages = [
     {
-      before: "/photos-before-and-after/before-car-dirty-1.jpg",
-      after: "/photos-before-and-after/after-carpet-treatment.jpg",
-      title: "Interior Transformation"
-    },
-    {
-      before: "/photos-before-and-after/before-car-dirty-2.jpg", 
+      before: "/photos-before-and-after/before-leather-treatment.jpg", 
       after: "/photos-before-and-after/after-leather-treatment.jpg",
       title: "Leather Restoration"
     },
@@ -636,7 +612,7 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {beforeAfterImages.map((item, index) => (
               <motion.div
                 key={index}
@@ -650,7 +626,6 @@ const HomePage = () => {
                 viewport={{ once: true }}
                 whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
                 className="group relative overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl shadow-2xl hover:shadow-cyan-500/30 transition-all duration-700 border border-white/20 hover:border-cyan-400/50"
-                onClick={() => openTransformationModal(index)}
               >
                 {/* Enhanced Image Container */}
                 <div className="relative h-80 overflow-hidden">
@@ -678,14 +653,14 @@ const HomePage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                   
                   {/* Before Badge */}
-                  <div className="absolute bottom-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-150">
+                  <div className="absolute bottom-4 left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:delay-0 delay-300">
                     <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       BEFORE
                     </span>
                   </div>
                   
                   {/* After Badge - Appears on Hover */}
-                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-0 group-hover:delay-300">
                     <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       AFTER
                     </span>
@@ -697,18 +672,6 @@ const HomePage = () => {
                       Hover to Reveal
                     </div>
                   </div>
-
-                  {/* Click to Expand Button */}
-                  <motion.div 
-                    className="absolute top-4 right-4"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileHover={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <button className="bg-white/20 backdrop-blur-md text-white p-2 rounded-full hover:bg-white/30 transition-colors">
-                      <Eye className="h-4 w-4" />
-                    </button>
-                  </motion.div>
                 </div>
                 
                 {/* Enhanced Content Area */}
@@ -923,99 +886,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Before/After Modal */}
-      <AnimatePresence>
-        {selectedTransformation !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={closeTransformationModal}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="relative max-w-4xl w-full max-h-[90vh] bg-white rounded-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={closeTransformationModal}
-                className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
-              >
-                <X className="h-6 w-6" />
-              </button>
-
-              {/* Modal Content */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
-                  {beforeAfterImages[selectedTransformation].title}
-                </h3>
-                
-                {/* Before/After Slider */}
-                <div className="relative w-full h-96 rounded-xl overflow-hidden">
-                  {/* Before Image */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={beforeAfterImages[selectedTransformation].before}
-                      alt="Before"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  
-                  {/* After Image with Slider */}
-                  <div 
-                    className="absolute inset-0 overflow-hidden"
-                    style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-                  >
-                    <Image
-                      src={beforeAfterImages[selectedTransformation].after}
-                      alt="After"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  
-                  {/* Slider Line */}
-                  <div 
-                    className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-10"
-                    style={{ left: `${sliderPosition}%` }}
-                  >
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Slider Input */}
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={sliderPosition}
-                    onChange={handleSliderChange}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
-                  />
-                  
-                  {/* Labels */}
-                  <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    Before
-                  </div>
-                  <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    After
-                  </div>
-                </div>
-                
-                <p className="text-gray-600 text-center mt-4">
-                  Drag the slider to compare before and after results
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
