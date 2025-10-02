@@ -308,9 +308,9 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: 80, rotateX: 20 }}
             whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ 
-              duration: 1.2, 
+              duration: 0.6, 
               ease: [0.25, 0.46, 0.45, 0.94],
-              rotateX: { duration: 1.5, ease: "easeOut" }
+              rotateX: { duration: 0.7, ease: "easeOut" }
             }}
             viewport={{ once: true }}
           >
@@ -319,10 +319,11 @@ const ContactPage = () => {
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.2,
+                duration: 0.5, 
+                delay: 0.1,
                 ease: [0.34, 1.56, 0.64, 1]
               }}
+              viewport={{ once: true }}
               whileHover={{ 
                 scale: 1.1, 
                 rotate: 5,
@@ -332,7 +333,8 @@ const ContactPage = () => {
               <motion.div
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                transition={{ delay: 0.2, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                viewport={{ once: true }}
               >
                 <Phone className="h-12 w-12 text-white" />
               </motion.div>
@@ -343,23 +345,26 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 1.0, 
-                delay: 0.3,
+                duration: 0.5, 
+                delay: 0.15,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               <motion.span
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+                transition={{ delay: 0.25, duration: 0.5 }}
+                viewport={{ once: true }}
               >
                 Call Us
               </motion.span>{' '}
               <motion.span
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
+                transition={{ delay: 0.35, duration: 0.5 }}
                 className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+                viewport={{ once: true }}
               >
                 Now
               </motion.span>
@@ -370,10 +375,11 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.6,
+                duration: 0.5, 
+                delay: 0.3,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               Ready to transform your vehicle? Get in touch with us today for immediate assistance.
             </motion.p>
@@ -383,10 +389,11 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 50, scale: 0.8, rotateX: 30 }}
               whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.8,
+                duration: 0.5, 
+                delay: 0.4,
                 ease: [0.34, 1.56, 0.64, 1]
               }}
+              viewport={{ once: true }}
               whileHover={{ 
                 scale: 1.08, 
                 y: -8,
@@ -411,7 +418,8 @@ const ContactPage = () => {
               <motion.div
                 initial={{ scale: 0, rotate: -90 }}
                 whileInView={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 1.0, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                transition={{ delay: 0.5, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                viewport={{ once: true }}
               >
                 <Phone className="h-6 w-6 relative z-10" />
               </motion.div>
@@ -419,7 +427,8 @@ const ContactPage = () => {
                 className="relative z-10"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2, duration: 0.6 }}
+                transition={{ delay: 0.6, duration: 0.4 }}
+                viewport={{ once: true }}
               >
                 +1 450-686-0016
               </motion.span>
@@ -460,9 +469,9 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: 60, rotateX: 15 }}
             whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ 
-              duration: 1.0, 
+              duration: 0.5, 
               ease: [0.25, 0.46, 0.45, 0.94],
-              rotateX: { duration: 1.2, ease: "easeOut" }
+              rotateX: { duration: 0.6, ease: "easeOut" }
             }}
             viewport={{ once: true }}
             className="text-center mb-16"
@@ -472,10 +481,11 @@ const ContactPage = () => {
               initial={{ scale: 0, rotate: -90 }}
               whileInView={{ scale: 1, rotate: 0 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.2,
+                duration: 0.5, 
+                delay: 0.1,
                 ease: [0.34, 1.56, 0.64, 1]
               }}
+              viewport={{ once: true }}
               whileHover={{ 
                 scale: 1.1, 
                 rotate: 10,
@@ -485,7 +495,8 @@ const ContactPage = () => {
               <motion.div
                 initial={{ scale: 0, rotate: 180 }}
                 whileInView={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.4, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                transition={{ delay: 0.2, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                viewport={{ once: true }}
               >
                 <Clock className="h-12 w-12 text-cyan-600" />
               </motion.div>
@@ -496,23 +507,26 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 40, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.3,
+                duration: 0.5, 
+                delay: 0.15,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               <motion.span
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+                transition={{ delay: 0.25, duration: 0.4 }}
+                viewport={{ once: true }}
               >
                 Operating
               </motion.span>{' '}
               <motion.span
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7, duration: 0.6 }}
+                transition={{ delay: 0.35, duration: 0.4 }}
                 className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
+                viewport={{ once: true }}
               >
                 Hours
               </motion.span>
@@ -523,10 +537,11 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 0.6, 
-                delay: 0.6,
+                duration: 0.4, 
+                delay: 0.3,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               We're here to serve you with premium car care services
             </motion.p>
@@ -536,10 +551,10 @@ const ContactPage = () => {
             initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
             whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ 
-              duration: 1.0, 
-              delay: 0.4, 
+              duration: 0.5, 
+              delay: 0.2, 
               ease: [0.25, 0.46, 0.45, 0.94],
-              rotateY: { duration: 1.2, ease: "easeOut" }
+              rotateY: { duration: 0.6, ease: "easeOut" }
             }}
             viewport={{ once: true }}
             whileHover={{ y: -5, scale: 1.02 }}
@@ -571,10 +586,11 @@ const ContactPage = () => {
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ 
-                      duration: 0.6, 
-                      delay: 0.6 + index * 0.1,
+                      duration: 0.4, 
+                      delay: 0.3 + index * 0.05,
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
+                    viewport={{ once: true }}
                     whileHover={{ x: 5, scale: 1.02 }}
                   >
                     <span className="text-lg font-semibold text-gray-900">{schedule.day}</span>
@@ -593,10 +609,11 @@ const ContactPage = () => {
                 initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: 0.8,
+                  duration: 0.5, 
+                  delay: 0.4,
                   ease: [0.34, 1.56, 0.64, 1]
                 }}
+                viewport={{ once: true }}
               >
                 <div className="text-center flex flex-col items-center justify-center h-full">
                   <motion.div 
@@ -622,7 +639,8 @@ const ContactPage = () => {
                     <motion.div
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      transition={{ delay: 1.0, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                      transition={{ delay: 0.5, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                      viewport={{ once: true }}
                     >
                       <Clock className="h-10 w-10 text-green-600" />
                     </motion.div>
@@ -631,7 +649,8 @@ const ContactPage = () => {
                     className="text-lg font-semibold text-gray-900 mb-2"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2, duration: 0.6 }}
+                    transition={{ delay: 0.6, duration: 0.4 }}
+                    viewport={{ once: true }}
                   >
                     Currently Open
                   </motion.p>
@@ -639,7 +658,8 @@ const ContactPage = () => {
                     className="text-sm text-gray-600"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.4, duration: 0.6 }}
+                    transition={{ delay: 0.7, duration: 0.4 }}
+                    viewport={{ once: true }}
                   >
                     We respond quickly to all inquiries
                   </motion.p>
@@ -683,9 +703,9 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: 60, rotateX: 20 }}
             whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ 
-              duration: 1.0, 
+              duration: 0.5, 
               ease: [0.25, 0.46, 0.45, 0.94],
-              rotateX: { duration: 1.2, ease: "easeOut" }
+              rotateX: { duration: 0.6, ease: "easeOut" }
             }}
             viewport={{ once: true }}
             className="text-center mb-16"
@@ -695,23 +715,26 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 40, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.2,
+                duration: 0.5, 
+                delay: 0.1,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               <motion.span
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+                viewport={{ once: true }}
               >
                 Find Us
               </motion.span>{' '}
               <motion.span
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
                 className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
+                viewport={{ once: true }}
               >
                 Here
               </motion.span>
@@ -722,10 +745,11 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 0.6, 
-                delay: 0.5,
+                duration: 0.4, 
+                delay: 0.25,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
+              viewport={{ once: true }}
             >
               Interactive Map
             </motion.p>
@@ -735,10 +759,10 @@ const ContactPage = () => {
             initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
             whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ 
-              duration: 1.0, 
-              delay: 0.3, 
+              duration: 0.5, 
+              delay: 0.15, 
               ease: [0.25, 0.46, 0.45, 0.94],
-              rotateY: { duration: 1.2, ease: "easeOut" }
+              rotateY: { duration: 0.6, ease: "easeOut" }
             }}
             viewport={{ once: true }}
             whileHover={{ y: -10, scale: 1.02 }}
@@ -814,9 +838,9 @@ const ContactPage = () => {
             initial={{ opacity: 0, y: 70, rotateX: 25 }}
             whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ 
-              duration: 1.2, 
+              duration: 0.6, 
               ease: [0.25, 0.46, 0.45, 0.94],
-              rotateX: { duration: 1.5, ease: "easeOut" }
+              rotateX: { duration: 0.7, ease: "easeOut" }
             }}
             viewport={{ once: true }}
             className="text-center mb-16"
@@ -826,8 +850,8 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 1.0, 
-                delay: 0.2,
+                duration: 0.5, 
+                delay: 0.1,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
               viewport={{ once: true }}
@@ -835,7 +859,7 @@ const ContactPage = () => {
               <motion.span
                 initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
                 viewport={{ once: true }}
               >
                 What Our
@@ -843,7 +867,7 @@ const ContactPage = () => {
               <motion.span
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
                 viewport={{ once: true }}
               >
@@ -856,8 +880,8 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                duration: 0.8, 
-                delay: 0.5,
+                duration: 0.5, 
+                delay: 0.25,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
               viewport={{ once: true }}
@@ -910,10 +934,10 @@ const ContactPage = () => {
                 initial={{ opacity: 0, y: 80, scale: 0.8, rotateX: 30 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
+                  duration: 0.5, 
+                  delay: index * 0.08,
                   ease: [0.25, 0.46, 0.45, 0.94],
-                  rotateX: { duration: 1.0, ease: "easeOut" }
+                  rotateX: { duration: 0.6, ease: "easeOut" }
                 }}
                 viewport={{ once: true, amount: 0.3 }}
                 whileHover={{ 
@@ -942,8 +966,8 @@ const ContactPage = () => {
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   transition={{ 
-                    duration: 0.6, 
-                    delay: 0.3 + index * 0.1,
+                    duration: 0.4, 
+                    delay: 0.15 + index * 0.05,
                     ease: [0.34, 1.56, 0.64, 1]
                   }}
                   viewport={{ once: true }}
@@ -957,7 +981,7 @@ const ContactPage = () => {
                     className="text-white font-bold text-xl"
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
+                    transition={{ delay: 0.25 + index * 0.05, duration: 0.3 }}
                     viewport={{ once: true }}
                   >
                     {testimonial.name.charAt(0)}
@@ -968,7 +992,7 @@ const ContactPage = () => {
                   className="flex justify-center mb-4 relative z-10"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                  transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
                   viewport={{ once: true }}
                 >
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -977,8 +1001,8 @@ const ContactPage = () => {
                       initial={{ scale: 0, rotate: -90 }}
                       whileInView={{ scale: 1, rotate: 0 }}
                       transition={{ 
-                        delay: 0.6 + index * 0.1 + i * 0.1, 
-                        duration: 0.4,
+                        delay: 0.3 + index * 0.05 + i * 0.05, 
+                        duration: 0.3,
                         ease: [0.34, 1.56, 0.64, 1]
                       }}
                       viewport={{ once: true }}
@@ -992,7 +1016,7 @@ const ContactPage = () => {
                   className="text-gray-200 text-lg leading-relaxed mb-6 relative z-10"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                  transition={{ delay: 0.25 + index * 0.05, duration: 0.4 }}
                   viewport={{ once: true }}
                 >
                   "{testimonial.text}"
@@ -1002,7 +1026,7 @@ const ContactPage = () => {
                   className="text-white font-semibold text-lg relative z-10"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                  transition={{ delay: 0.3 + index * 0.05, duration: 0.4 }}
                   viewport={{ once: true }}
                 >
                   {testimonial.name}
