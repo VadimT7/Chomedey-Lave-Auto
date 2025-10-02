@@ -43,8 +43,8 @@ const ServicesPage = () => {
       icon: Car,
       color: 'from-blue-500 to-cyan-500',
       duration: '30-45 min',
-          price: '$25',
-          originalPrice: '$35',
+          price: 'From $15',
+          priceDetails: 'Car: $15 | SUV: $17 | Truck: $20',
           rating: 5,
           popular: false,
       features: [
@@ -64,8 +64,8 @@ const ServicesPage = () => {
           icon: Sparkles,
           color: 'from-purple-500 to-pink-500',
           duration: '45-60 min',
-          price: '$35',
-          originalPrice: '$45',
+          price: 'From $26',
+          priceDetails: 'Car: $26 | SUV: $28 | Truck: $30',
           rating: 5,
           popular: true,
           features: [
@@ -85,8 +85,8 @@ const ServicesPage = () => {
           icon: Wrench,
           color: 'from-slate-500 to-gray-500',
           duration: '45-60 min',
-          price: '$40',
-          originalPrice: '$50',
+          price: 'From $25',
+          priceDetails: 'Car: $25 | SUV: $30 | Truck: $30',
           rating: 5,
           popular: false,
           features: [
@@ -116,8 +116,8 @@ const ServicesPage = () => {
       icon: Sparkles,
       color: 'from-purple-500 to-pink-500',
           duration: '90-120 min',
-          price: '$85',
-          originalPrice: '$120',
+          price: 'From $100',
+          priceDetails: 'Car: $100 | SUV: $120 | Truck: $140',
           rating: 5,
           popular: true,
       features: [
@@ -137,8 +137,8 @@ const ServicesPage = () => {
       icon: Droplets,
       color: 'from-orange-500 to-red-500',
       duration: '90-120 min',
-          price: '$95',
-          originalPrice: '$130',
+          price: 'From $70',
+          priceDetails: 'Car: $70 | SUV: $80 | Truck: $80',
           rating: 5,
           popular: false,
       features: [
@@ -158,8 +158,9 @@ const ServicesPage = () => {
           icon: Crown,
       color: 'from-yellow-500 to-orange-500',
       duration: '4-6 hours',
-          price: '$199',
-          originalPrice: '$299',
+          price: 'Call for Price',
+          priceDetails: 'Custom pricing based on vehicle condition and size',
+          phoneNumber: '+14506860016',
           rating: 5,
           popular: true,
       features: [
@@ -183,25 +184,25 @@ const ServicesPage = () => {
       bgGradient: 'from-emerald-50 via-teal-50 to-emerald-50',
       services: [
         {
-          id: 'ceramic-coating',
-          title: 'Ceramic Coating',
-          description: 'Long-lasting protection with advanced ceramic coating technology',
+          id: 'anti-rust',
+          title: 'Anti-Rust Protection',
+          description: 'Professional rust protection treatment for long-lasting vehicle preservation',
           icon: Shield,
           color: 'from-emerald-500 to-teal-500',
-          duration: '3-4 hours',
-          price: '$399',
-          originalPrice: '$599',
+          duration: '2-3 hours',
+          price: 'From $95',
+          priceDetails: 'Car: $95 | SUV: $105 | Truck: $105',
           rating: 5,
           popular: true,
           features: [
-            'Paint correction and preparation',
-            'Professional ceramic coating',
-            'UV and chemical protection',
-            'Easy maintenance for 2+ years',
-            'Enhanced gloss and shine',
-            'Warranty included'
+            'Complete undercarriage treatment',
+            'Rust prevention coating',
+            'Cavity protection spray',
+            'Long-lasting formula',
+            'Protection against salt and moisture',
+            'Annual maintenance available'
           ],
-          image: '/Others/ceramic-coating.jpeg'
+          image: '/Others/anti-rust.jpeg'
         },
         {
           id: 'paint-correction',
@@ -210,8 +211,9 @@ const ServicesPage = () => {
           icon: Zap,
           color: 'from-indigo-500 to-purple-500',
           duration: '4-6 hours',
-          price: '$299',
-          originalPrice: '$399',
+          price: 'Call for Estimate',
+          priceDetails: 'Pricing varies based on paint condition',
+          phoneNumber: '+14506860016',
           rating: 5,
           popular: false,
           features: [
@@ -222,7 +224,7 @@ const ServicesPage = () => {
             'Protection application',
             'Showroom finish'
           ],
-          image: '/Others/paint-correction.jpeg'
+          image: '/Others/wax-and-polish.jpeg'
         },
         {
           id: 'leather-restoration',
@@ -231,8 +233,9 @@ const ServicesPage = () => {
           icon: Heart,
           color: 'from-rose-500 to-pink-500',
           duration: '2-3 hours',
-          price: '$149',
-          originalPrice: '$199',
+          price: 'Call for Price',
+          priceDetails: 'Custom pricing based on leather condition',
+          phoneNumber: '+14506860016',
           rating: 5,
           popular: false,
           features: [
@@ -682,12 +685,22 @@ const ServicesPage = () => {
 
                             {/* Pricing */}
                             <div className="mb-6">
-                              <div className="flex items-center space-x-3 mb-2">
-                                <span className="text-3xl font-black text-white">{service.price}</span>
-                                {service.originalPrice && (
-                                  <span className="text-lg text-gray-400 line-through">{service.originalPrice}</span>
+                              <div className="mb-2">
+                                {service.phoneNumber ? (
+                                  <a 
+                                    href={`tel:${service.phoneNumber}`}
+                                    className="inline-flex items-center space-x-2 text-2xl font-black text-white hover:text-cyan-300 transition-colors bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg border-2 border-cyan-400/50 hover:border-cyan-300 group"
+                                  >
+                                    <Phone className="h-5 w-5 group-hover:animate-pulse" />
+                                    <span>{service.price}</span>
+                                  </a>
+                                ) : (
+                                  <span className="text-3xl font-black text-white">{service.price}</span>
                                 )}
                               </div>
+                              {service.priceDetails && (
+                                <p className="text-sm text-gray-400 mb-3">{service.priceDetails}</p>
+                              )}
                               <div className="flex items-center space-x-4 text-sm text-gray-400">
                                 <div className="flex items-center space-x-1">
                                   <Clock className="h-4 w-4" />
