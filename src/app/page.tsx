@@ -176,7 +176,7 @@ const HomePage = () => {
       <section 
         ref={heroRef}
         id="main-content"
-        className="relative h-[110vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-0"
+        className="relative h-[110vh] flex items-center justify-center overflow-hidden pt-[calc(64px+env(safe-area-inset-top))] sm:pt-0"
         aria-label="Hero section"
       >
         {/* Enhanced Animated Background */}

@@ -191,7 +191,7 @@ const GalleryPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-0"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-[calc(64px+env(safe-area-inset-top))] sm:pt-0"
       >
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
