@@ -139,7 +139,7 @@ const ContactPage = () => {
                 delay: 0.6,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black font-display text-white mb-8 leading-tight tracking-tight uppercase"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-display text-white mb-8 leading-tight tracking-tight uppercase"
             >
               <motion.span
                 initial={{ opacity: 0, x: -100 }}
@@ -166,7 +166,7 @@ const ContactPage = () => {
                 delay: 1.2,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12 font-light tracking-wide"
+              className="text-base sm:text-lg lg:text-xl xl:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12 font-light tracking-wide px-4"
             >
               Ready to transform your vehicle? Get in touch with us today. We're here to answer 
               your questions and help you choose the perfect service for your car.
@@ -216,7 +216,7 @@ const ContactPage = () => {
                     ease: "easeInOut" 
                   }
                 }}
-                className="btn-premium cursor-interactive bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white px-12 py-6 rounded-full font-bold text-lg inline-flex items-center justify-center space-x-3 shadow-2xl border-2 border-red-400/30 relative overflow-hidden"
+                className="btn-premium cursor-interactive bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-base sm:text-lg inline-flex items-center justify-center space-x-3 shadow-2xl border-2 border-red-400/30 relative overflow-hidden"
                 style={{
                   boxShadow: "0 0 20px rgba(255, 0, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1)"
                 }}
@@ -240,7 +240,7 @@ const ContactPage = () => {
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 1.8, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
                 >
-                  <Phone className="h-6 w-6 relative z-10" />
+                  <Phone className="h-5 w-5 sm:h-6 sm:w-6 relative z-10" />
                 </motion.div>
                 <motion.span 
                   className="relative z-10"
@@ -277,7 +277,7 @@ const ContactPage = () => {
       </motion.section>
 
       {/* Call Us Now Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 15 }).map((_, i) => (
@@ -315,7 +315,7 @@ const ContactPage = () => {
             viewport={{ once: true }}
           >
             <motion.div 
-              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl mb-8"
+              className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl mb-6 sm:mb-8"
               initial={{ scale: 0, rotate: -180 }}
               whileInView={{ scale: 1, rotate: 0 }}
               transition={{ 
@@ -341,7 +341,7 @@ const ContactPage = () => {
             </motion.div>
             
             <motion.h2 
-              className="text-4xl lg:text-5xl font-black text-white mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6"
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -371,7 +371,7 @@ const ContactPage = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -401,7 +401,7 @@ const ContactPage = () => {
                 boxShadow: "0 30px 60px -12px rgba(6, 182, 212, 0.6)"
               }}
               whileTap={{ scale: 0.95, rotateX: 5 }}
-              className="btn-premium cursor-interactive inline-flex items-center space-x-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-12 py-6 rounded-full font-bold text-xl shadow-2xl relative overflow-hidden"
+              className="btn-premium cursor-interactive inline-flex items-center space-x-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full font-bold text-lg sm:text-xl shadow-2xl relative overflow-hidden"
             >
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full"
@@ -421,7 +421,7 @@ const ContactPage = () => {
                 transition={{ delay: 0.5, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
                 viewport={{ once: true }}
               >
-                <Phone className="h-6 w-6 relative z-10" />
+                <Phone className="h-5 w-5 sm:h-6 sm:w-6 relative z-10" />
               </motion.div>
               <motion.span 
                 className="relative z-10"
@@ -438,7 +438,7 @@ const ContactPage = () => {
       </section>
 
       {/* Business Hours Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
         {/* Subtle Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           {Array.from({ length: 20 }).map((_, i) => (
@@ -503,7 +503,7 @@ const ContactPage = () => {
             </motion.div>
             
             <motion.h2 
-              className="text-4xl lg:text-5xl font-black text-gray-900 mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-6"
               initial={{ opacity: 0, y: 40, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -533,7 +533,7 @@ const ContactPage = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-xl text-gray-600 max-w-2xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -558,7 +558,7 @@ const ContactPage = () => {
             }}
             viewport={{ once: true }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="card-premium bg-white rounded-3xl p-10 shadow-xl border border-gray-100 relative overflow-hidden"
+            className="card-premium bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl border border-gray-100 relative overflow-hidden"
           >
             {/* Animated Background Glow */}
             <motion.div
@@ -582,7 +582,7 @@ const ContactPage = () => {
                 ].map((schedule, index) => (
                   <motion.div 
                     key={schedule.day}
-                    className="flex items-center justify-between py-4 border-b border-gray-100"
+                    className="flex items-center justify-between py-3 sm:py-4 border-b border-gray-100 space-x-2"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ 
@@ -593,9 +593,9 @@ const ContactPage = () => {
                     viewport={{ once: true }}
                     whileHover={{ x: 5, scale: 1.02 }}
                   >
-                    <span className="text-lg font-semibold text-gray-900">{schedule.day}</span>
+                    <span className="text-base sm:text-lg font-semibold text-gray-900">{schedule.day}</span>
                     <motion.span 
-                      className="text-lg font-bold text-cyan-600"
+                      className="text-base sm:text-lg font-bold text-cyan-600"
                       whileHover={{ scale: 1.1, color: "#0891b2" }}
                     >
                       {schedule.time}
@@ -646,7 +646,7 @@ const ContactPage = () => {
                     </motion.div>
                   </motion.div>
                   <motion.p 
-                    className="text-lg font-semibold text-gray-900 mb-2"
+                    className="text-base sm:text-lg font-semibold text-gray-900 mb-2"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, duration: 0.4 }}
@@ -655,7 +655,7 @@ const ContactPage = () => {
                     Currently Open
                   </motion.p>
                   <motion.p 
-                    className="text-sm text-gray-600"
+                    className="text-xs sm:text-sm text-gray-600"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7, duration: 0.4 }}
@@ -671,7 +671,7 @@ const ContactPage = () => {
       </section>
 
       {/* Interactive Map Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 12 }).map((_, i) => (
@@ -711,7 +711,7 @@ const ContactPage = () => {
             className="text-center mb-16"
           >
             <motion.h2 
-              className="text-4xl lg:text-5xl font-black text-gray-900 mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-6"
               initial={{ opacity: 0, y: 40, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -741,7 +741,7 @@ const ContactPage = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-xl text-gray-600 max-w-2xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -779,12 +779,12 @@ const ContactPage = () => {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.1234567890!2d-73.7123456!3d45.6123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a1234567890%3A0x1234567890abcdef!2s3987%20Av.%20de%20la%20Renaissance%2C%20Laval%2C%20QC%20H7L%203X2%2C%20Canada!5e0!3m2!1sen!2sca!4v1234567890123!5m2!1sen!2sca"
                 width="100%"
-                height="500"
+                height="350"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-[500px]"
+                className="w-full h-[350px] sm:h-[450px] lg:h-[500px]"
                 title="Chomedey Lave-Auto Location"
               />
               
@@ -807,7 +807,7 @@ const ContactPage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 25 }).map((_, i) => (
@@ -846,7 +846,7 @@ const ContactPage = () => {
             className="text-center mb-16"
           >
             <motion.h2 
-              className="text-4xl lg:text-5xl font-black text-white mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6"
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -876,7 +876,7 @@ const ContactPage = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-xl text-gray-300 max-w-2xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -946,7 +946,7 @@ const ContactPage = () => {
                   rotateX: -5,
                   boxShadow: "0 25px 50px -12px rgba(255, 255, 255, 0.1)"
                 }}
-                className="card-premium cursor-interactive bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/20 text-center relative overflow-hidden"
+                className="card-premium cursor-interactive bg-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 shadow-xl border border-white/20 text-center relative overflow-hidden"
               >
                 {/* Animated Background Glow */}
                 <motion.div
@@ -1013,7 +1013,7 @@ const ContactPage = () => {
                 </motion.div>
                 
                 <motion.p 
-                  className="text-gray-200 text-lg leading-relaxed mb-6 relative z-10"
+                  className="text-gray-200 text-base sm:text-lg leading-relaxed mb-6 relative z-10"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.25 + index * 0.05, duration: 0.4 }}
@@ -1023,7 +1023,7 @@ const ContactPage = () => {
                 </motion.p>
                 
                 <motion.p 
-                  className="text-white font-semibold text-lg relative z-10"
+                  className="text-white font-semibold text-base sm:text-lg relative z-10"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.05, duration: 0.4 }}

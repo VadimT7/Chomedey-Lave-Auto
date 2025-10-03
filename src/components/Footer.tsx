@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Car className="h-8 w-8 text-primary-400" />
               <div>
-                <h3 className="text-xl font-bold font-display">Chomedey Lave-Auto</h3>
+                <h3 className="text-lg sm:text-xl font-bold font-display">Chomedey Lave-Auto</h3>
                 <p className="text-sm text-gray-400">Professional Car Care</p>
               </div>
             </div>
@@ -48,7 +48,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold font-display">Quick Links</h4>
+            <h4 className="text-base sm:text-lg font-semibold font-display">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-300 hover:text-primary-400 transition-colors text-sm">
@@ -85,7 +85,7 @@ const Footer = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold font-display">Our Services</h4>
+            <h4 className="text-base sm:text-lg font-semibold font-display">Our Services</h4>
             <ul className="space-y-2">
               <li className="text-gray-300 text-sm">Exterior Car Wash</li>
               <li className="text-gray-300 text-sm">Interior Detailing</li>
@@ -98,7 +98,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold font-display">Contact Info</h4>
+            <h4 className="text-base sm:text-lg font-semibold font-display">Contact Info</h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-primary-400 flex-shrink-0" />
@@ -113,7 +113,7 @@ const Footer = () => {
                 <Mail className="h-4 w-4 text-primary-400 flex-shrink-0" />
                 <a
                   href="mailto:info@laveautochomedey.com"
-                  className="text-gray-300 hover:text-primary-400 transition-colors text-sm"
+                  className="text-gray-300 hover:text-primary-400 transition-colors text-sm break-all"
                 >
                   info@laveautochomedey.com
                 </a>
@@ -141,7 +141,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
               © 2024 Chomedey Lave-Auto. All rights reserved.

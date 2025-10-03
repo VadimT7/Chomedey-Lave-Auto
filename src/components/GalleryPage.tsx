@@ -74,7 +74,7 @@ const BeforeAfterSlider = ({ before, after, title, description }: { before: stri
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />
-          <div className="absolute top-6 right-6 bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-emerald-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs font-bold shadow-lg">
             AFTER
           </div>
         </div>
@@ -92,7 +92,7 @@ const BeforeAfterSlider = ({ before, after, title, description }: { before: stri
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />
-          <div className="absolute top-6 left-6 bg-red-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-red-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs font-bold shadow-lg">
             BEFORE
           </div>
         </div>
@@ -108,9 +108,9 @@ const BeforeAfterSlider = ({ before, after, title, description }: { before: stri
         </div>
 
         {/* Info Overlay - Always visible */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-8">
-          <h3 className="text-white font-bold text-2xl mb-2">{title}</h3>
-          <p className="text-white/80 text-sm">{description}</p>
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 sm:p-6 lg:p-8">
+          <h3 className="text-white font-bold text-lg sm:text-xl lg:text-2xl mb-2">{title}</h3>
+          <p className="text-white/80 text-xs sm:text-sm">{description}</p>
         </div>
       </div>
     </motion.div>
@@ -145,9 +145,9 @@ const VideoShowcase = ({ videoSrc, title, isPrimary = false }: { videoSrc: strin
       {/* Gradient Overlay Top */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent pointer-events-none" />
 
-      {/* Title - At the top with beautiful styling, hide on hover */}
-      <div className={`absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/80 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
-        <h3 className="text-white font-bold text-lg lg:text-xl tracking-tight leading-tight" style={{
+      {/* Title - At the bottom with beautiful styling, hide on hover */}
+      <div className={`absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
+        <h3 className="text-white font-bold text-base sm:text-lg lg:text-xl tracking-tight leading-tight" style={{
           textShadow: '0 6px 16px rgba(0, 0, 0, 0.9), 0 3px 8px rgba(0, 0, 0, 0.7), 0 10px 32px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 1)'
         }}>
           {title}
@@ -155,12 +155,12 @@ const VideoShowcase = ({ videoSrc, title, isPrimary = false }: { videoSrc: strin
       </div>
 
       {/* Premium Badge */}
-      {isPrimary && (
-        <div className="absolute top-6 right-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1">
-          <Sparkles className="h-3 w-3" />
-          <span>PREMIUM</span>
-        </div>
-      )}
+          {isPrimary && (
+            <div className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1 z-10">
+              <Sparkles className="h-3 w-3" />
+              <span>PREMIUM</span>
+            </div>
+          )}
     </motion.div>
   );
 };
@@ -187,11 +187,11 @@ const GalleryPage = () => {
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-0"
       >
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
@@ -234,12 +234,12 @@ const GalleryPage = () => {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full text-base font-semibold mb-8 border border-white/20"
+              className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-xl text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full text-sm sm:text-base font-semibold mb-6 sm:mb-8 border border-white/20"
           >
             <Sparkles className="h-5 w-5 text-cyan-400" />
             <span>Transformation Gallery</span>
@@ -249,7 +249,7 @@ const GalleryPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-6xl sm:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight"
+            className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-6 sm:mb-8 leading-tight"
           >
             Where Magic
             <br />
@@ -262,7 +262,7 @@ const GalleryPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl lg:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4"
           >
             Witness the extraordinary transformations that have made us the premier 
             choice for luxury car care. Every detail, perfected.
@@ -273,7 +273,7 @@ const GalleryPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16"
           >
             {[
               { icon: Award, number: '5,000+', label: 'Transformations' },
@@ -288,11 +288,11 @@ const GalleryPage = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-6 lg:p-8"
                 >
-                  <IconComponent className="h-10 w-10 text-cyan-400 mx-auto mb-3" />
-                  <div className="text-3xl font-black text-white mb-2">{stat.number}</div>
-                  <div className="text-sm text-white/70">{stat.label}</div>
+                  <IconComponent className="h-8 w-8 sm:h-10 sm:w-10 text-cyan-400 mx-auto mb-2 sm:mb-3" />
+                  <div className="text-2xl sm:text-3xl font-black text-white mb-1 sm:mb-2">{stat.number}</div>
+                  <div className="text-xs sm:text-sm text-white/70">{stat.label}</div>
                 </motion.div>
               );
             })}
@@ -325,7 +325,7 @@ const GalleryPage = () => {
       </motion.section>
 
       {/* Main Gallery Section */}
-      <section className="relative py-32 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden">
+      <section className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -343,30 +343,30 @@ const GalleryPage = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-24 px-4"
           >
-            <h2 className="text-5xl lg:text-6xl font-black text-white mb-6">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 px-4">
               Before & After
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"> Showcase</span>
             </h2>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto px-4">
               Drag the slider to reveal the stunning transformations. Every detail matters.
             </p>
           </motion.div>
 
           {/* Asymmetric Masonry Layout */}
-          <div className="space-y-20 max-w-[1400px] mx-auto px-4 lg:px-6">
+          <div className="space-y-12 sm:space-y-16 lg:space-y-20 max-w-[1400px] mx-auto px-4 lg:px-6">
             {/* Row 1: Two Large Transformations */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
               {/* Carpet Transformation */}
               <motion.div
                 initial={{ opacity: 0, x: -100, rotate: -5 }}
                 whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ 
-                  duration: 1.618,
+                  duration: 0.5,
                   type: "spring",
                   bounce: 0.2
                 }}
-                className="h-[500px] lg:h-[700px]"
+                className="h-[400px] sm:h-[500px] lg:h-[700px]"
               >
                 <BeforeAfterSlider
                   before={transformations[0].before}
@@ -382,12 +382,12 @@ const GalleryPage = () => {
                 whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ 
-                  duration: 1.618,
+                  duration: 0.5,
                   type: "spring",
                   bounce: 0.2,
-                  delay: 0.618
+                  delay: 0.2
                 }}
-                className="h-[500px] lg:h-[700px]"
+                className="h-[400px] sm:h-[500px] lg:h-[700px]"
               >
                 <BeforeAfterSlider
                   before={transformations[1].before}
@@ -404,7 +404,7 @@ const GalleryPage = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 1.618,
+                duration: 0.6,
                 ease: [0.22, 1, 0.36, 1]
               }}
               className="relative py-16"
@@ -413,17 +413,17 @@ const GalleryPage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-emerald-500/10 blur-3xl" />
               
               {/* Title */}
-              <div className="text-center mb-12 px-4">
+              <div className="text-center mb-8 sm:mb-12 px-4">
                 <motion.h3
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 0.618
+                    delay: 0.2
                   }}
-                  className="text-4xl lg:text-5xl font-black text-white mb-4"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3 sm:mb-4 px-2 sm:px-0"
                 >
                   The <span className="bg-gradient-to-r from-red-400 via-amber-400 to-emerald-400 bg-clip-text text-transparent">Ultimate</span> Transformation
                 </motion.h3>
@@ -431,7 +431,7 @@ const GalleryPage = () => {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1.618, delay: 1.236 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
                   className="text-lg text-white/70"
                 >
                   Watch the magic unfold from start to finish
@@ -446,9 +446,9 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 1.618
+                    delay: 0.4
                   }}
                   className="lg:col-span-5 h-[600px] lg:h-[700px]"
                 >
@@ -465,11 +465,11 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 2.236
+                    delay: 0.5
                   }}
-                  className="lg:col-span-2 flex items-center justify-center py-8 lg:py-0"
+                  className="lg:col-span-2 flex items-center justify-center py-6 sm:py-8 lg:py-0"
                 >
                   <div className="relative flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-4">
                     {/* Single Sleek Animated Arrow */}
@@ -479,7 +479,7 @@ const GalleryPage = () => {
                         opacity: [0.5, 1, 0.5],
                       }}
                       transition={{ 
-                        duration: 3.236,
+                        duration: 1.5,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -512,9 +512,9 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 1.618
+                    delay: 0.4
                   }}
                   className="lg:col-span-5 h-[600px] lg:h-[700px]"
                 >
@@ -533,7 +533,7 @@ const GalleryPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 1.618,
+                duration: 0.6,
                 ease: [0.22, 1, 0.36, 1]
               }}
               className="relative py-16"
@@ -542,17 +542,17 @@ const GalleryPage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-blue-500/10 blur-3xl" />
               
               {/* Title */}
-              <div className="text-center mb-12 px-4">
+              <div className="text-center mb-8 sm:mb-12 px-4">
                 <motion.h3
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 0.618
+                    delay: 0.2
                   }}
-                  className="text-4xl lg:text-5xl font-black text-white mb-4"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3 sm:mb-4 px-2 sm:px-0"
                 >
                   Interior <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Deep Clean</span> Transformation
                 </motion.h3>
@@ -560,7 +560,7 @@ const GalleryPage = () => {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1.618, delay: 1.236 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
                   className="text-lg text-white/70"
                 >
                   From neglected to immaculate
@@ -575,9 +575,9 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 1.618
+                    delay: 0.4
                   }}
                   className="lg:col-span-5 h-[600px] lg:h-[700px]"
                 >
@@ -597,7 +597,7 @@ const GalleryPage = () => {
                     duration: 1.618,
                     delay: 2.236
                   }}
-                  className="lg:col-span-2 flex items-center justify-center py-8 lg:py-0"
+                  className="lg:col-span-2 flex items-center justify-center py-6 sm:py-8 lg:py-0"
                 >
                   <div className="relative flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-4">
                     {/* Single Sleek Animated Arrow */}
@@ -607,7 +607,7 @@ const GalleryPage = () => {
                         opacity: [0.5, 1, 0.5],
                       }}
                       transition={{
-                        duration: 3.236,
+                        duration: 1.5,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -640,9 +640,9 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 1.618
+                    delay: 0.4
                   }}
                   className="lg:col-span-5 h-[600px] lg:h-[700px]"
                 >
@@ -661,7 +661,7 @@ const GalleryPage = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 1.618,
+                duration: 0.6,
                 ease: [0.22, 1, 0.36, 1]
               }}
               className="relative py-16"
@@ -670,17 +670,17 @@ const GalleryPage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-teal-500/10 blur-3xl" />
               
               {/* Title */}
-              <div className="text-center mb-12 px-4">
+              <div className="text-center mb-8 sm:mb-12 px-4">
                 <motion.h3
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 0.618
+                    delay: 0.2
                   }}
-                  className="text-5xl lg:text-7xl font-black text-white mb-6"
+                  className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-4 sm:mb-6"
                 >
                   Behind the <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">Scenes</span>
                 </motion.h3>
@@ -688,8 +688,8 @@ const GalleryPage = () => {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1.618, delay: 1.236 }}
-                  className="text-xl lg:text-2xl text-white/70"
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="text-lg sm:text-xl lg:text-2xl text-white/70"
                 >
                   Watch our meticulous process in action
                 </motion.p>
@@ -711,15 +711,15 @@ const GalleryPage = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ 
-                          duration: 1.618,
+                          duration: 0.5,
                           ease: [0.22, 1, 0.36, 1],
-                          delay: 1.618 + (idx * 0.618)
+                          delay: 0.4 + (idx * 0.15)
                         }}
                         whileHover={{ x: 8 }}
-                        className={`bg-gradient-to-br ${item.color} backdrop-blur-xl border-2 ${item.borderColor} p-6 rounded-xl group cursor-default shadow-lg`}
+                        className={`bg-gradient-to-br ${item.color} backdrop-blur-xl border-2 ${item.borderColor} p-4 sm:p-6 rounded-xl group cursor-default shadow-lg`}
                       >
-                        <h4 className="text-white font-bold text-xl mb-1 tracking-tight">{item.title}</h4>
-                        <p className="text-white/80 text-sm font-light tracking-wide">{item.subtitle}</p>
+                        <h4 className="text-white font-bold text-lg sm:text-xl mb-1 tracking-tight">{item.title}</h4>
+                        <p className="text-white/80 text-xs sm:text-sm font-light tracking-wide">{item.subtitle}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -731,13 +731,13 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
-                    delay: 1.618
+                    delay: 0.4
                   }}
                   className="lg:col-span-6 flex justify-center"
                 >
-                  <div className="w-full max-w-md h-[500px] lg:h-[700px]">
+                  <div className="w-full max-w-lg h-[450px] sm:h-[550px] lg:h-[700px]">
                     <VideoShowcase
                       videoSrc="/photos-before-and-after/Cleaning-Process-Video.mp4"
                       title="Our Meticulous Process"
@@ -760,15 +760,15 @@ const GalleryPage = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ 
-                          duration: 1.618,
+                          duration: 0.5,
                           ease: [0.22, 1, 0.36, 1],
-                          delay: 1.618 + (idx * 0.618)
+                          delay: 0.4 + (idx * 0.15)
                         }}
                         whileHover={{ x: -8 }}
-                        className={`bg-gradient-to-br ${item.color} backdrop-blur-xl border-2 ${item.borderColor} p-6 rounded-xl group cursor-default shadow-lg`}
+                        className={`bg-gradient-to-br ${item.color} backdrop-blur-xl border-2 ${item.borderColor} p-4 sm:p-6 rounded-xl group cursor-default shadow-lg`}
                       >
-                        <h4 className="text-white font-bold text-xl mb-1 tracking-tight">{item.title}</h4>
-                        <p className="text-white/80 text-sm font-light tracking-wide">{item.subtitle}</p>
+                        <h4 className="text-white font-bold text-lg sm:text-xl mb-1 tracking-tight">{item.title}</h4>
+                        <p className="text-white/80 text-xs sm:text-sm font-light tracking-wide">{item.subtitle}</p>
               </motion.div>
             ))}
                   </div>
@@ -780,36 +780,36 @@ const GalleryPage = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="relative py-32 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
+      <section className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
         {/* Gradient Orbs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl lg:text-6xl font-black text-white mb-6">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6">
               Ready for Your
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"> Transformation?</span>
             </h2>
-            <p className="text-xl text-white/70 mb-12 max-w-3xl mx-auto">
+            <p             className="text-lg sm:text-xl text-white/70 mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
               Experience the same level of care and attention to detail. Your car deserves the best.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <a
                 href="/contact"
-                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-12 py-5 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-cyan-500/50 overflow-hidden"
+                className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 sm:px-12 sm:py-5 rounded-full font-bold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-cyan-500/50 overflow-hidden"
               >
                 <span className="relative z-10">Book Your Service</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
               <a
                 href="/services"
-                className="group bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-5 rounded-full font-bold text-lg border-2 border-white/30 hover:border-white/50 transition-all duration-300"
+                className="group bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 sm:px-12 sm:py-5 rounded-full font-bold text-base sm:text-lg border-2 border-white/30 hover:border-white/50 transition-all duration-300"
               >
                 View All Services
               </a>

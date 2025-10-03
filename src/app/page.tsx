@@ -17,6 +17,7 @@ import {
   Car
 } from 'lucide-react';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -25,6 +26,8 @@ if (typeof window !== 'undefined') {
 
 const HomePage = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [clickedItems, setClickedItems] = useState<{[key: number]: boolean}>({});
+  const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
@@ -33,6 +36,24 @@ const HomePage = () => {
   const handleVideoLoad = () => {
     setVideoLoaded(true);
   };
+
+  const toggleBeforeAfter = (index: number) => {
+    if (isMobile) {
+      setClickedItems(prev => ({
+        ...prev,
+        [index]: !prev[index]
+      }));
+    }
+  };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Testimonials data with Montreal-style names
   const testimonials = [
@@ -155,7 +176,7 @@ const HomePage = () => {
       <section 
         ref={heroRef}
         id="main-content"
-        className="relative h-[110vh] flex items-center justify-center overflow-hidden"
+        className="relative h-[110vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-0"
         aria-label="Hero section"
       >
         {/* Enhanced Animated Background */}
@@ -260,7 +281,7 @@ const HomePage = () => {
               >
                 <Star className="w-6 h-6 text-cyan-400 fill-current" />
               </motion.div>
-              <span className="text-lg font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
+              <span className="text-sm sm:text-base lg:text-lg font-semibold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
                 Chomedey's Premier Detailing Service
               </span>
             </motion.div>
@@ -270,7 +291,7 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-8 leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black mb-6 sm:mb-8 leading-tight"
             >
               <motion.span 
                 className="block bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent"
@@ -285,7 +306,7 @@ const HomePage = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.8 }}
-                className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent"
+                className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-200 bg-clip-text text-transparent"
                 style={{ textShadow: '0 0 60px rgba(59, 130, 246, 0.8)' }}
               >
                 Lave-Auto
@@ -297,7 +318,7 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
-              className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 max-w-5xl mx-auto leading-relaxed font-medium px-4"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 sm:mb-12 max-w-5xl mx-auto leading-relaxed font-medium px-4"
             >
               Transform your vehicle with our{' '}
               <span className="font-bold bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-transparent">
@@ -317,13 +338,13 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-16"
           >
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-premium cursor-interactive group relative px-12 py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-full font-bold text-xl shadow-2xl shadow-cyan-500/50 flex items-center gap-3 overflow-hidden"
+              className="btn-premium cursor-interactive group relative px-8 py-4 sm:px-12 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-full font-bold text-lg sm:text-xl shadow-2xl shadow-cyan-500/50 flex items-center gap-2 sm:gap-3 overflow-hidden w-full sm:w-auto justify-center"
               aria-label="Book your car detailing service - Contact us now"
             >
               <span className="relative z-10">Book My Service</span>
@@ -341,7 +362,7 @@ const HomePage = () => {
               href="/gallery"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-12 py-6 rounded-full font-bold text-xl border-2 border-white/30 flex items-center gap-3"
+              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white px-8 py-4 sm:px-12 sm:py-6 rounded-full font-bold text-lg sm:text-xl border-2 border-white/30 flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
               aria-label="View our before and after gallery - See our work"
             >
               <Eye className="w-6 h-6" />
@@ -354,9 +375,9 @@ const HomePage = () => {
             initial={{ opacity: 0, scaleX: 0.8 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 1, delay: 1.6 }}
-            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-8 mx-auto max-w-5xl"
+            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-3 sm:p-6 lg:p-8 mx-auto max-w-5xl"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 lg:gap-8">
               {[
                 { number: '5000+', label: 'Cars Transformed', icon: <Car className="h-6 w-6 text-cyan-400" /> },
                 { number: '100%', label: 'Satisfaction', icon: <Star className="h-6 w-6 text-cyan-400" /> },
@@ -370,15 +391,17 @@ const HomePage = () => {
                   transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
                   className="text-center group"
                 >
-                  <div className="flex items-center justify-center mb-3">
-                    {stat.icon}
+                  <div className="flex items-center justify-center mb-2 sm:mb-3">
+                    <div className="h-4 w-4 sm:h-6 sm:w-6">
+                      {stat.icon}
+                    </div>
                   </div>
-                  <div className="text-3xl lg:text-4xl font-black text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                    {stat.number}
-                  </div>
-                  <div className="text-sm text-white/70 font-medium uppercase tracking-wide">
-                    {stat.label}
-                  </div>
+                    <div className="text-lg sm:text-2xl lg:text-3xl xl:text-4xl font-black text-white mb-1 sm:mb-2 group-hover:text-cyan-400 transition-colors">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs sm:text-sm text-white/70 font-medium uppercase tracking-wide leading-tight">
+                      {stat.label}
+                    </div>
                 </motion.div>
               ))}
             </div>
@@ -404,7 +427,7 @@ const HomePage = () => {
 
       {/* Enhanced Services Section */}
       <section 
-        className="py-32 px-4 relative bg-gradient-to-br from-slate-900 via-gray-900 to-black"
+        className="py-16 sm:py-24 lg:py-32 px-4 relative bg-gradient-to-br from-slate-900 via-gray-900 to-black"
         aria-label="Our premium car detailing services"
       >
         {/* Background Elements */}
@@ -445,19 +468,19 @@ const HomePage = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-white/20"
             >
               <Sparkles className="h-5 w-5 text-cyan-400" />
               <span>Premium Services</span>
             </motion.div>
             
-            <h2 className="text-5xl sm:text-6xl font-black text-white mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 lg:mb-8">
               Choose Your{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Service Tier
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4">
               Experience the ultimate in automotive care with our comprehensive range of luxury services
             </p>
           </motion.div>
@@ -466,83 +489,47 @@ const HomePage = () => {
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
                 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
-                className="card-premium cursor-interactive group relative bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 hover:border-cyan-300/50 hover:shadow-xl hover:shadow-cyan-500/20"
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ y: -15, scale: 1.05 }}
+                className="card-premium cursor-interactive group relative bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 hover:border-cyan-300/50 hover:shadow-xl hover:shadow-cyan-500/20"
               >
                 {/* Service Icon */}
-                <div className="p-8">
-                  <motion.div 
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: index * 0.15 + 0.2,
-                      ease: "backOut"
-                    }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: 360,
-                      transition: { duration: 0.5 }
-                    }}
-                    className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg shadow-cyan-500/25"
-                  >
+                <div className="p-6 sm:p-8">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:shadow-lg shadow-cyan-500/25 transition-all duration-300">
                     <div className="text-white">
                       {service.icon}
                     </div>
-                  </motion.div>
+                  </div>
                   
-                  <motion.h3 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
-                    viewport={{ once: true }}
-                    className="text-2xl font-black text-white mb-4 group-hover:text-cyan-300 transition-colors"
-                  >
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 sm:mb-4 group-hover:text-cyan-300 transition-colors duration-300">
                     {service.title}
-                  </motion.h3>
+                  </h3>
                   
-                  <motion.p 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
-                    viewport={{ once: true }}
-                    className="text-gray-300 mb-8 leading-relaxed"
-                  >
+                  <p className="text-gray-300 mb-4 sm:mb-6 lg:mb-8 leading-relaxed text-sm sm:text-base">
                     {service.description}
-                  </motion.p>
+                  </p>
                   
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.6 }}
-                    viewport={{ once: true }}
-                  >
-                    <h5 className="font-bold text-white mb-4 text-sm">What's Included:</h5>
+                  <div>
+                    <h5 className="font-bold text-white mb-3 sm:mb-4 text-xs sm:text-sm">What's Included:</h5>
                     <ul className="space-y-3">
                       {service.features.map((feature, idx) => (
-                        <motion.li 
-                          key={idx} 
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: index * 0.15 + 0.7 + idx * 0.1 }}
-                          viewport={{ once: true }}
-                          className="flex items-center space-x-3 text-gray-300"
+                        <li 
+                          key={idx}
+                          className="flex items-center space-x-2 sm:space-x-3 text-gray-300 text-sm sm:text-base"
                         >
                           <CheckCircle className="h-5 w-5 text-cyan-400 flex-shrink-0" />
                           <span>{feature}</span>
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -552,7 +539,7 @@ const HomePage = () => {
 
       {/* Enhanced Before/After Gallery */}
       <section 
-        className="py-32 px-4 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
+        className="py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
         aria-label="Before and after transformation gallery"
       >
         {/* Background Elements */}
@@ -593,13 +580,13 @@ const HomePage = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-white/20"
             >
               <Eye className="h-5 w-5 text-cyan-400" />
               <span>Witness the Transformation</span>
             </motion.div>
             
-            <h2 className="text-5xl sm:text-6xl font-black text-white mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 lg:mb-8">
               Our Work{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Speaks
@@ -607,25 +594,26 @@ const HomePage = () => {
               <br />
               for Itself
             </h2>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4">
               See the dramatic before and after results of our premium detailing services
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {beforeAfterImages.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
                 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
-                className="group relative overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl shadow-2xl hover:shadow-cyan-500/30 transition-all duration-700 border border-white/20 hover:border-cyan-400/50"
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                onClick={() => toggleBeforeAfter(index)}
+                className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white/10 backdrop-blur-xl shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 border border-white/20 hover:border-cyan-400/50 cursor-pointer"
               >
                 {/* Enhanced Image Container */}
                 <div className="relative h-80 overflow-hidden">
@@ -635,12 +623,17 @@ const HomePage = () => {
                       src={item.before}
                       alt={`Before: ${item.title}`}
                       fill
-                      className="object-cover transition-all duration-1000 group-hover:scale-110 group-hover:blur-sm"
+                      className="object-cover transition-opacity duration-500"
                     />
                   </div>
                   
-                  {/* After Image - Reveals on Hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-1000 transform group-hover:scale-100">
+                  {/* After Image - Reveals on Hover/Click */}
+                  <div className={cn(
+                    "absolute inset-0 transition-opacity duration-500",
+                    isMobile 
+                      ? (clickedItems[index] ? "opacity-100" : "opacity-0")
+                      : "opacity-0 group-hover:opacity-100"
+                  )}>
                     <Image
                       src={item.after}
                       alt={`After: ${item.title}`}
@@ -649,62 +642,60 @@ const HomePage = () => {
                     />
                   </div>
                   
-                  {/* Enhanced Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                  {/* Enhanced Overlay - Desktop hover only */}
+                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Before Badge */}
-                  <div className="absolute bottom-4 left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:delay-0 delay-300">
+                  <div className={cn(
+                    "absolute bottom-4 left-4 transition-opacity duration-300",
+                    isMobile
+                      ? (clickedItems[index] ? "opacity-0" : "opacity-100")
+                      : "opacity-100 group-hover:opacity-0"
+                  )}>
                     <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       BEFORE
                     </span>
                   </div>
                   
-                  {/* After Badge - Appears on Hover */}
-                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-0 group-hover:delay-300">
+                  {/* After Badge - Appears on Hover/Click */}
+                  <div className={cn(
+                    "absolute bottom-4 left-4 transition-opacity duration-300",
+                    isMobile
+                      ? (clickedItems[index] ? "opacity-100" : "opacity-0")
+                      : "opacity-0 group-hover:opacity-100"
+                  )}>
                     <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                       AFTER
                     </span>
                   </div>
                   
-                  {/* Enhanced Hover Instruction */}
-                  <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-all duration-300">
+                  {/* Enhanced Hover/Click Instruction */}
+                  <div className={cn(
+                    "absolute top-4 left-4 transition-all duration-300",
+                    isMobile
+                      ? (clickedItems[index] ? "opacity-0" : "opacity-100")
+                      : "opacity-100 group-hover:opacity-0"
+                  )}>
                     <div className="bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium border border-white/20">
-                      Hover to Reveal
+                      <span className="hidden sm:inline">Hover to Reveal</span>
+                      <span className="sm:hidden">Tap to Reveal</span>
                     </div>
                   </div>
                 </div>
                 
                 {/* Enhanced Content Area */}
-                <div className="p-8 bg-gradient-to-br from-white/5 to-transparent relative">
+                <div className="p-6 sm:p-8 bg-gradient-to-br from-white/5 to-transparent relative">
                   <div className="relative z-10">
-                    <motion.h3 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
-                      viewport={{ once: true }}
-                      className="text-xl font-black text-white mb-4 group-hover:text-cyan-300 transition-colors duration-500"
-                    >
+                    <h3 className="text-lg sm:text-xl font-black text-white mb-3 sm:mb-4 group-hover:text-cyan-300 transition-colors duration-300">
                       {item.title}
-                    </motion.h3>
+                    </h3>
                     
-                    <motion.p 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
-                      viewport={{ once: true }}
-                      className="text-gray-300 text-sm leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-500"
-                    >
+                    <p className="text-gray-300 text-sm leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
                       Complete transformation with our premium detailing process
-                    </motion.p>
+                    </p>
                     
                     {/* Enhanced Rating */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.15 + 0.6 }}
-                      viewport={{ once: true }}
-                      className="flex items-center justify-between"
-                    >
+                    <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="flex items-center space-x-1">
                           {[...Array(5)].map((_, i) => (
@@ -718,7 +709,7 @@ const HomePage = () => {
                         <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                         <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -729,7 +720,7 @@ const HomePage = () => {
 
       {/* Testimonials Section */}
       <section 
-        className="py-24 px-4 relative"
+        className="py-16 sm:py-24 px-4 relative"
         aria-label="Customer testimonials and reviews"
       >
         <div className="max-w-7xl mx-auto">
@@ -740,10 +731,10 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Client Testimonials
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto px-4">
               Hear from our satisfied clients about their luxury car care experience
             </p>
           </motion.div>
@@ -756,7 +747,7 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card-premium cursor-interactive group relative p-6 bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-2xl border border-white/10 backdrop-blur-sm hover:border-cyan-500/50"
+                className="card-premium cursor-interactive group relative p-4 sm:p-6 bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-xl sm:rounded-2xl border border-white/10 backdrop-blur-sm hover:border-cyan-500/50"
               >
                 <div className="absolute top-4 right-4">
                   <Quote className="w-8 h-8 text-purple-500 opacity-30" />
@@ -768,7 +759,7 @@ const HomePage = () => {
                   ))}
                 </div>
                 
-                <p className="text-gray-300 mb-6 leading-relaxed italic">
+                <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed italic">
                   "{testimonial.text}"
                 </p>
                 
@@ -784,7 +775,7 @@ const HomePage = () => {
 
       {/* CTA Section */}
       <section 
-        className="py-24 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
+        className="py-16 sm:py-24 px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden"
         aria-label="Call to action - Book your service today"
       >
         {/* Animated Background Elements */}
@@ -849,7 +840,7 @@ const HomePage = () => {
               <Award className="w-16 h-16 text-cyan-400 mx-auto mb-6 drop-shadow-lg" />
             </motion.div>
             
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white">
               Come Ready for the Ultimate
               <br />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">
@@ -858,7 +849,7 @@ const HomePage = () => {
             </h2>
             
             <motion.p 
-              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-4"
               animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -867,7 +858,7 @@ const HomePage = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button 
-                className="btn-premium cursor-interactive px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-full font-bold text-lg text-white shadow-2xl shadow-cyan-500/25"
+                className="btn-premium cursor-interactive px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-full font-bold text-base sm:text-lg text-white shadow-2xl shadow-cyan-500/25"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{ 

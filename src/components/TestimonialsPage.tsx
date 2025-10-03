@@ -353,7 +353,7 @@ const TestimonialsPage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+        className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
@@ -368,7 +368,7 @@ const TestimonialsPage = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="card-premium bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-[600px]"
+              className="card-premium bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-auto lg:h-[600px]"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
                 {/* Image Section */}
@@ -382,23 +382,23 @@ const TestimonialsPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   
                   {/* Before/After Indicator */}
-                  <div className="absolute top-6 left-6">
-                    <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                  <div                   className="absolute top-4 left-4 sm:top-6 sm:left-6">
+                    <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold">
                       AFTER
                     </span>
                   </div>
 
                   {/* Service Badge */}
-                  <div className="absolute bottom-6 left-6">
-                    <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
+                    <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
                       {testimonials[currentTestimonial].service}
                     </span>
                   </div>
 
                   {/* Verified Badge */}
                   {testimonials[currentTestimonial].verified && (
-                    <div className="absolute top-6 right-6">
-                      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1">
+                    <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+                      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1">
                         <Shield className="h-3 w-3" />
                         <span>Verified</span>
                       </div>
@@ -408,20 +408,20 @@ const TestimonialsPage = () => {
                   {/* Image Navigation Arrows */}
                   <button
                     onClick={prevTestimonial}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-2 sm:p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
                   >
-                    <ChevronLeft className="h-5 w-5" />
+                    <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                   <button
                     onClick={nextTestimonial}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-2 sm:p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
                   >
-                    <ChevronRight className="h-5 w-5" />
+                    <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 </div>
 
                 {/* Content Section */}
-                <div className="p-12 lg:p-16 flex flex-col justify-center h-full relative">
+                <div className="p-6 sm:p-8 lg:p-12 xl:p-16 flex flex-col justify-center h-full relative">
                   {/* Quote Icon */}
                   <div className="absolute top-6 left-15">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-100 to-purple-100 rounded-2xl">
@@ -430,7 +430,7 @@ const TestimonialsPage = () => {
                   </div>
 
                   {/* Testimonial Text */}
-                  <blockquote className="text-xl text-gray-700 leading-relaxed mb-10 font-medium h-32 flex items-center mt-8">
+                  <blockquote className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-6 sm:mb-8 lg:mb-10 font-medium h-auto lg:h-32 flex items-center mt-6 sm:mt-8">
                     "{testimonials[currentTestimonial].text}"
                   </blockquote>
 
@@ -470,10 +470,10 @@ const TestimonialsPage = () => {
                     <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                       <button
                         onClick={prevTestimonial}
-                        className="btn-premium cursor-interactive flex items-center space-x-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-700 px-6 py-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+                        className="btn-premium cursor-interactive flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 w-10 h-10 sm:w-auto sm:h-auto sm:px-6 sm:py-3 rounded-full shadow-lg border-2 border-gray-200 transition-all duration-300 hover:shadow-xl"
                       >
-                        <ChevronLeft className="h-4 w-4" />
-                        <span className="font-semibold text-sm">Previous</span>
+                        <ChevronLeft className="h-5 w-5 sm:h-4 sm:w-4" />
+                        <span className="font-semibold text-sm hidden sm:inline ml-1">Previous</span>
                       </button>
 
                       {/* Dots */}
@@ -482,7 +482,7 @@ const TestimonialsPage = () => {
                           <button
                             key={index}
                             onClick={() => goToTestimonial(index)}
-                            className={`btn-premium cursor-interactive w-3 h-3 rounded-full transition-all duration-300 ${
+                            className={`btn-premium cursor-interactive w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                               index === currentTestimonial
                                 ? 'bg-gradient-to-r from-pink-500 to-purple-500 scale-125'
                                 : 'bg-gray-300 hover:bg-gray-400'
@@ -493,10 +493,10 @@ const TestimonialsPage = () => {
 
                       <button
                         onClick={nextTestimonial}
-                        className="btn-premium cursor-interactive flex items-center space-x-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-700 px-6 py-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+                        className="btn-premium cursor-interactive flex items-center justify-center bg-white hover:bg-gray-50 text-gray-700 w-10 h-10 sm:w-auto sm:h-auto sm:px-6 sm:py-3 rounded-full shadow-lg border-2 border-gray-200 transition-all duration-300 hover:shadow-xl"
                       >
-                        <span className="font-semibold text-sm">Next</span>
-                        <ChevronRight className="h-4 w-4" />
+                        <span className="font-semibold text-sm hidden sm:inline mr-1">Next</span>
+                        <ChevronRight className="h-5 w-5 sm:h-4 sm:w-4" />
                       </button>
                     </div>
                   </div>
@@ -509,31 +509,31 @@ const TestimonialsPage = () => {
       </motion.section>
 
       {/* Additional Testimonials Grid */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black font-display text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl font-black font-display text-gray-900 mb-4 sm:mb-6 px-4">
               More Customer Reviews
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Here are more testimonials from our satisfied customers
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.slice(0, 6).map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.1,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 0.6, 
+                  delay: index * 0.08,
+                  ease: "easeOut"
                 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className="card-premium cursor-interactive bg-white rounded-3xl p-8 shadow-xl border border-gray-100"
+                className="card-premium cursor-interactive bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-100"
               >
                 <div className="flex items-center space-x-2 mb-6">
                   {renderStars(testimonial.rating)}
@@ -545,19 +545,19 @@ const TestimonialsPage = () => {
                   )}
                 </div>
                 
-                <blockquote className="text-gray-700 mb-8 leading-relaxed text-lg">
+                <blockquote className="text-gray-700 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">
                   "{testimonial.text}"
                 </blockquote>
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-bold text-gray-900 text-lg">
+                    <div className="font-bold text-gray-900 text-base sm:text-lg">
                       {testimonial.name}
                     </div>
-                    <div className="text-gray-600 font-medium">
+                    <div className="text-gray-600 font-medium text-sm sm:text-base">
                       {testimonial.car}
                     </div>
-                    <div className="text-gray-500 text-sm">
+                    <div className="text-gray-500 text-xs sm:text-sm">
                       {testimonial.location}
                     </div>
                   </div>
@@ -578,38 +578,68 @@ const TestimonialsPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20"
+          >
             <Sparkles className="h-5 w-5 text-pink-400" />
             <span>Join Our Happy Customers</span>
-          </div>
+          </motion.div>
           
-          <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-white mb-4 sm:mb-6 lg:mb-8 px-4"
+          >
             Get Ready to Experience the Difference
-          </h2>
+          </motion.h2>
           
-          <p className="text-xl text-white/80 mb-12 leading-relaxed">
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-base sm:text-lg lg:text-xl text-white/80 mb-8 sm:mb-12 leading-relaxed px-4"
+          >
             Join hundreds of satisfied customers who trust Chomedey Lave-Auto 
             with their vehicle care needs.
-          </p>
+          </motion.p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 sm:space-x-8 px-4 sm:px-0 w-full sm:w-auto"
+          >
             <a
               href="/contact"
-              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-indigo-700 px-10 py-5 rounded-full font-bold text-lg"
+              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-indigo-700 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg w-full sm:w-auto"
             >
               Book My Service
             </a>
             <a
               href="tel:+14506860016"
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-10 py-5 rounded-full font-bold text-lg border border-white/20"
+              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg border border-white/20 w-full sm:w-auto"
             >
               Call +1 450-686-0016
             </a>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

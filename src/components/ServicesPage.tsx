@@ -269,7 +269,7 @@ const ServicesPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative min-h-screen pb-16 flex items-center overflow-hidden pt-20"
+        className="relative min-h-screen pb-8 sm:pb-16 flex items-center overflow-hidden pt-20"
       >
         {/* Single Video Background */}
         <motion.div 
@@ -345,7 +345,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-center mb-6"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 leading-none">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 leading-none">
               <motion.span 
                 className="block text-white"
                 initial={{ opacity: 0, x: -50 }}
@@ -369,7 +369,7 @@ const ServicesPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed font-medium px-4"
+              className="text-base sm:text-lg lg:text-xl xl:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed font-medium px-4"
             >
               Experience professional detailing that transforms your vehicle from ordinary to extraordinary
             </motion.p>
@@ -420,9 +420,9 @@ const ServicesPage = () => {
             initial={{ opacity: 0, scaleX: 0.8 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 1, delay: 1.9 }}
-            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 sm:p-8 mx-auto max-w-5xl"
+            className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mx-auto max-w-5xl"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {[
                 { number: '5000+', label: 'Cars Detailed', icon: Car },
                 { number: '100%', label: 'Satisfaction', icon: Heart },
@@ -441,10 +441,10 @@ const ServicesPage = () => {
                     <div className="flex items-center justify-center mb-2">
                       <IconComponent className="h-5 w-5 text-cyan-400 group-hover:scale-125 transition-transform duration-300" />
                     </div>
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-1 group-hover:text-cyan-400 transition-colors">
+                    <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black text-white mb-1 group-hover:text-cyan-400 transition-colors">
                       {stat.number}
                     </div>
-                    <div className="text-xs sm:text-sm text-white/70 font-medium uppercase tracking-wide">
+                    <div className="text-xs text-white/70 font-medium uppercase tracking-wide">
                       {stat.label}
                     </div>
                   </motion.div>
@@ -459,7 +459,7 @@ const ServicesPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2.3 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+          className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         >
           <motion.a
             href="#services"
@@ -481,7 +481,7 @@ const ServicesPage = () => {
       </motion.section>
 
       {/* Services Categories */}
-      <section id="services" className="py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <section id="services" className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         {/* Luxury Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 20 }).map((_, i) => (
@@ -516,13 +516,13 @@ const ServicesPage = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 lg:mb-8">
               Choose Your{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Service Tier
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
               From essential maintenance to luxury treatments, select the perfect service tier 
               that matches your vehicle's needs and your expectations.
             </p>
@@ -549,7 +549,7 @@ const ServicesPage = () => {
                     
                     {/* Main Category Card */}
                     <motion.div 
-                      className={`relative bg-gradient-to-r ${category.color} rounded-3xl p-12 shadow-2xl border border-white/10 backdrop-blur-xl`}
+                      className={`relative bg-gradient-to-r ${category.color} rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl border border-white/10 backdrop-blur-xl`}
                       whileHover={{ scale: 1.02, y: -5 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -566,16 +566,16 @@ const ServicesPage = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-6">
                           <motion.div 
-                            className="w-20 h-20 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/30"
+                            className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-xl rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/30"
                             whileHover={{ scale: 1.1, rotate: 5 }}
                             transition={{ duration: 0.3 }}
                           >
-                            <CategoryIcon className="h-10 w-10 text-white" />
+                            <CategoryIcon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
                           </motion.div>
                           
                           <div>
                             <motion.h3 
-                              className="text-4xl font-black text-white mb-2"
+                              className="text-3xl sm:text-4xl font-black text-white mb-1 sm:mb-2"
                               initial={{ opacity: 0, x: -20 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.3, duration: 0.6 }}
@@ -583,7 +583,7 @@ const ServicesPage = () => {
                               {category.title}
                             </motion.h3>
                             <motion.p 
-                              className="text-white/80 text-lg font-light"
+                              className="text-white/80 text-base sm:text-lg font-light"
                               initial={{ opacity: 0, x: -20 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.5, duration: 0.6 }}
@@ -625,7 +625,7 @@ const ServicesPage = () => {
                           }}
                           viewport={{ once: true }}
                           whileHover={{ y: -15, scale: 1.05, rotateX: -5 }}
-                          className={`card-premium cursor-interactive group relative bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 ${
+                          className={`card-premium cursor-interactive group relative bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 ${
                             service.popular 
                               ? 'border-cyan-400/50 shadow-2xl shadow-cyan-500/30 scale-105' 
                               : 'hover:border-cyan-300/50 hover:shadow-xl hover:shadow-cyan-500/20'
@@ -672,12 +672,12 @@ const ServicesPage = () => {
                 </div>
 
                           {/* Service Content */}
-                          <div className="p-8">
+                          <div className="p-4 sm:p-6 lg:p-8">
                             <div className="mb-6">
-                              <h4 className="text-xl font-black text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                              <h4 className="text-lg sm:text-xl font-black text-white mb-2 sm:mb-3 group-hover:text-cyan-300 transition-colors">
                                 {service.title}
                               </h4>
-                              <p className="text-gray-300 text-sm leading-relaxed">
+                              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                                 {service.description}
                               </p>
                             </div>
@@ -688,19 +688,19 @@ const ServicesPage = () => {
                                 {service.phoneNumber ? (
                                   <a 
                                     href={`tel:${service.phoneNumber}`}
-                                    className="inline-flex items-center space-x-2 text-2xl font-black text-white hover:text-cyan-300 transition-colors bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg border-2 border-cyan-400/50 hover:border-cyan-300 group"
+                                    className="inline-flex items-center space-x-2 text-xl sm:text-2xl font-black text-white hover:text-cyan-300 transition-colors bg-white/10 hover:bg-white/20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border-2 border-cyan-400/50 hover:border-cyan-300 group"
                                   >
                                     <Phone className="h-5 w-5 group-hover:animate-pulse" />
                                     <span>{service.price}</span>
                                   </a>
                                 ) : (
-                                  <span className="text-3xl font-black text-white">{service.price}</span>
+                                  <span className="text-2xl sm:text-3xl font-black text-white">{service.price}</span>
                                 )}
                               </div>
                               {service.priceDetails && (
-                                <p className="text-sm text-gray-400 mb-3">{service.priceDetails}</p>
+                                <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3">{service.priceDetails}</p>
                               )}
-                              <div className="flex items-center space-x-4 text-sm text-gray-400">
+                              <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-gray-400">
                                 <div className="flex items-center space-x-1">
                                   <Clock className="h-4 w-4" />
                                   <span className="font-semibold">{service.duration}</span>
@@ -714,10 +714,10 @@ const ServicesPage = () => {
 
                             {/* Features Preview */}
                             <div className="mb-6">
-                              <h5 className="font-bold text-white mb-3 text-sm">What's Included:</h5>
+                              <h5 className="font-bold text-white mb-2 sm:mb-3 text-xs sm:text-sm">What's Included:</h5>
                               <ul className="space-y-2">
                                 {service.features.slice(0, 3).map((feature, index) => (
-                                  <li key={index} className="flex items-center space-x-2 text-sm text-gray-300">
+                                  <li key={index} className="flex items-center space-x-2 text-xs sm:text-sm text-gray-300">
                                     <CheckCircle className="h-4 w-4 text-cyan-400 flex-shrink-0" />
                                     <span>{feature}</span>
                                   </li>
@@ -734,7 +734,7 @@ const ServicesPage = () => {
                             <div className="space-y-3">
                               <Link
                                 href="/contact"
-                                className={`btn-premium cursor-interactive w-full text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 transition-all duration-300 ${
+                                className={`btn-premium cursor-interactive w-full text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all duration-300 ${
                                   service.popular
                                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25'
                                     : 'bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20'
@@ -746,7 +746,7 @@ const ServicesPage = () => {
                     
                               <Link
                                 href="/gallery"
-                                className="btn-premium cursor-interactive w-full bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 border border-white/20 transition-all duration-300"
+                                className="btn-premium cursor-interactive w-full bg-white/5 hover:bg-white/10 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 border border-white/20 transition-all duration-300"
                               >
                                 <Eye className="h-4 w-4" />
                                 <span>View Results</span>
@@ -763,25 +763,25 @@ const ServicesPage = () => {
           </div>
 
           {/* Package Comparison */}
-          <div className="mt-24">
-            <div className="card-premium bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl p-12 text-center text-white">
-              <h3 className="text-3xl font-black mb-6">
+          <div className="mt-12 sm:mt-16 lg:mt-24">
+            <div className="card-premium bg-gradient-to-br from-slate-900 to-gray-900 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 text-center text-white">
+              <h3 className="text-2xl sm:text-3xl font-black mb-4 sm:mb-6 px-2">
                 Want To Know Which Service Is Best For You?
               </h3>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
                 Our experts are here to help you choose the perfect service package 
                 based on your vehicle's needs and your budget.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
                 <Link
                   href="/contact"
-                  className="btn-premium cursor-interactive bg-white hover:bg-gray-100 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg"
+                  className="btn-premium cursor-interactive bg-white hover:bg-gray-100 text-slate-900 px-6 py-3 sm:px-8 sm:py-4 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg w-full sm:w-auto"
                 >
                   Get Free Quote
                 </Link>
                 <a
                   href="tel:+14506860016"
-                  className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-xl font-bold text-lg border border-white/20"
+                  className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg border border-white/20 w-full sm:w-auto"
                 >
                   Call +1 450-686-0016
                 </a>
@@ -792,32 +792,32 @@ const ServicesPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
             <Heart className="h-5 w-5 text-cyan-400" />
             <span>Ready to Transform Your Vehicle?</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-white mb-4 sm:mb-6 lg:mb-8 px-2">
             Experience the Chomedey Lave-Auto Difference
           </h2>
           
-          <p className="text-xl text-white/80 mb-12 leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-8 sm:mb-12 leading-relaxed px-4">
             Contact us today to schedule your service and experience the premium car care 
             that has made us Chomedey's most trusted detailing service.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 sm:space-x-8 px-4 sm:px-0 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-slate-700 px-10 py-5 rounded-full font-bold text-lg"
+              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-slate-700 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg w-full sm:w-auto"
             >
               Book My Service
             </Link>
             <a
               href="tel:+14506860016"
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-10 py-5 rounded-full font-bold text-lg border border-white/20"
+              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg border border-white/20 w-full sm:w-auto"
             >
               Call +1 450-686-0016
             </a>

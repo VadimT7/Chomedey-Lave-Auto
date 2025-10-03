@@ -298,7 +298,7 @@ const AboutPage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-32 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
+        className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
       >
         {/* Subtle Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
@@ -315,18 +315,18 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-gray-900 mb-8 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black font-display text-gray-900 mb-4 sm:mb-6 lg:mb-8 leading-tight px-4">
               From Soap to{' '}
               <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
                 Shine
               </span>
               </h2>
-            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
               Chomedey's Premier Car Detailing Experience
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20 items-center">
             {/* Story Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -342,7 +342,7 @@ const AboutPage = () => {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 cursor-interactive mb-8 text-center"
+                  className="bg-white rounded-2xl p-4 sm:p-6 shadow-xl border border-gray-100 cursor-interactive mb-6 sm:mb-8 text-center"
                 >
                   <div className="flex items-center justify-center space-x-2 mb-3">
                     <Crown className="h-5 w-5 text-amber-500" />
@@ -352,18 +352,18 @@ const AboutPage = () => {
                   <div className="text-sm text-gray-600">Car Detailing Service</div>
                 </motion.div>
 
-                <div className="space-y-6">
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                <div className="space-y-4 sm:space-y-6">
+                  <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                   Chomedey Lave-Auto was born from a simple passion: the love of seeing a dirty, 
                   neglected vehicle transform into a gleaming masterpiece. Founded in 2010 by 
                   Jean-Pierre Dubois, we started as a small operation with big dreams.
                 </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                  <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                   What began as a one-man show has grown into a trusted team of professionals 
                   who share the same commitment to excellence. Over the years, we've invested 
                     in the latest equipment, premium products, and continuous training.
                 </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                  <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                   Today, we're proud to have served over 5,000 satisfied customers in the 
                   Chomedey and greater Laval area. Our reputation is built on quality, 
                   reliability, and an unwavering commitment to customer satisfaction.
@@ -371,7 +371,7 @@ const AboutPage = () => {
               </div>
                 
                 {/* Key Stats */}
-                <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
+                <div className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 border-t border-gray-200">
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -379,8 +379,8 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="text-center"
                   >
-                    <div className="text-4xl font-black text-cyan-600 mb-2">5000+</div>
-                    <div className="text-sm text-gray-600 font-medium">Cars Transformed</div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-cyan-600 mb-1 sm:mb-2">5000+</div>
+                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Cars Transformed</div>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -389,8 +389,8 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="text-center"
                   >
-                    <div className="text-4xl font-black text-blue-600 mb-2">14+</div>
-                    <div className="text-sm text-gray-600 font-medium">Years Experience</div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-600 mb-1 sm:mb-2">14+</div>
+                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Years Experience</div>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -399,8 +399,8 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="text-center"
                   >
-                    <div className="text-4xl font-black text-indigo-600 mb-2">5★</div>
-                    <div className="text-sm text-gray-600 font-medium">Rating</div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-indigo-600 mb-1 sm:mb-2">5★</div>
+                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Rating</div>
                   </motion.div>
               </div>
             </div>
@@ -436,7 +436,7 @@ const AboutPage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-32 bg-white relative overflow-hidden"
+        className="py-16 sm:py-24 lg:py-32 bg-white relative overflow-hidden"
       >
         {/* Subtle Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
@@ -451,13 +451,13 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl sm:text-6xl font-black font-display text-gray-900 mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display text-gray-900 mb-4 sm:mb-6 lg:mb-8">
               What Drives{' '}
               <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
                 Us
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
               These core values guide everything we do and shape the experience we provide to every customer.
             </p>
           </motion.div>
@@ -481,7 +481,7 @@ const AboutPage = () => {
                     scale: 1.02,
                     transition: { duration: 0.3 }
                   }}
-                  className="card-premium cursor-interactive bg-white rounded-3xl p-8 shadow-lg border border-gray-100 text-center group"
+                  className="card-premium cursor-interactive bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-100 text-center group"
                 >
                   <motion.div 
                     initial={{ scale: 0, rotate: -180 }}
@@ -507,7 +507,7 @@ const AboutPage = () => {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.15 + 0.4 }}
                     viewport={{ once: true }}
-                    className="text-xl font-black text-gray-900 mb-4"
+                    className="text-lg sm:text-xl font-black text-gray-900 mb-3 sm:mb-4"
                   >
                         {value.title}
                   </motion.h3>
@@ -517,7 +517,7 @@ const AboutPage = () => {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.15 + 0.5 }}
                     viewport={{ once: true }}
-                    className="text-gray-600 leading-relaxed text-sm"
+                    className="text-gray-600 leading-relaxed text-xs sm:text-sm"
                   >
                         {value.description}
                   </motion.p>
@@ -535,14 +535,14 @@ const AboutPage = () => {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black"
+        className="py-16 sm:py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-black"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black font-display text-white mb-8">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-white mb-4 sm:mb-6 lg:mb-8">
               Our Journey
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mx-auto px-4">
               Key milestones in our growth and evolution as Chomedey's premier car care service.
             </p>
           </div>
@@ -554,10 +554,10 @@ const AboutPage = () => {
               whileInView={{ scaleY: 1 }}
               transition={{ duration: 2, ease: "easeInOut" }}
               viewport={{ once: true }}
-              className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-500 to-cyan-500 rounded-full origin-top"
+              className="absolute left-8 sm:left-1/2 transform sm:-translate-x-1/2 w-0.5 sm:w-1 h-full bg-gradient-to-b from-emerald-500 to-cyan-500 rounded-full origin-top"
             />
             
-            <div className="space-y-16">
+            <div className="space-y-12 sm:space-y-16">
               {milestones.map((milestone, index) => {
                 const IconComponent = milestone.icon;
                 const isEven = index % 2 === 0;
@@ -587,9 +587,9 @@ const AboutPage = () => {
                       rotateY: isEven ? 5 : -5,
                       transition: { duration: 0.3 }
                     }}
-                    className={`flex items-center ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+                    className={`flex items-center flex-col sm:${isEven ? 'flex-row' : 'flex-row-reverse'}`}
                   >
-                    <div className={`w-1/2 ${isEven ? 'pr-12 text-right' : 'pl-12 text-left'}`}>
+                    <div className={`w-full pl-16 sm:pl-0 sm:w-1/2 ${isEven ? 'sm:pr-12 sm:text-right' : 'sm:pl-12 sm:text-left'} text-left sm:text-center mb-6 sm:mb-0`}>
                       <motion.div 
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -599,20 +599,20 @@ const AboutPage = () => {
                           scale: 1.02,
                           boxShadow: "0 20px 40px rgba(16, 185, 129, 0.3)"
                         }}
-                        className="card-premium bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20"
+                        className="card-premium bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/20"
                       >
                         <div className="flex items-center space-x-4 mb-4">
                           <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl">
                             <IconComponent className="h-6 w-6 text-white" />
                           </div>
-                          <div className="text-3xl font-black text-emerald-400">
+                          <div className="text-2xl sm:text-3xl font-black text-emerald-400">
                         {milestone.year}
                       </div>
                         </div>
-                        <h3 className="text-2xl font-black text-white mb-3">
+                        <h3 className="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3">
                         {milestone.title}
                       </h3>
-                        <p className="text-white/80 text-lg">
+                        <p className="text-white/80 text-base sm:text-lg">
                         {milestone.description}
                       </p>
                       </motion.div>
@@ -632,7 +632,7 @@ const AboutPage = () => {
                         rotate: 360,
                         transition: { duration: 0.5 }
                       }}
-                      className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full border-4 border-white flex items-center justify-center z-10 shadow-lg shadow-emerald-500/50"
+                      className="absolute left-3 sm:relative sm:left-auto w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full border-4 border-white flex items-center justify-center z-10 shadow-lg shadow-emerald-500/50 my-4 sm:my-0"
                     >
                       <motion.div 
                         initial={{ scale: 0 }}
@@ -643,7 +643,7 @@ const AboutPage = () => {
                       />
                     </motion.div>
                   
-                  <div className="w-1/2"></div>
+                  <div className="hidden sm:block w-1/2"></div>
                   </motion.div>
                 );
               })}
@@ -658,7 +658,7 @@ const AboutPage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden"
+        className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden"
       >
         {/* Subtle Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
@@ -673,13 +673,13 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl sm:text-6xl font-black font-display text-white mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display text-white mb-4 sm:mb-6 lg:mb-8">
               Why Trust{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Us?
               </span>
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed px-4">
               Our certifications, insurance, and commitment to excellence give you peace of mind.
             </p>
           </motion.div>
@@ -724,16 +724,16 @@ const AboutPage = () => {
                       rotate: 360,
                       transition: { duration: 0.5 }
                     }}
-                    className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r ${badge.color} rounded-3xl mb-6 shadow-lg`}
+                    className={`inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${badge.color} rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 shadow-lg`}
                   >
-                    <IconComponent className={`h-10 w-10 ${badge.iconColor}`} />
+                    <IconComponent className={`h-8 w-8 sm:h-10 sm:w-10 ${badge.iconColor}`} />
                   </motion.div>
                   <motion.h3 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.2 + 0.4 }}
                     viewport={{ once: true }}
-                    className="text-xl font-black text-white mb-3"
+                    className="text-lg sm:text-xl font-black text-white mb-2 sm:mb-3"
                   >
                     {badge.title}
                   </motion.h3>
@@ -742,7 +742,7 @@ const AboutPage = () => {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.2 + 0.5 }}
                     viewport={{ once: true }}
-                    className="text-white/80"
+                    className="text-sm sm:text-base text-white/80"
                   >
                     {badge.description}
                   </motion.p>
@@ -759,7 +759,7 @@ const AboutPage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="py-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden"
+        className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden"
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
@@ -820,7 +820,7 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-xl text-slate-800 px-8 py-4 rounded-full text-sm font-medium mb-12 border border-slate-200 shadow-lg"
+            className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-xl text-slate-800 px-4 py-2 sm:px-8 sm:py-4 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-12 border border-slate-200 shadow-lg"
           >
             <motion.div
               animate={{ rotate: 360 }}
@@ -828,7 +828,7 @@ const AboutPage = () => {
             >
               <Sparkles className="h-6 w-6 text-cyan-600" />
             </motion.div>
-            <span className="text-lg">Ready to Experience Excellence?</span>
+            <span className="text-sm sm:text-base lg:text-lg">Ready to Experience Excellence?</span>
           </motion.div>
           
           <motion.h2 
@@ -836,7 +836,7 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black font-display text-slate-900 mb-8 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black font-display text-slate-900 mb-4 sm:mb-6 lg:mb-8 leading-tight px-4"
           >
             Ready for the{' '}
             <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -851,7 +851,7 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-xl lg:text-2xl text-slate-700 mb-16 leading-relaxed max-w-4xl mx-auto"
+            className="text-base sm:text-lg lg:text-xl xl:text-2xl text-slate-700 mb-8 sm:mb-12 lg:mb-16 leading-relaxed max-w-4xl mx-auto px-4"
           >
             Book your premium detailing service today and transform your vehicle into a masterpiece. 
             Join thousands of satisfied customers who trust us with their most prized possessions.
@@ -862,14 +862,14 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 sm:space-x-8 px-4 sm:px-0 w-full sm:w-auto"
           >
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="btn-premium cursor-interactive bg-slate-900 hover:bg-slate-800 text-white px-12 py-6 rounded-full font-bold text-xl inline-flex items-center justify-center space-x-3 shadow-2xl"
+              className="btn-premium cursor-interactive bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 sm:px-12 sm:py-6 rounded-full font-bold text-base sm:text-lg lg:text-xl inline-flex items-center justify-center space-x-2 sm:space-x-3 shadow-2xl w-full sm:w-auto"
             >
               <span>Book My Service</span>
               <ArrowRight className="h-6 w-6" />
@@ -879,7 +879,7 @@ const AboutPage = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="btn-premium cursor-interactive bg-white/80 hover:bg-white backdrop-blur-md text-slate-900 px-12 py-6 rounded-full font-bold text-xl border border-slate-200 shadow-lg inline-flex items-center justify-center space-x-3"
+              className="btn-premium cursor-interactive bg-white/80 hover:bg-white backdrop-blur-md text-slate-900 px-8 py-4 sm:px-12 sm:py-6 rounded-full font-bold text-base sm:text-lg lg:text-xl border border-slate-200 shadow-lg inline-flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
             >
               <Phone className="h-6 w-6" />
               <span>Call +1 450-686-0016</span>
