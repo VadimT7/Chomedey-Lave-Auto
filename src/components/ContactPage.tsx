@@ -576,9 +576,8 @@ const ContactPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
               <div className="space-y-6">
                 {[
-                  { day: "Monday - Friday", time: "8:00 AM - 6:00 PM" },
-                  { day: "Saturday", time: "9:00 AM - 5:00 PM" },
-                  { day: "Sunday", time: "9:00 AM - 5:00 PM" }
+                  { day: "Monday - Saturday", time: "8:00 AM - 5:00 PM" },
+                  { day: "Sunday", time: "9:00 AM - 3:00 PM" }
                 ].map((schedule, index) => (
                   <motion.div 
                     key={schedule.day}

@@ -32,7 +32,6 @@ const TestimonialsPage = () => {
     {
       id: 1,
       name: 'Sarah',
-      car: 'BMW X5 2021',
       location: 'Chomedey, Laval',
       rating: 5,
       date: '2 weeks ago',
@@ -45,7 +44,6 @@ const TestimonialsPage = () => {
     {
       id: 2,
       name: 'Michael',
-      car: 'Mercedes C-Class 2020',
       location: 'Laval',
       rating: 5,
       date: '1 month ago',
@@ -58,7 +56,6 @@ const TestimonialsPage = () => {
     {
       id: 3,
       name: 'Emily',
-      car: 'Audi A4 2019',
       location: 'Chomedey',
       rating: 5,
       date: '3 weeks ago',
@@ -71,7 +68,6 @@ const TestimonialsPage = () => {
     {
       id: 4,
       name: 'David',
-      car: 'Toyota Camry 2022',
       location: 'Laval',
       rating: 5,
       date: '1 week ago',
@@ -84,7 +80,6 @@ const TestimonialsPage = () => {
     {
       id: 5,
       name: 'Lisa',
-      car: 'Honda Civic 2020',
       location: 'Chomedey, Laval',
       rating: 5,
       date: '2 months ago',
@@ -97,7 +92,6 @@ const TestimonialsPage = () => {
     {
       id: 6,
       name: 'Robert',
-      car: 'Lexus RX 2021',
       location: 'Laval',
       rating: 5,
       date: '3 weeks ago',
@@ -444,9 +438,6 @@ const TestimonialsPage = () => {
                         <div className="font-bold text-gray-900 text-xl">
                           {testimonials[currentTestimonial].name}
                         </div>
-                        <div className="text-gray-600 font-medium">
-                          {testimonials[currentTestimonial].car}
-                        </div>
                         <div className="text-gray-500 text-sm">
                           {testimonials[currentTestimonial].location}
                         </div>
@@ -553,9 +544,6 @@ const TestimonialsPage = () => {
                   <div>
                     <div className="font-bold text-gray-900 text-base sm:text-lg">
                       {testimonial.name}
-                    </div>
-                    <div className="text-gray-600 font-medium text-sm sm:text-base">
-                      {testimonial.car}
                     </div>
                     <div className="text-gray-500 text-xs sm:text-sm">
                       {testimonial.location}

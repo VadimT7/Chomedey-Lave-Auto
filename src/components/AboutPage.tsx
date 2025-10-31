@@ -458,7 +458,7 @@ const AboutPage = () => {
               </span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-              These core values guide everything we do and shape the experience we provide to every customer.
+              We don't follow industry standards—we set them. These core values aren't suggestions; they're non-negotiables. This is why we dominate premium car care in Chomedey, and why others simply can't match what we deliver.
             </p>
           </motion.div>
 

@@ -42,7 +42,6 @@ const ServicesPage = () => {
       description: 'Complete exterior cleaning with premium soap and protective wax',
       icon: Car,
       color: 'from-blue-500 to-cyan-500',
-      duration: '30-45 min',
           price: 'From $15',
           priceDetails: 'Car: $15 | SUV: $17 | Truck: $20',
           rating: 5,
@@ -63,7 +62,6 @@ const ServicesPage = () => {
           description: 'Basic interior cleaning and vacuuming service',
           icon: Sparkles,
           color: 'from-purple-500 to-pink-500',
-          duration: '45-60 min',
           price: 'From $26',
           priceDetails: 'Car: $26 | SUV: $28 | Truck: $30',
           rating: 5,
@@ -84,7 +82,6 @@ const ServicesPage = () => {
           description: 'Complete engine bay cleaning and detailing service',
           icon: Wrench,
           color: 'from-slate-500 to-gray-500',
-          duration: '45-60 min',
           price: 'From $25',
           priceDetails: 'Car: $25 | SUV: $30 | Truck: $30',
           rating: 5,
@@ -115,7 +112,6 @@ const ServicesPage = () => {
       description: 'Deep cleaning and protection for your car\'s interior surfaces',
       icon: Sparkles,
       color: 'from-purple-500 to-pink-500',
-          duration: '90-120 min',
           price: 'From $100',
           priceDetails: 'Car: $100 | SUV: $120 | Truck: $140',
           rating: 5,
@@ -136,7 +132,6 @@ const ServicesPage = () => {
       description: 'Professional waxing and polishing for showroom-quality shine',
       icon: Droplets,
       color: 'from-orange-500 to-red-500',
-      duration: '90-120 min',
           price: 'From $70',
           priceDetails: 'Car: $70 | SUV: $80 | Truck: $80',
           rating: 5,
@@ -157,7 +152,6 @@ const ServicesPage = () => {
       description: 'Complete inside and out transformation package',
           icon: Crown,
       color: 'from-yellow-500 to-orange-500',
-      duration: '4-6 hours',
           price: 'Call for Price',
           priceDetails: 'Custom pricing based on vehicle condition and size',
           phoneNumber: '+14506860016',
@@ -189,7 +183,6 @@ const ServicesPage = () => {
           description: 'Professional rust protection treatment for long-lasting vehicle preservation',
           icon: Shield,
           color: 'from-emerald-500 to-teal-500',
-          duration: '2-3 hours',
           price: 'From $95',
           priceDetails: 'Car: $95 | SUV: $105 | Truck: $105',
           rating: 5,
@@ -210,7 +203,6 @@ const ServicesPage = () => {
           description: 'Professional paint restoration and enhancement service',
           icon: Zap,
           color: 'from-indigo-500 to-purple-500',
-          duration: '4-6 hours',
           price: 'Call for Estimate',
           priceDetails: 'Pricing varies based on paint condition',
           phoneNumber: '+14506860016',
@@ -232,7 +224,6 @@ const ServicesPage = () => {
           description: 'Professional leather cleaning, conditioning, and protection',
           icon: Heart,
           color: 'from-rose-500 to-pink-500',
-          duration: '2-3 hours',
           price: 'From $45',
           priceDetails: 'Car: $45 | SUV: $45 | 7-Passenger: $65',
           rating: 5,
@@ -664,11 +655,6 @@ const ServicesPage = () => {
                                 <ServiceIcon className="h-6 w-6 text-white" />
                               </div>
                             </div>
-                            <div className="absolute top-4 left-4">
-                              <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-md px-2 py-1 rounded-full">
-                                {renderStars(service.rating)}
-                              </div>
-                  </div>
                 </div>
 
                           {/* Service Content */}
@@ -700,16 +686,6 @@ const ServicesPage = () => {
                               {service.priceDetails && (
                                 <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3">{service.priceDetails}</p>
                               )}
-                              <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-gray-400">
-                                <div className="flex items-center space-x-1">
-                                  <Clock className="h-4 w-4" />
-                                  <span className="font-semibold">{service.duration}</span>
-                                </div>
-                                <div className="flex items-center space-x-1">
-                                  <Star className="h-4 w-4 text-yellow-400" />
-                                  <span className="font-semibold">{service.rating}.0</span>
-                                </div>
-                              </div>
                             </div>
 
                             {/* Features Preview */}

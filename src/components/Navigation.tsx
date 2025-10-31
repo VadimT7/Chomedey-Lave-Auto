@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Car, Phone, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,6 @@ const Navigation = () => {
   }, [lastScrollY]);
 
   const navItems = [
-    { href: '/', label: 'Home' },
     { href: '/services', label: 'Services' },
     { href: '/gallery', label: 'Gallery' },
     { href: '/testimonials', label: 'Testimonials' },
@@ -49,10 +49,11 @@ const Navigation = () => {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out pt-[env(safe-area-inset-top)]',
+        // Mobile always has white background, desktop changes based on scroll
         isScrolled 
           ? 'bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/10' 
-          : 'bg-transparent backdrop-blur-none border-b border-transparent shadow-none',
+          : 'bg-transparent md:bg-transparent backdrop-blur-none md:backdrop-blur-none border-b border-transparent shadow-none md:shadow-none bg-white/95 md:bg-transparent',
         isVisible ? 'translate-y-0' : '-translate-y-full'
       )}
       role="navigation"
@@ -73,17 +74,17 @@ const Navigation = () => {
               />
             </div>
             <div className="hidden sm:block flex-shrink-0">
-              <h1 className={cn(
+              <h1                 className={cn(
                 "text-lg lg:text-xl font-black bg-clip-text text-transparent group-hover:from-cyan-600 group-hover:to-blue-600 transition-all duration-300 whitespace-nowrap",
                 isScrolled 
                   ? "bg-gradient-to-r from-gray-900 via-cyan-800 to-blue-800" 
-                  : "bg-gradient-to-r from-white via-cyan-100 to-blue-100"
+                  : "bg-gradient-to-r from-gray-900 via-cyan-800 to-blue-800 md:from-white md:via-cyan-100 md:to-blue-100"
               )}>
                 Chomedey
               </h1>
               <p className={cn(
                 "text-xs font-semibold -mt-1 group-hover:text-cyan-600 transition-colors duration-300 whitespace-nowrap",
-                isScrolled ? "text-gray-600" : "text-white/90"
+                isScrolled ? "text-gray-600" : "text-gray-600 md:text-white/90"
               )}>Lave-Auto</p>
             </div>
           </Link>
@@ -148,7 +149,7 @@ const Navigation = () => {
               "lg:hidden p-3 rounded-xl hover:text-cyan-600 transition-all duration-300 group",
               isScrolled 
                 ? "text-gray-700 hover:bg-cyan-50" 
-                : "text-white/90 hover:bg-white/10"
+                : "text-gray-700 hover:bg-cyan-50"
             )}
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isOpen}
@@ -161,9 +162,28 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden" id="mobile-menu" role="menu" aria-label="Mobile navigation menu">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/98 backdrop-blur-xl rounded-xl mt-2 shadow-xl shadow-black/10 border border-white/20">
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div 
+              className="lg:hidden fixed inset-0 z-50 bg-white pt-[env(safe-area-inset-top)]" 
+              id="mobile-menu" 
+              role="menu" 
+              aria-label="Mobile navigation menu"
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-6 right-6 p-2 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              
+              <div className="px-6 pt-24 pb-6 space-y-2 h-full overflow-y-auto">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -200,9 +220,10 @@ const Navigation = () => {
                   Visit Us Today
                 </Link>
               </div>
-            </div>
-          </div>
-        )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );

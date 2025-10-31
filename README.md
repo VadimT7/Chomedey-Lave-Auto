@@ -176,7 +176,7 @@ The website can be deployed to any platform that supports Next.js:
 - Address: 123 Chomedey Blvd, Chomedey, Laval, QC H7P 1A1
 - Phone: (450) 123-4567
 - Email: info@laveautochomedey.com
-- Hours: Mon-Fri 8:00 AM - 6:00 PM, Sat-Sun 9:00 AM - 5:00 PM
+- Hours: Mon-Sat 8:00 AM - 5:00 PM, Sun 9:00 AM - 3:00 PM
 
 ## 🛠️ Future Enhancements
 
