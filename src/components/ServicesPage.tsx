@@ -417,7 +417,7 @@ const ServicesPage = () => {
               {[
                 { number: '5000+', label: 'Cars Detailed', icon: Car },
                 { number: '100%', label: 'Satisfaction', icon: Heart },
-                { number: '14+', label: 'Years', icon: Award },
+                { number: 'Since 1993', label: 'Years', icon: Award },
                 { number: '5.0★', label: 'Rating', icon: Star },
               ].map((stat, index) => {
                 const IconComponent = stat.icon;
@@ -768,18 +768,25 @@ const ServicesPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-6 py-3 rounded-full text-sm font-medium mb-8 border border-white/20">
-            <Heart className="h-5 w-5 text-cyan-400" />
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-blue-100 via-cyan-100 to-indigo-200 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-cyan-300/40 to-blue-300/40 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-gradient-to-r from-indigo-300/40 to-cyan-300/40 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-sky-200/30 to-cyan-200/30 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-xl text-slate-800 px-6 py-3 rounded-full text-sm font-medium mb-8 border border-cyan-200/50 shadow-lg">
+            <Heart className="h-5 w-5 text-cyan-600" />
             <span>Ready to Transform Your Vehicle?</span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-white mb-4 sm:mb-6 lg:mb-8 px-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 mb-4 sm:mb-6 lg:mb-8 px-2">
             Experience the Chomedey Lave-Auto Difference
           </h2>
           
-          <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-8 sm:mb-12 leading-relaxed px-4">
+          <p className="text-base sm:text-lg lg:text-xl text-slate-700 mb-8 sm:mb-12 leading-relaxed px-4">
             Contact us today to schedule your service and experience the premium car care 
             that has made us Chomedey's most trusted detailing service.
           </p>
@@ -787,13 +794,13 @@ const ServicesPage = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 sm:space-x-8 px-4 sm:px-0 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="btn-premium cursor-interactive bg-white hover:bg-gray-50 text-slate-700 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg w-full sm:w-auto"
+              className="btn-premium cursor-interactive bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg shadow-xl shadow-cyan-500/50 w-full sm:w-auto"
             >
               Book My Service
             </Link>
             <a
               href="tel:+14506860016"
-              className="btn-premium cursor-interactive bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg border border-white/20 w-full sm:w-auto"
+              className="btn-premium cursor-interactive bg-white/90 hover:bg-white backdrop-blur-md text-slate-800 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg border border-cyan-200/50 shadow-lg w-full sm:w-auto"
             >
               Call +1 450-686-0016
             </a>

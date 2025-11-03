@@ -40,7 +40,7 @@ const AboutPage = () => {
     {
       icon: Shield,
       title: 'Trust & Reliability',
-      description: 'We\'ve been serving the Chomedey community for over 14 years, building lasting relationships through consistent quality.',
+      description: 'We\'ve been serving the Chomedey community for over 32 years, building lasting relationships through consistent quality.',
       color: 'from-blue-500 to-cyan-500',
       bgColor: 'from-blue-50 to-cyan-50'
     },
@@ -61,17 +61,17 @@ const AboutPage = () => {
   ];
 
   const milestones = [
-    { year: '2010', title: 'Founded', description: 'Started with a small shop and big dreams', icon: Car },
-    { year: '2012', title: 'First Expansion', description: 'Added interior detailing services', icon: Wrench },
-    { year: '2015', title: 'Ceramic Coating', description: 'Introduced premium ceramic coating services', icon: Droplets },
-    { year: '2018', title: 'Team Growth', description: 'Expanded to a team of 5 professionals', icon: Users },
+    { year: '1993', title: 'Founded', description: 'Started with a small shop and big dreams', icon: Car },
+    { year: '2000', title: 'First Expansion', description: 'Added interior detailing services and premium packages', icon: Wrench },
+    { year: '2010', title: 'Ceramic Coating', description: 'Introduced premium ceramic coating services', icon: Droplets },
+    { year: '2015', title: 'Team Growth', description: 'Expanded to a team of 10 professionals', icon: Users },
     { year: '2020', title: 'Eco Initiative', description: 'Switched to 100% eco-friendly products', icon: Leaf },
     { year: '2024', title: '5000+ Cars', description: 'Celebrated 5000+ successful transformations', icon: Crown }
   ];
 
   const stats = [
     { number: '5000+', label: 'Cars Transformed', icon: Car },
-    { number: '14+', label: 'Years Experience', icon: Clock },
+    { number: '32+', label: 'Years Experience', icon: Clock },
     { number: '100%', label: 'Satisfaction Rate', icon: Heart },
     { number: '5★', label: 'Average Rating', icon: Star }
   ];
@@ -146,7 +146,7 @@ const AboutPage = () => {
             className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-white/20"
           >
             <Crown className="h-4 w-4 sm:h-5 sm:w-5 text-amber-400" />
-            <span className="whitespace-nowrap">Est. 2010 • Chomedey's #1</span>
+            <span className="whitespace-nowrap">32+ Years • Chomedey's #1</span>
           </motion.div>
 
           <motion.h1
@@ -160,7 +160,7 @@ const AboutPage = () => {
               Perfection
             </span>
             <br />
-            Since 2010
+            Since 1993
           </motion.h1>
 
           <motion.p
@@ -220,8 +220,8 @@ const AboutPage = () => {
           >
             {[
               { icon: Car, number: '5000+', label: 'Cars Detailed' },
-              { icon: Users, number: '5', label: 'Expert Team' },
-              { icon: Award, number: '14+', label: 'Years Excellence' },
+              { icon: Users, number: '10', label: 'Expert Team' },
+              { icon: Award, number: '32+', label: 'Years Excellence' },
               { icon: Leaf, number: '100%', label: 'Eco-Friendly' }
             ].map((stat, index) => {
               const IconComponent = stat.icon;
@@ -355,8 +355,8 @@ const AboutPage = () => {
                 <div className="space-y-4 sm:space-y-6">
                   <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                   Chomedey Lave-Auto was born from a simple passion: the love of seeing a dirty, 
-                  neglected vehicle transform into a gleaming masterpiece. Founded in 2010 by 
-                  Jean-Pierre Dubois, we started as a small operation with big dreams.
+                  neglected vehicle transform into a gleaming masterpiece. With over 32 years of 
+                  experience, we started as a small operation with big dreams and have grown into Chomedey's premier car detailing service.
                 </p>
                   <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                   What began as a one-man show has grown into a trusted team of professionals 
@@ -389,7 +389,7 @@ const AboutPage = () => {
                     viewport={{ once: true }}
                     className="text-center"
                   >
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-600 mb-1 sm:mb-2">14+</div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-600 mb-1 sm:mb-2">32+</div>
                     <div className="text-xs sm:text-sm text-gray-600 font-medium">Years Experience</div>
                   </motion.div>
                   <motion.div
@@ -587,9 +587,9 @@ const AboutPage = () => {
                       rotateY: isEven ? 5 : -5,
                       transition: { duration: 0.3 }
                     }}
-                    className={`flex items-center flex-col sm:${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+                    className={isEven ? 'flex items-center flex-col sm:flex-row' : 'flex items-center flex-col sm:flex-row-reverse'}
                   >
-                    <div className={`w-full pl-16 sm:pl-0 sm:w-1/2 ${isEven ? 'sm:pr-12 sm:text-right' : 'sm:pl-12 sm:text-left'} text-left sm:text-center mb-6 sm:mb-0`}>
+                    <div className={isEven ? 'w-full pl-16 sm:pl-0 sm:w-1/2 sm:pr-12 sm:text-right text-left sm:text-center mb-6 sm:mb-0' : 'w-full pl-16 sm:pl-0 sm:w-1/2 sm:pl-12 sm:text-left text-left mb-6 sm:mb-0'}>
                       <motion.div 
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -652,7 +652,7 @@ const AboutPage = () => {
         </div>
       </motion.section>
 
-      {/* Trust Badges Section */}
+      {/* Trust Badges Section - Split Side-by-Side Layout */}
       <motion.section 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -684,68 +684,109 @@ const AboutPage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Split Layout - 2 columns on mobile, 2x2 grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { icon: Shield, title: "Fully Insured", description: "Complete liability coverage for your peace of mind", color: "from-green-500 to-emerald-500", iconColor: "text-white" },
-              { icon: Award, title: "Certified Professionals", description: "Trained and certified in the latest techniques", color: "from-blue-500 to-cyan-500", iconColor: "text-white" },
-              { icon: Leaf, title: "Eco-Friendly", description: "100% biodegradable and environmentally safe products", color: "from-emerald-500 to-teal-500", iconColor: "text-white" },
-              { icon: Star, title: "5-Star Rated", description: "Consistently rated 5 stars by our customers", color: "from-yellow-500 to-orange-500", iconColor: "text-white" }
+              { icon: Shield, title: "Fully Insured", description: "Complete liability coverage for your peace of mind", color: "from-green-500 to-emerald-500", gradient: "from-emerald-500/20" },
+              { icon: Award, title: "Certified Professionals", description: "Trained and certified in the latest techniques", color: "from-blue-500 to-cyan-500", gradient: "from-cyan-500/20" },
+              { icon: Leaf, title: "Eco-Friendly", description: "100% biodegradable and environmentally safe products", color: "from-emerald-500 to-teal-500", gradient: "from-teal-500/20" },
+              { icon: Star, title: "5-Star Rated", description: "Consistently rated 5 stars by our customers", color: "from-yellow-500 to-orange-500", gradient: "from-amber-500/20" }
             ].map((badge, index) => {
               const IconComponent = badge.icon;
               return (
                 <motion.div
                   key={badge.title}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   transition={{ 
                     duration: 0.6, 
-                    delay: index * 0.2,
+                    delay: index * 0.15,
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
                   viewport={{ once: true }}
                   whileHover={{ 
-                    y: -10, 
-                    scale: 1.05,
+                    scale: 1.02,
+                    y: -5,
                     transition: { duration: 0.3 }
                   }}
-                  className="text-center cursor-interactive"
+                  className="group relative cursor-interactive"
                 >
+                  {/* Card Background */}
                   <motion.div 
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: index * 0.2 + 0.2,
-                      ease: "backOut"
+                    className="relative bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/10 overflow-hidden"
+                    whileHover={{
+                      borderColor: 'rgba(6, 182, 212, 0.3)',
+                      transition: { duration: 0.3 }
                     }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: 360,
-                      transition: { duration: 0.5 }
-                    }}
-                    className={`inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${badge.color} rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 shadow-lg`}
                   >
-                    <IconComponent className={`h-8 w-8 sm:h-10 sm:w-10 ${badge.iconColor}`} />
+                    {/* Animated Gradient Accent */}
+                    <motion.div 
+                      className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${badge.gradient} to-transparent rounded-full blur-2xl`}
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.5, 0.3],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.5
+                      }}
+                    />
+                    
+                    <div className="relative z-10">
+                      {/* Large Icon */}
+                      <motion.div 
+                        initial={{ scale: 0, rotate: -180 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        transition={{ 
+                          duration: 0.6, 
+                          delay: index * 0.15 + 0.2,
+                          ease: "backOut"
+                        }}
+                        viewport={{ once: true }}
+                        className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${badge.color} rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300`}
+                      >
+                        <IconComponent className="h-8 w-8 text-white" />
+                      </motion.div>
+                      
+                      {/* Title */}
+                      <motion.h3 
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.4, delay: index * 0.15 + 0.3 }}
+                        viewport={{ once: true }}
+                        className="text-2xl sm:text-3xl font-black text-white mb-3 sm:mb-4 leading-tight"
+                      >
+                        {badge.title}
+                      </motion.h3>
+                      
+                      {/* Description */}
+                      <motion.p 
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.4, delay: index * 0.15 + 0.4 }}
+                        viewport={{ once: true }}
+                        className="text-base sm:text-lg text-white/70 leading-relaxed"
+                      >
+                        {badge.description}
+                      </motion.p>
+
+                      {/* Decorative Line */}
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '100%' }}
+                        transition={{ duration: 0.8, delay: index * 0.15 + 0.5 }}
+                        viewport={{ once: true }}
+                        className={`mt-6 h-1 bg-gradient-to-r ${badge.color} rounded-full`}
+                      />
+                    </div>
+
+                    {/* Shine Effect on Hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                    />
                   </motion.div>
-                  <motion.h3 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.2 + 0.4 }}
-                    viewport={{ once: true }}
-                    className="text-lg sm:text-xl font-black text-white mb-2 sm:mb-3"
-                  >
-                    {badge.title}
-                  </motion.h3>
-                  <motion.p 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.2 + 0.5 }}
-                    viewport={{ once: true }}
-                    className="text-sm sm:text-base text-white/80"
-                  >
-                    {badge.description}
-                  </motion.p>
                 </motion.div>
               );
             })}

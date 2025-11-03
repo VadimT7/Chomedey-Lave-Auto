@@ -278,7 +278,7 @@ const GalleryPage = () => {
             {[
               { icon: Award, number: '5,000+', label: 'Transformations' },
               { icon: Star, number: '5.0', label: 'Perfect Rating' },
-              { icon: Trophy, number: '14+', label: 'Years Excellence' },
+              { icon: Trophy, number: '32+', label: 'Years Excellence' },
               { icon: Heart, number: '100%', label: 'Satisfied Clients' }
             ].map((stat, index) => {
               const IconComponent = stat.icon;
@@ -594,8 +594,8 @@ const GalleryPage = () => {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 1.618,
-                    delay: 2.236
+                    duration: 0.5,
+                    delay: 0.4
                   }}
                   className="lg:col-span-2 flex items-center justify-center py-6 sm:py-8 lg:py-0"
                 >

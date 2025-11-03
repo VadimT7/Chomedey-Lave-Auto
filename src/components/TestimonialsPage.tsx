@@ -300,7 +300,7 @@ const TestimonialsPage = () => {
               { icon: ThumbsUp, number: '100+', label: '5-Star Reviews' },
               { icon: Award, number: '100%', label: 'Verified' },
               { icon: Users, number: '5000+', label: 'Happy Customers' },
-              { icon: Heart, number: '14+', label: 'Years Trusted' }
+              { icon: Heart, number: '32+', label: 'Years Trusted' }
             ].map((stat, index) => {
               const IconComponent = stat.icon;
               return (
