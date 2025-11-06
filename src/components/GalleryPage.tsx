@@ -170,8 +170,8 @@ const GalleryPage = () => {
   const transformations = [
     {
       id: 1,
-      before: '/photos-before-and-after/before-carpet-treatment.jpg',
-      after: '/photos-before-and-after/after-carpet-treatment.jpg',
+      before: '/photos-before-and-after/Carpet Cleaning - Before.jpeg',
+      after: '/photos-before-and-after/Carpet Cleaning - After.jpeg',
       title: 'Complete Carpet Restoration',
       description: 'Deep cleaning and restoration bringing carpets back to showroom condition'
     },

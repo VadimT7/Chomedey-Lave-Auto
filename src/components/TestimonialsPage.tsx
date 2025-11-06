@@ -37,8 +37,8 @@ const TestimonialsPage = () => {
       date: '2 weeks ago',
       service: 'Full Detailing Package',
       text: 'Absolutely amazing service! My car looks brand new after their full detailing package. The attention to detail is incredible, and the staff is so professional. I will definitely be coming back!',
-      image: '/photos-before-and-after/after-carpet-treatment.jpg',
-      beforeImage: '/photos-before-and-after/before-carpet-treatment.jpg',
+      image: '/photos-before-and-after/Carpet Cleaning - After.jpeg',
+      beforeImage: '/photos-before-and-after/Carpet Cleaning - Before.jpeg',
       verified: true
     },
     {
@@ -49,8 +49,8 @@ const TestimonialsPage = () => {
       date: '1 month ago',
       service: 'Ceramic Coating',
       text: 'The ceramic coating service exceeded my expectations. My car has never looked this good, and the protection is outstanding. The team explained everything clearly and delivered exactly what they promised.',
-      image: '/photos-before-and-after/after-leather-treatment.jpg',
-      beforeImage: '/photos-before-and-after/before-leather-treatment.jpg',
+      image: '/photos-before-and-after/Ceramic Coating.avif',
+      beforeImage: '/photos-before-and-after/Ceramic Coating.avif',
       verified: true
     },
     {
@@ -71,7 +71,7 @@ const TestimonialsPage = () => {
       location: 'Laval',
       rating: 5,
       date: '1 week ago',
-      service: 'Exterior Wash & Wax',
+      service: 'Leather Treatment',
       text: 'Fast, efficient, and thorough. My car was filthy from winter driving, and they made it look showroom ready. The wax job is still holding up perfectly after weeks of driving.',
       image: '/photos-before-and-after/after-leather-treatment.jpg',
       beforeImage: '/photos-before-and-after/before-leather-treatment.jpg',
@@ -85,8 +85,8 @@ const TestimonialsPage = () => {
       date: '2 months ago',
       service: 'Engine Bay Cleaning',
       text: 'I never thought to clean my engine bay, but they convinced me to try it. The difference is incredible! My engine looks brand new, and they were so careful with all the electrical components.',
-      image: '/photos-before-and-after/after-carpet-treatment.jpg',
-      beforeImage: '/photos-before-and-after/before-carpet-treatment.jpg',
+      image: '/photos-before-and-after/Engine Bay Cleaning.webp',
+      beforeImage: '/photos-before-and-after/Engine Bay Cleaning.webp',
       verified: true
     },
     {
@@ -97,8 +97,8 @@ const TestimonialsPage = () => {
       date: '3 weeks ago',
       service: 'Full Detailing Package',
       text: 'Best car detailing service in the area! Professional, reliable, and the results speak for themselves. My car looks better than when I first bought it. Worth every penny!',
-      image: '/photos-before-and-after/after-leather-treatment.jpg',
-      beforeImage: '/photos-before-and-after/before-leather-treatment.jpg',
+      image: '/photos-before-and-after/Deep Clean - Before and After.webp',
+      beforeImage: '/photos-before-and-after/Deep Clean - Before and After.webp',
       verified: true
     }
   ];

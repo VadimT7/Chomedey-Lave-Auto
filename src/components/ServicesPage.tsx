@@ -106,77 +106,67 @@ const ServicesPage = () => {
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-50 via-pink-50 to-purple-50',
       services: [
-    {
-      id: 'interior-detailing',
-      title: 'Interior Detailing',
-      description: 'Deep cleaning and protection for your car\'s interior surfaces',
-      icon: Sparkles,
-      color: 'from-purple-500 to-pink-500',
+        {
+          id: 'interior-detailing',
+          title: 'Interior Detailing',
+          description: 'Deep cleaning and protection for your car\'s interior surfaces',
+          icon: Sparkles,
+          color: 'from-purple-500 to-pink-500',
           price: 'From $100',
           priceDetails: 'Car: $100 | SUV: $120 | Truck: $140',
           rating: 5,
           popular: true,
-      features: [
-        'Complete vacuum and steam cleaning',
-        'Leather conditioning and protection',
+          features: [
+            'Complete vacuum and steam cleaning',
+            'Leather conditioning and protection',
             'Dashboard and console deep clean',
-        'Carpet and upholstery treatment',
-        'Odor elimination',
-        'UV protection application'
-      ],
+            'Carpet and upholstery treatment',
+            'Odor elimination',
+            'UV protection application'
+          ],
           image: '/Others/interior-detailing.jpg'
-    },
-    {
-      id: 'wax-polish',
-      title: 'Wax & Polish',
-      description: 'Professional waxing and polishing for showroom-quality shine',
-      icon: Droplets,
-      color: 'from-orange-500 to-red-500',
+        },
+        {
+          id: 'wax-polish',
+          title: 'Wax & Polish',
+          description: 'Professional waxing and polishing for showroom-quality shine',
+          icon: Droplets,
+          color: 'from-orange-500 to-red-500',
           price: 'From $70',
           priceDetails: 'Car: $70 | SUV: $80 | Truck: $80',
           rating: 5,
           popular: false,
-      features: [
-        'Paint correction and polishing',
-        'Premium carnauba wax',
-        'Buffing and shine enhancement',
-        'Paint protection',
-        'Scratch and swirl removal',
-        'Long-lasting results'
-      ],
+          features: [
+            'Paint correction and polishing',
+            'Premium carnauba wax',
+            'Buffing and shine enhancement',
+            'Paint protection',
+            'Scratch and swirl removal',
+            'Long-lasting results'
+          ],
           image: '/Others/wax-and-polish.jpeg'
-    },
-    {
-      id: 'full-detailing',
-      title: 'Full Detailing Package',
-      description: 'Complete inside and out transformation package',
+        },
+        {
+          id: 'full-detailing',
+          title: 'Full Detailing Package',
+          description: 'Complete inside and out transformation package',
           icon: Crown,
-      color: 'from-yellow-500 to-orange-500',
+          color: 'from-yellow-500 to-orange-500',
           price: 'Call for Price',
           priceDetails: 'Custom pricing based on vehicle condition and size',
           phoneNumber: '+14506860016',
           rating: 5,
           popular: true,
-      features: [
-        'Everything included',
-        'Premium products used',
-        'Expert craftsmanship',
-        'Guaranteed results',
-        'Before/after photos',
-        'Satisfaction guarantee'
-      ],
+          features: [
+            'Everything included',
+            'Premium products used',
+            'Expert craftsmanship',
+            'Guaranteed results',
+            'Before/after photos',
+            'Satisfaction guarantee'
+          ],
           image: '/Others/full-car-detailing.jpeg'
-        }
-      ]
-    },
-    {
-      id: 'luxury-services',
-      title: 'Luxury Services',
-      subtitle: 'Ultimate protection and enhancement treatments',
-      icon: Gem,
-      color: 'from-emerald-500 to-teal-500',
-      bgGradient: 'from-emerald-50 via-teal-50 to-emerald-50',
-      services: [
+        },
         {
           id: 'anti-rust',
           title: 'Anti-Rust Protection',
@@ -473,7 +463,7 @@ const ServicesPage = () => {
 
       {/* Services Categories */}
       <section id="services" className="py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
-        {/* Luxury Background Elements */}
+        {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 20 }).map((_, i) => (
             <motion.div
@@ -514,7 +504,7 @@ const ServicesPage = () => {
               </span>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
-              From essential maintenance to luxury treatments, select the perfect service tier 
+              From essential maintenance to premium treatments, select the perfect service tier 
               that matches your vehicle's needs and your expectations.
             </p>
           </motion.div>
@@ -533,7 +523,7 @@ const ServicesPage = () => {
                   transition={{ duration: 1.0, delay: categoryIndex * 0.2 }}
                   viewport={{ once: true }}
                 >
-                  {/* Luxury Category Header */}
+                  {/* Category Header */}
                   <div className="relative mb-20">
                     {/* Background Glow */}
                     <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-10 blur-3xl rounded-3xl`}></div>
@@ -584,7 +574,7 @@ const ServicesPage = () => {
                           </div>
                         </div>
                         
-                        {/* Luxury Badge */}
+                        {/* Category Badge */}
                         <motion.div 
                           className="hidden lg:flex items-center space-x-3 bg-white/10 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20"
                           initial={{ opacity: 0, scale: 0.8 }}
@@ -593,7 +583,7 @@ const ServicesPage = () => {
                         >
                           <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                           <span className="text-white font-medium text-sm uppercase tracking-wider">
-                            {categoryIndex === 0 ? 'Essential' : categoryIndex === 1 ? 'Premium' : 'Luxury'}
+                            {categoryIndex === 0 ? 'Essential' : 'Premium'}
                           </span>
                         </motion.div>
                       </div>
@@ -788,7 +778,7 @@ const ServicesPage = () => {
           
           <p className="text-base sm:text-lg lg:text-xl text-slate-700 mb-8 sm:mb-12 leading-relaxed px-4">
             Contact us today to schedule your service and experience the premium car care 
-            that has made us Chomedey's most trusted detailing service.
+            that has made us Chomedey's and Sainte-Rose's most trusted detailing service.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 sm:space-x-8 px-4 sm:px-0 w-full sm:w-auto">

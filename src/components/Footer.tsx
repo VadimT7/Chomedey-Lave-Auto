@@ -89,6 +89,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="text-gray-300 text-sm">Exterior Car Wash</li>
               <li className="text-gray-300 text-sm">Interior Detailing</li>
+              <li className="text-gray-300 text-sm">Rust Proofing</li>
               <li className="text-gray-300 text-sm">Ceramic Coating</li>
               <li className="text-gray-300 text-sm">Wax & Polish</li>
               <li className="text-gray-300 text-sm">Engine Bay Cleaning</li>
