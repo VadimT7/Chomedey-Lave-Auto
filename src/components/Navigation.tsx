@@ -38,6 +38,28 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+  }, [isOpen]);
+
   const navItems = [
     { href: '/services', label: 'Services' },
     { href: '/gallery', label: 'Gallery' },
@@ -165,7 +187,7 @@ const Navigation = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div 
-              className="lg:hidden fixed inset-0 z-50 bg-white pt-[env(safe-area-inset-top)]" 
+              className="lg:hidden fixed inset-0 z-[9999] bg-white" 
               id="mobile-menu" 
               role="menu" 
               aria-label="Mobile navigation menu"
@@ -173,17 +195,25 @@ const Navigation = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              style={{ 
+                paddingTop: 'env(safe-area-inset-top)',
+                height: '100dvh' // Dynamic viewport height for mobile
+              }}
             >
               {/* Close Button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-6 right-6 p-2 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                className="absolute top-6 right-6 z-10 p-2 rounded-xl text-gray-700 hover:bg-gray-100 transition-all duration-200"
                 aria-label="Close menu"
+                style={{ top: 'calc(env(safe-area-inset-top) + 1.5rem)' }}
               >
                 <X className="h-6 w-6" />
               </button>
               
-              <div className="px-6 pt-24 pb-6 space-y-2 h-full overflow-y-auto">
+              <div className="px-6 pt-24 pb-6 space-y-2 h-full overflow-y-auto" style={{ 
+                paddingTop: 'calc(env(safe-area-inset-top) + 6rem)',
+                maxHeight: 'calc(100dvh - env(safe-area-inset-top))'
+              }}>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
